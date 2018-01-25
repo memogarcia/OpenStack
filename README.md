@@ -8,4 +8,4 @@
 
 ### Keystone
 
-    docker run --name openstack-keystone -p 0.0.0.0:5000:5000 -p 0.0.0.0:35357:35357 openstack/keystone:pike
+    docker run -p 0.0.0.0:5000:5000 -p 0.0.0.0:35357:35357 --link optimistic_montalcini:optimistic_montalcini openstack/keystone:pike
