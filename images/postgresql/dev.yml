@@ -1,0 +1,27 @@
+---
+version: '3.1'
+
+services:
+
+  postgres:
+    image: postgres:10.1-alpine
+    container_name: openstack_postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: admin
+      POSTGRES_DB: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgmaster:/var/lib/postgresql/data
+    networks:
+      - openstack-management-net
+
+volumes:
+  pgmaster:
+    driver: local
+
+networks:
+  openstack-management-net:
+    external: true

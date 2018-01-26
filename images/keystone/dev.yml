@@ -1,0 +1,26 @@
+---
+version: "3"
+
+services:
+
+  keystone:
+    build: .
+    container_name: openstack_keystone
+    ports:
+      - "0.0.0.0:35357:35357"
+      - "0.0.0.0:5000:5000"
+    networks:
+      - openstack-management-net
+    external_links:
+      - openstack_postgresql:openstack_postgresql
+    volumes:
+      - keystone_log:/var/log/keystone
+    command: ["./start.sh"]
+
+volumes:
+  keystone_log:
+    driver: local
+
+networks:
+  openstack-management-net:
+    external: true

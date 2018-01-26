@@ -9,6 +9,12 @@ RUN pacman -Sy --noconfirm \
         python-pip \
         gcc \
         base-devel \
-        git
+        git \
+        python-setuptools \
+        python2 python2-pip python2-setuptools \
+        python2-netifaces gcc-libs \
+        wget
 
-RUN pacman -S --noconfirm python-setuptools
+RUN wget http://ftp5.gwdg.de/pub/linux/archlinux/core/os/x86_64//mpfr-4.0.0-1-x86_64.pkg.tar.xz
+
+RUN pacman -U  --noconfirm mpfr-4.0.0-1-x86_64.pkg.tar.xz

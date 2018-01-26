@@ -8,25 +8,13 @@ RUN git clone --depth=1 -b stable/pike https://github.com/openstack/keystone.git
 
 WORKDIR /opt/keystone
 
-# RUN pacman -S --noconfirm nginx
+RUN pacman -S --noconfirm nginx
 
-RUN pacman -S --noconfirm python2
+RUN ln -sf python python2
 
-RUN pacman -S --noconfirm python2-pip python2-setuptools
+RUN python2 -m pip install -e .
 
-RUN pacman -S --noconfirm python2-netifaces gcc-libs
-
-RUN ["ln", "-sf", "python", "python2"]
-
-RUN pacman -S --noconfirm wget
-
-RUN wget http://ftp5.gwdg.de/pub/linux/archlinux/core/os/x86_64//mpfr-4.0.0-1-x86_64.pkg.tar.xz
-
-RUN pacman -U  --noconfirm mpfr-4.0.0-1-x86_64.pkg.tar.xz
-
-RUN ["python2", "-m", "pip", "install", "-e", "."]
-
-RUN pip install tox
+RUN python2 -m pip install tox psycopg2
 
 RUN tox -e genconfig
 
@@ -48,7 +36,5 @@ VOLUME ["/var/log/keystone"]
 
 EXPOSE 35357
 EXPOSE 5000
-
-RUN python2 -m pip install psycopg2
 
 CMD ["./start.sh"]
