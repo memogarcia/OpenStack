@@ -3,9 +3,9 @@ version: '3.1'
 
 services:
 
-  postgres:
+  postgresql:
     image: postgres:10.1-alpine
-    container_name: openstack_postgres
+    container_name: openstack_postgresql
     restart: always
     environment:
       POSTGRES_PASSWORD: secret

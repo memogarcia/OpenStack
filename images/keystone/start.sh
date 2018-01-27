@@ -1,10 +1,10 @@
-##!/bin/bash
+#!/bin/bash
 set -x
 
 export PGPASSWORD=secret
 
 # DB configuration
-psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "postgres" <<-EOSQL
+psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "admin" <<-EOSQL
     CREATE USER keystone;
     ALTER USER keystone WITH PASSWORD 'secret';
     CREATE DATABASE keystone;
@@ -30,3 +30,6 @@ keystone-manage bootstrap --bootstrap-password secret \
   --bootstrap-internal-url http://0.0.0.0:35357/v3/ \
   --bootstrap-public-url http://0.0.0.0:5000/v3/ \
   --bootstrap-region-id RegionOne
+
+# echo "# Starting keystone..."
+/usr/bin/httpd -D "FOREGROUND" -f /etc/httpd/conf.d/wsgi-keystone.conf

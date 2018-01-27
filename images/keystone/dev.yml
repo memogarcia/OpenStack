@@ -13,9 +13,10 @@ services:
       - openstack-management-net
     external_links:
       - openstack_postgresql:openstack_postgresql
+      - openstack_memcached:openstack_memcached
     volumes:
       - keystone_log:/var/log/keystone
-    command: ["./start.sh"]
+    command: ["bash", "start.sh"]
 
 volumes:
   keystone_log:
