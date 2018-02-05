@@ -13,7 +13,8 @@ RUN pacman -Sy --noconfirm \
         python-setuptools \
         python2 python2-pip python2-setuptools \
         python2-netifaces gcc-libs \
-        wget
+        wget \
+        supervisor
 
 RUN wget http://ftp5.gwdg.de/pub/linux/archlinux/core/os/x86_64//mpfr-4.0.0-1-x86_64.pkg.tar.xz
 

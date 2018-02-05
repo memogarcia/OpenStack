@@ -1,3 +1,10 @@
-docker-compose -f images/postgresql/dev.yml restart
-docker-compose -f images/memcached/dev.yml restart
-docker-compose -f images/rabbitmq/dev.yml restart
+#!/bin/bash
+
+set -u -x
+
+SERVICES="postgresql memcached rabbitmq keystone"
+
+for service in $SERVICES
+do
+    docker-compose -f images/$service/dev.yml restart
+done

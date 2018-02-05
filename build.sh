@@ -6,5 +6,5 @@ SERVICES="postgresql memcached rabbitmq keystone"
 
 for service in $SERVICES
 do
-    docker-compose -f images/$service/dev.yml up -d
+    docker-compose -f images/$service/dev.yml build
 done

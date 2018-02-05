@@ -26,8 +26,14 @@ COPY wsgi-keystone.conf /etc/httpd/conf.d/wsgi-keystone.conf
 COPY keystone-paste.ini /etc/keystone/keystone-paste.ini
 COPY keystone.conf /etc/keystone/keystone.conf
 
-RUN mkdir -p /etc/httpd/logs/
+RUN mkdir -p /var/httpd/logs/
 RUN mkdir -p /run/httpd/
+
+RUN chown -R http:http /var/log/httpd
+
+RUN useradd keystone && chown -R keystone:keystone /etc/keystone
+RUN chown http:http /usr/bin/keystone-wsgi-admin
+RUN chown -R http:http /var/log/keystone/
 
 COPY start.sh start.sh
 

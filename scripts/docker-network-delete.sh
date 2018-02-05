@@ -1,3 +1,8 @@
-docker network rm openstack-management-net
-docker network rm openstack-public-net
-docker network rm openstack-private-net
+#!/bin/bash
+
+set -u -x
+
+for network in openstack-management-net openstack-public-net openstack-private-net
+do
+    docker network rm "$network"
+done
