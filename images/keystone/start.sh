@@ -1,7 +1,15 @@
 #!/bin/bash
-set -x -u
+set -u
 
 export PGPASSWORD=secret
+
+echo "Copying configuration files"
+cp /opt/keystone/etc/keystone.conf.sample /etc/keystone/keystone.conf
+cp /opt/keystone/etc/keystone-paste.ini /etc/keystone/keystone-paste.ini
+cp /opt/keystone/etc/logging.conf.sample /etc/keystone/logging.conf
+
+echo "Applying configuration"
+python2 configmerge.py
 
 echo "DB configuration"
 psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "admin" <<-EOSQL
@@ -18,7 +26,7 @@ echo "Initialize fernet key repositories"
 keystone-manage fernet_setup --keystone-user http --keystone-group http
 keystone-manage credential_setup --keystone-user http --keystone-group http
 
-"Bootstrap the service"
+echo "Bootstrap the service"
 keystone-manage bootstrap \
   --bootstrap-password secret \
   --bootstrap-username admin \
@@ -35,5 +43,5 @@ keystone-manage bootstrap \
   --bootstrap-password secret \
   --bootstrap-project-name service
 
-echo "Starting keystone..."
-/usr/bin/httpd -D "FOREGROUND" -f /etc/httpd/conf.d/wsgi-keystone.conf
+keystone-wsgi-admin --port 35357 --host 0.0.0.0 &
+keystone-wsgi-public --port 5000 --host 0.0.0.0

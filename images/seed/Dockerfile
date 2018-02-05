@@ -21,5 +21,3 @@ RUN wget http://ftp5.gwdg.de/pub/linux/archlinux/core/os/x86_64//mpfr-4.0.0-1-x8
 RUN pacman -U  --noconfirm mpfr-4.0.0-1-x86_64.pkg.tar.xz
 
 RUN python2 -m pip install tox psycopg2 python-memcached
-
-RUN ln -sf python python2
