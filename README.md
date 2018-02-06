@@ -8,6 +8,8 @@
 
 ### Postgresql
 
+postgres is case sensitive
+
     docker-compose -f postgresql/dev.yml
 
 ### Keystone

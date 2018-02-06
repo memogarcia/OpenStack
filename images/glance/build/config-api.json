@@ -1,0 +1,28 @@
+{
+    "keystone_authtoken":
+    {
+        "auth_uri": "openstack_keystone:5000",
+        "auth_url": "openstack_keystone:35357",
+        "memcached_servers": "openstack_memcached:11211",
+        "auth_type": "password",
+        "project_domain_name": "Default",
+        "user_domain_name": "Default",
+        "project_name": "service",
+        "username": "glance",
+        "password": "secret"
+    },
+    "paste_deploy":
+    {
+        "flavor": "keystone"
+    },
+    "database":
+    {
+        "connection": "postgresql://glance:secret@openstack_postgresql/glance"
+    },
+    "glance_store":
+    {
+        "stores": "file,http",
+        "default_store": "file",
+        "filesystem_store_datadir": "/var/lib/glance/images/"
+    }
+}
