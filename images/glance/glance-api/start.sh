@@ -32,3 +32,4 @@ openstack endpoint create --region RegionOne image internal http://0.0.0.0:9292
 
 echo "Creating admin endpoint"
 openstack endpoint create --region RegionOne image admin http://0.0.0.0:9292
+
