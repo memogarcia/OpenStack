@@ -1,5 +1,13 @@
 # Openstack deployer
 
+## Dev environment
+
+    docker-compose -f dev.yml
+
+## Prod environment
+
+    docker-compose -f prod.yml
+
 ## Start docker services
 
 ## Docker networks

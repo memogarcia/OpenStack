@@ -2,7 +2,9 @@
 
 set -u -x
 
-SERVICES="postgresql memcached rabbitmq keystone"
+SERVICES="keystone glance"
+
+docker build -t openstack/seed images/seed/
 
 for service in $SERVICES
 do
