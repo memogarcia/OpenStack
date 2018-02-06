@@ -25,6 +25,5 @@ RUN python2 -m pip install tox psycopg2 python-memcached
 COPY configparse.py configparse.py
 
 COPY osrc-v3 /opt/osrc-v3
-RUN source /opt/osrc-v3
 
 RUN python2 -m pip install python-openstackclient

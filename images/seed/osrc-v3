@@ -8,4 +8,3 @@ export OS_IDENTITY_API_VERSION=3
 export OS_IMAGE_API_VERSION=2
 export OS_NO_CACHE=True
 export OS_REGION_NAME=RegionOne
-export OS_TOKEN=secret

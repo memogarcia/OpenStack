@@ -3,44 +3,26 @@ version: "3"
 
 services:
 
-  glance-build:
-    build: ./build/
-    container_name: openstack_glance_build
-    # ports:
-    #   - "0.0.0.0:9292:9292"
-    #   - "0.0.0.0:9191:9191"
+  glance:
+    build: .
+    container_name: openstack_glance
     networks:
       - openstack-management-net
-    external_links:
-      - openstack_postgresql:openstack_postgresql
-      - openstack_memcached:openstack_memcached
-      - openstack_keystone:openstack_keystone
-    volumes:
-      - glance_log:/var/log/glance
-      - /opt/glance:/etc/keystone
-    # command: ["bash", "start.sh"]
-
-  glance-api:
-    build: ./glance-api/
-    container_name: openstack_glance_api
     ports:
       - "0.0.0.0:9292:9292"
-    #   - "0.0.0.0:9191:9191"
-    networks:
-      - openstack-management-net
     external_links:
       - openstack_postgresql:openstack_postgresql
       - openstack_memcached:openstack_memcached
       - openstack_keystone:openstack_keystone
     volumes:
       - glance_log:/var/log/glance
-      - /opt/glance:/etc/glance
+      # - glance_etc:/etc/glance
     command: ["bash", "start.sh"]
-    depends_on:
-      - glance-build
 
 volumes:
   glance_log:
+    driver: local
+  glance_etc:
     driver: local
 
 networks:

@@ -12,8 +12,10 @@ psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "admin" <<-EO
     GRANT ALL PRIVILEGES ON DATABASE glance TO glance;
 EOSQL
 
+echo "Syncing db"
+glance-manage db_sync
+
 source /opt/osrc-v3
-unset OS_TOKEN
 
 echo "Creating user"
 openstack user create --domain Default --password secret glance
@@ -33,3 +35,6 @@ openstack endpoint create --region RegionOne image internal http://0.0.0.0:9292
 echo "Creating admin endpoint"
 openstack endpoint create --region RegionOne image admin http://0.0.0.0:9292
 
+echo "Starting glance api's"
+glance-api &
+glance-registry
