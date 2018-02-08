@@ -10,11 +10,12 @@ services:
       - openstack-management-net
     ports:
       - "0.0.0.0:8774:8774"
-      - "0.0.0.0:8775:8775"
+      # - "0.0.0.0:8775:8775"
       - "0.0.0.0:8776:8776"
       - "0.0.0.0:8778:8778"
     external_links:
       - openstack_postgresql:openstack_postgresql
+      - openstack_rabbitmq:openstack_rabbitmq
       - openstack_memcached:openstack_memcached
       - openstack_keystone:openstack_keystone
       - openstack_glance:openstack_glance

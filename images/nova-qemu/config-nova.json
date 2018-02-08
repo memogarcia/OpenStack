@@ -1,0 +1,55 @@
+{
+    "DEFAULT":
+    {
+        "transport_url": "rabbit://guest:guest@openstack_rabbitmq",
+        "my_ip": "0.0.0.0",
+        "use_neutron": "True",
+        "firewall_driver": "nova.virt.firewall.NoopFirewallDriver"
+    },
+    "api":
+    {
+        "auth_strategy": "keystone"
+    },
+    "keystone_authtoken":
+    {
+        "auth_uri": "http://openstack_keystone:5000",
+        "auth_url": "http://openstack_keystone:35357",
+        "memcached_servers": "openstack_memcached:11211",
+        "auth_type": "password",
+        "project_domain_name": "Default",
+        "user_domain_name": "Default",
+        "project_name": "service",
+        "username": "nova",
+        "password": "secret"
+    },
+    "vnc":
+    {
+        "enabled": "True",
+        "vncserver_listen": "0.0.0.0",
+        "vncserver_proxyclient_address": "0.0.0.0",
+        "novncproxy_base_url": "http://0.0.0.0:6080/vnc_auto.html"
+    },
+    "glance":
+    {
+        "api_servers": "http://openstack_glance:9292"
+    },
+    "oslo_concurrency":
+    {
+        "lock_path": "/var/lib/nova/tmp"
+    },
+    "placement":
+    {
+        "os_region_name": "RegionOne",
+        "project_domain_name": "Default",
+        "project_name": "service",
+        "auth_type": "password",
+        "user_domain_name": "Default",
+        "auth_url": "http://openstack_keystone:35357/v3",
+        "username": "placement",
+        "password": "secret"
+    },
+    "scheduler":
+    {
+        "discover_hosts_in_cells_interval": 300
+    }
+}

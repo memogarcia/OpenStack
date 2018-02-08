@@ -19,10 +19,11 @@ RUN git clone https://github.com/kanaka/noVNC /usr/share/novnc &&\
 VOLUME ["/var/log/nova"]
 
 EXPOSE 8774
-EXPOSE 8775
+# EXPOSE 8775
 EXPOSE 8776
 EXPOSE 8778
 
+RUN ["cp", "/opt/nova/etc/nova/nova.conf", "/etc/nova/nova.conf"]
 RUN ["cp", "/opt/nova/etc/nova/api-paste.ini", "/etc/nova/api-paste.ini"]
 RUN ["cp", "/opt/nova/etc/nova/cells.json", "/etc/nova/cells.json"]
 RUN ["cp", "/opt/nova/etc/nova/logging_sample.conf", "/etc/nova/logging.conf"]

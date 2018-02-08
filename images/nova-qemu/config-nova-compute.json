@@ -1,0 +1,10 @@
+{
+    "libvirt":
+    {
+        "virt_type": "qemu"
+    },
+    "DEFAULT":
+    {
+        "compute_driver": "libvirt.LibvirtDriver"
+    }
+}
