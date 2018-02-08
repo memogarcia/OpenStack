@@ -2,7 +2,7 @@
 
 set -u -x
 
-SERVICES="postgresql memcached rabbitmq keystone glance nova"
+SERVICES=$(cat scripts/services.txt)
 
 for service in $SERVICES
 do

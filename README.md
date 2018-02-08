@@ -2,6 +2,8 @@
 
 ## Start OpenStack
 
+    ./scripts/build.sh
+    ./scripts/docker-network-create.sh
     ./scripts/start.sh
 
 ## Verify installation

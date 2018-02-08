@@ -2,9 +2,9 @@
 
 set -u -x
 
-SERVICES="postgresql memcached rabbitmq keystone glance nova"
+SERVICES=$(cat scripts/services.txt)
 
 for service in $SERVICES
 do
-    docker-compose -f ../images/$service/dev.yml up -d
+    docker-compose -f images/$service/dev.yml up -d
 done
