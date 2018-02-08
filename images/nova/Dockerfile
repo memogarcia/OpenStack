@@ -23,7 +23,7 @@ EXPOSE 8774
 EXPOSE 8776
 EXPOSE 8778
 
-RUN ["cp", "/opt/nova/etc/nova/nova.conf", "/etc/nova/nova.conf"]
+# RUN ["cp", "/opt/nova/etc/nova/nova.conf", "/etc/nova/nova.conf"]
 RUN ["cp", "/opt/nova/etc/nova/api-paste.ini", "/etc/nova/api-paste.ini"]
 RUN ["cp", "/opt/nova/etc/nova/cells.json", "/etc/nova/cells.json"]
 RUN ["cp", "/opt/nova/etc/nova/logging_sample.conf", "/etc/nova/logging.conf"]

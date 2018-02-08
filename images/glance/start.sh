@@ -41,13 +41,13 @@ endpoint=`openstack endpoint list -f csv -q |grep glance`
 if [ -z "$endpoint" ]
 then
     echo "Creating public endpoint"
-    openstack endpoint create --region RegionOne image public http://0.0.0.0:9292
+    openstack endpoint create --region RegionOne image public http://openstack_glance:9292
 
     echo "Creating internal endpoint"
-    openstack endpoint create --region RegionOne image internal http://0.0.0.0:9292
+    openstack endpoint create --region RegionOne image internal http://openstack_glance:9292
 
     echo "Creating admin endpoint"
-    openstack endpoint create --region RegionOne image admin http://0.0.0.0:9292
+    openstack endpoint create --region RegionOne image admin http://openstack_glance:9292
 else
     echo "Skipping"
 fi

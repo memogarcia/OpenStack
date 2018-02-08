@@ -7,6 +7,8 @@ source /opt/osrc-v3
 echo "Creating nova-compute service"
 openstack compute service list --service nova-compute
 
+nova-manage cell_v2 discover_hosts --verbose
+
 echo "Starting nova-compute"
 /usr/sbin/libvirtd &
 /usr/sbin/virtlogd &

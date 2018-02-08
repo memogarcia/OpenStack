@@ -56,13 +56,13 @@ endpoint=`openstack endpoint list -f csv -q |grep nova`
 if [ -z "$endpoint" ]
 then
     echo "Creating public endpoint"
-    openstack endpoint create --region RegionOne compute public http://0.0.0.0:8774/v2.1
+    openstack endpoint create --region RegionOne compute public http://openstack_nova:8774/v2.1
 
     echo "Creating internal endpoint"
-    openstack endpoint create --region RegionOne compute internal http://0.0.0.0:8774/v2.1
+    openstack endpoint create --region RegionOne compute internal http://openstack_nova:8774/v2.1
 
     echo "Creating admin endpoint"
-    openstack endpoint create --region RegionOne compute admin http://0.0.0.0:8774/v2.1
+    openstack endpoint create --region RegionOne compute admin http://openstack_nova:8774/v2.1
 else
     echo "Skipping"
 fi
@@ -90,13 +90,13 @@ endpoint=`openstack endpoint list -f csv -q |grep placement`
 if [ -z "$endpoint" ]
 then
     echo "Creating public endpoint"
-    openstack endpoint create --region RegionOne placement public http://0.0.0.0:8778/v2.1
+    openstack endpoint create --region RegionOne placement public http://openstack_nova:8778/v2.1
 
     echo "Creating internal endpoint"
-    openstack endpoint create --region RegionOne placement internal http://0.0.0.0:8778/v2.1
+    openstack endpoint create --region RegionOne placement internal http://openstack_nova:8778/v2.1
 
     echo "Creating admin endpoint"
-    openstack endpoint create --region RegionOne placement admin http://0.0.0.0:8778/v2.1
+    openstack endpoint create --region RegionOne placement admin http://openstack_nova:8778/v2.1
 else
     echo "Skipping"
 fi

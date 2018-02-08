@@ -1,4 +1,12 @@
 {
+    "api_database":
+    {
+        "connection": "postgresql://nova:secret@openstack_postgresql/nova_api"
+    },
+    "database":
+    {
+        "connection": "postgresql://nova:secret@openstack_postgresql/nova"
+    },
     "DEFAULT":
     {
         "transport_url": "rabbit://guest:guest@openstack_rabbitmq",
