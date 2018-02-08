@@ -2,7 +2,7 @@
 
 set -u -x
 
-SERVICES="postgresql memcached rabbitmq keystone"
+SERVICES="postgresql memcached rabbitmq keystone glance"
 
 for service in $SERVICES
 do
