@@ -2,16 +2,13 @@
 
 # set -u
 
-# source /opt/osrc-v3
+source /opt/osrc-v3
 
-# echo "Creating nova-compute service"
-# if [ -z `openstack service list -f csv -q |grep nova` ]
-# then
-#     openstack service create --name nova --description "OpenStack Compute" compute
-# else
-#     echo "Skipping"
-# fi
-# openstack compute service list --service nova-compute
+echo "Creating nova-compute service"
+openstack compute service list --service nova-compute
 
-# echo "Starting nova-compute"
-# # nova-compute &
+echo "Starting nova-compute"
+/usr/sbin/libvirtd &
+/usr/sbin/virtlogd &
+nova-api-metadata --log-file=/var/log/nova/nova-metadata.log &
+nova-compute --config-file /etc/nova/nova.conf --config-file /etc/nova/nova-compute.conf --log-file=/var/log/nova/nova-compute.log

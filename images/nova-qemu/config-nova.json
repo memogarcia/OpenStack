@@ -4,7 +4,8 @@
         "transport_url": "rabbit://guest:guest@openstack_rabbitmq",
         "my_ip": "0.0.0.0",
         "use_neutron": "True",
-        "firewall_driver": "nova.virt.firewall.NoopFirewallDriver"
+        "firewall_driver": "nova.virt.firewall.NoopFirewallDriver",
+        "enabled_apis": "osapi_compute,metadata"
     },
     "api":
     {
@@ -29,10 +30,6 @@
         "vncserver_proxyclient_address": "0.0.0.0",
         "novncproxy_base_url": "http://0.0.0.0:6080/vnc_auto.html"
     },
-    "glance":
-    {
-        "api_servers": "http://openstack_glance:9292"
-    },
     "oslo_concurrency":
     {
         "lock_path": "/var/lib/nova/tmp"
@@ -51,5 +48,9 @@
     "scheduler":
     {
         "discover_hosts_in_cells_interval": 300
+    },
+    "glance":
+    {
+        "api_servers": "http://openstack_glance:9292"
     }
 }
