@@ -1,0 +1,30 @@
+---
+version: "3"
+
+services:
+
+  nova:
+    build: .
+    container_name: openstack_nova
+    networks:
+      - openstack-management-net
+    # ports:
+    #   - "0.0.0.0:9292:9292"
+    external_links:
+      - openstack_postgresql:openstack_postgresql
+      - openstack_memcached:openstack_memcached
+      - openstack_keystone:openstack_keystone
+    volumes:
+      - nova_log:/var/log/nova
+      # - glance_etc:/etc/glance
+    command: ["bash", "start.sh"]
+
+volumes:
+  nova_log:
+    driver: local
+  # glance_etc:
+    # driver: local
+
+networks:
+  openstack-management-net:
+    external: true
