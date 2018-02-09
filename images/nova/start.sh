@@ -12,24 +12,24 @@ mysql -hopenstack_mariadb -umysql -psecret \
 
 mysql -hopenstack_mariadb -umysql -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' \
-        IDENTIFIED BY '$NOVA_DB_PASS';"
+        IDENTIFIED BY 'secret';"
 mysql -hopenstack_mariadb -umysql -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'%' \
-        IDENTIFIED BY '$NOVA_DB_PASS';"
+        IDENTIFIED BY 'secret';"
 
 mysql -hopenstack_mariadb -umysql -psecret \
         -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' \
-        IDENTIFIED BY '$NOVA_DB_PASS';"
+        IDENTIFIED BY 'secret';"
 mysql -hopenstack_mariadb -umysql -psecret \
         -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' \
-        IDENTIFIED BY '$NOVA_DB_PASS';"
+        IDENTIFIED BY 'secret';"
 
 mysql -hopenstack_mariadb -umysql -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'localhost' \
-        IDENTIFIED BY '$NOVA_DB_PASS';"
+        IDENTIFIED BY 'secret';"
 mysql -hopenstack_mariadb -umysql -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'%' \
-        IDENTIFIED BY '$NOVA_DB_PASS';"
+        IDENTIFIED BY 'secret';"
 
 echo "Syncing api database"
 nova-manage api_db sync

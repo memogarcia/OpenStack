@@ -39,7 +39,7 @@ COPY config-nova.json config-nova.json
 RUN python2 /configparse.py --config config-nova.json --service "/etc/nova/nova.conf"
 
 # temporary patch for sqlalchemy/api.py in stable/pike
-# RUN rm /opt/nova/nova/db/sqlalchemy/api.py && wget https://gist.githubusercontent.com/memogarcia/e0c44badaf9edb4eb8335954837e1c39/raw/4e66294a89b8bb3459acabe9b2d6a271ab18900c/api.py -O /opt/nova/nova/db/sqlalchemy/api.py
+RUN rm /opt/nova/nova/db/sqlalchemy/api.py && wget https://gist.githubusercontent.com/memogarcia/e0c44badaf9edb4eb8335954837e1c39/raw/4e66294a89b8bb3459acabe9b2d6a271ab18900c/api.py -O /opt/nova/nova/db/sqlalchemy/api.py
 
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]
