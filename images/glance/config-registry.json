@@ -17,6 +17,6 @@
     },
     "database":
     {
-        "connection": "mysql+pymysql://glance:secret@openstack_postgresql/glance"
+        "connection": "mysql+pymysql://glance:secret@openstack_mariadb/glance"
     }
 }
