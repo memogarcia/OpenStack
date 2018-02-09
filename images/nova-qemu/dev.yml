@@ -12,7 +12,7 @@
       ports:
         - "0.0.0.0:8775:8775"
       external_links:
-        - openstack_postgresql:openstack_postgresql
+        - openstack_mariadb:openstack_mariadb
         - openstack_rabbitmq:openstack_rabbitmq
         - openstack_memcached:openstack_memcached
         - openstack_keystone:openstack_keystone
@@ -21,20 +21,19 @@
       volumes:
         - nova_log:/var/log/nova
         # - /var/run/libvirtd.pid:/var/run/libvirtd.pid
-        # - /var/lib/libvirt/:/var/lib/libvirt/
+        - libvirt_volume:/var/lib/libvirt/
         - /sys/fs/cgroup:/sys/fs/cgroup:rw
         # - glance_etc:/etc/glance
       devices:
         - "/dev/kvm:/dev/kvm"
       command: ["bash", "start.sh"]
-  
+
   volumes:
     nova_log:
       driver: local
-    # glance_etc:
-      # driver: local
-  
+    libvirt_volume:
+      driver: local
+
   networks:
     openstack-management-net:
       external: true
-  
