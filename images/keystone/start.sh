@@ -3,21 +3,17 @@ set -u
 
 export PGPASSWORD=secret
 
-echo "Copying configuration files"
-cp /opt/keystone/etc/keystone.conf.sample /etc/keystone/keystone.conf
-cp /opt/keystone/etc/keystone-paste.ini /etc/keystone/keystone-paste.ini
-cp /opt/keystone/etc/logging.conf.sample /etc/keystone/logging.conf
-
-echo "Applying configuration"
-python2 configmerge.py
-
 echo "DB configuration"
-psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "admin" <<-EOSQL
-    CREATE USER keystone;
-    ALTER USER keystone WITH PASSWORD 'secret';
-    CREATE DATABASE keystone;
-    GRANT ALL PRIVILEGES ON DATABASE keystone TO keystone;
-EOSQL
+mysql  -h openstack_mariadb -u mysql -p secret \
+      -e "CREATE DATABASE keystone;"
+
+mysql  -h openstack_mariadb P -u mysql -p secret \
+       -e "GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' \
+          IDENTIFIED BY 'secret';"
+
+mysql  -h openstack_mariadb -u mysql -p secret \
+       -e "GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' \
+          IDENTIFIED BY 'secret'"
 
 echo "Sync keystone database"
 keystone-manage db_sync

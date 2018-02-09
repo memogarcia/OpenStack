@@ -8,11 +8,11 @@ services:
     container_name: openstack_keystone
     ports:
       - "0.0.0.0:35357:35357"
-      - "0.0.0.0:5000:5000"
+      - "0.0.0.0:50000:5000"
     networks:
       - openstack-management-net
     external_links:
-      - openstack_postgresql:openstack_postgresql
+      - openstack_mariadb:openstack_mariadb
       - openstack_memcached:openstack_memcached
     volumes:
       - keystone_log:/var/log/keystone

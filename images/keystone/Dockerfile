@@ -17,6 +17,11 @@ VOLUME ["/var/log/keystone"]
 EXPOSE 35357
 EXPOSE 5000
 
-COPY configmerge.py configmerge.py
+RUN ["cp", "/opt/keystone/etc/keystone.conf.sample", "/opt/keystone/etc/keystone.conf"]
+RUN ["cp", "/opt/keystone/etc/keystone-paste.ini", "/opt/keystone/etc/keystone-paste.ini"]
+RUN ["cp", "/opt/keystone/etc/logging.conf.sample", "/etc/keystone/logging.conf"]
+
+RUN python2 /configparse.py --config config.json --service "/etc/keystone/keystone.conf"
+
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]
