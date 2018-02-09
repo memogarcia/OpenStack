@@ -20,7 +20,7 @@
         - openstack_nova:openstack_nova
       volumes:
         - nova_log:/var/log/nova
-        - /var/run/libvirtd.pid:/var/run/libvirtd.pid
+        # - /var/run/libvirtd.pid:/var/run/libvirtd.pid
         - /var/lib/libvirt/:/var/lib/libvirt/
         - /sys/fs/cgroup:/sys/fs/cgroup:rw
         # - glance_etc:/etc/glance
