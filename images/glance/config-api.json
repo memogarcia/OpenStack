@@ -17,7 +17,7 @@
     },
     "database":
     {
-        "connection": "postgresql://glance:secret@openstack_postgresql/glance"
+        "connection": "mysql+pymysql://glance:secret@openstack_postgresql/glance"
     },
     "glance_store":
     {

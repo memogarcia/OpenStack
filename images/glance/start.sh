@@ -2,15 +2,17 @@
 
 set -u
 
-export PGPASSWORD=secret
-
 echo "DB configuration"
-psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "admin" <<-EOSQL
-    CREATE USER glance;
-    ALTER USER glance WITH PASSWORD 'secret';
-    CREATE DATABASE glance;
-    GRANT ALL PRIVILEGES ON DATABASE glance TO glance;
-EOSQL
+mysql  -hopenstack_mariadb -umysql -psecret \
+      -e "CREATE DATABASE glance;"
+
+mysql  -hopenstack_mariadb P -umysql -psecret \
+       -e "GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'localhost' \
+          IDENTIFIED BY 'secret';"
+
+mysql  -hopenstack_mariadb -umysql -psecret \
+       -e "GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'%' \
+          IDENTIFIED BY 'secret'"
 
 echo "Syncing db"
 glance-manage db_sync
