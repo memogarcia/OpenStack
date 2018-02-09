@@ -5,7 +5,7 @@ services:
 
   nova:
     build: .
-    container_name: openstack_nova:master
+    container_name: openstack_nova
     networks:
       - openstack-management-net
     ports:

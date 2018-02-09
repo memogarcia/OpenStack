@@ -1,0 +1,27 @@
+---
+  version: '3.1'
+
+  services:
+
+    mariadb:
+      build: .
+      container_name: openstack_mariadb
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: secret
+        MYSQL_USER: mysql
+        MYSQL_PASS: secret
+      # ports:
+      #   - "3306:3306"
+      volumes:
+        - mysql_volume:/var/lib/mysql/
+      networks:
+        - openstack-management-net
+
+  volumes:
+    mysql_volume:
+      driver: local
+
+  networks:
+    openstack-management-net:
+      external: true

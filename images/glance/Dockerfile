@@ -10,7 +10,7 @@ WORKDIR /opt/glance
 
 RUN python2 -m pip install -e . && tox -e genconfig
 
-VOLUME ["/var/log/glance"]
+VOLUME ["/var/log/glance", "/var/lib/glance"]
 
 EXPOSE 9292
 EXPOSE 9191

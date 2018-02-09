@@ -5,10 +5,11 @@ services:
 
   glance:
     build: .
-    container_name: openstack_glance:master
+    container_name: openstack_glance
     networks:
       - openstack-management-net
     ports:
+      - "0.0.0.0:9191:9191"
       - "0.0.0.0:9292:9292"
     external_links:
       - openstack_postgresql:openstack_postgresql
@@ -17,12 +18,13 @@ services:
     volumes:
       - glance_log:/var/log/glance
       # - glance_etc:/etc/glance
+      - glance_lib:/var/lib/glance
     command: ["bash", "start.sh"]
 
 volumes:
   glance_log:
     driver: local
-  glance_etc:
+  glance_lib:
     driver: local
 
 networks:

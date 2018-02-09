@@ -6,7 +6,7 @@
     nova_qemu:
       build: .
       privileged: true
-      container_name: openstack_nova_qemu:master
+      container_name: openstack_nova_qemu
       networks:
         - openstack-management-net
       ports:
