@@ -10,7 +10,7 @@ WORKDIR /opt/keystone
 
 RUN python2 -m pip install -e . && tox -e genconfig
 
-# RUN python2 -m pip install 'pika<0.11,>=0.9' 'pymysql'
+RUN python2 -m pip install 'pika<0.11,>=0.9' 'pymysql'
 
 VOLUME ["/var/log/keystone"]
 
