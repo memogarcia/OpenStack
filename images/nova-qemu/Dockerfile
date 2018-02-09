@@ -7,13 +7,15 @@ RUN pacman -S --noconfirm libvirt-python \
                             libvirt \
                             qemu
 
-RUN git clone --depth=1 -b stable/pike https://github.com/openstack/nova.git /opt/nova
+RUN git clone --depth=1 https://github.com/openstack/nova.git /opt/nova
 
 WORKDIR /opt/nova
 
 RUN python2 -m pip install -e . && tox -e genconfig
 
-RUN mkdir /etc/nova
+RUN pip2 install libvirt-python
+
+RUN mkdir /etc/nova /opt/nova/instances
 
 VOLUME  ["/var/log/nova"]
 
@@ -37,13 +39,10 @@ RUN ["cp", "/opt/nova/etc/nova/rootwrap.d/network.filters", "/etc/nova/rootwrap.
 RUN python2 /configparse.py --config config-nova.json --service "/etc/nova/nova.conf"
 RUN python2 /configparse.py --config config-nova-compute.json --service "/etc/nova/nova-compute.conf"
 
-RUN rm /opt/nova/nova/db/sqlalchemy/api.py && wget https://gist.githubusercontent.com/memogarcia/e0c44badaf9edb4eb8335954837e1c39/raw/4e66294a89b8bb3459acabe9b2d6a271ab18900c/api.py -O /opt/nova/nova/db/sqlalchemy/api.py
-RUN rm /opt/nova/nova/virt/libvirt/driver.py && wget https://gist.githubusercontent.com/memogarcia/46b9a2466c9d85a213dc739389e384f9/raw/c1ddd14ede8e4413d839f212e86496b084e3186c/driver.py -O /opt/nova/nova/virt/libvirt/driver.py
+# RUN rm /opt/nova/nova/db/sqlalchemy/api.py && wget https://gist.githubusercontent.com/memogarcia/e0c44badaf9edb4eb8335954837e1c39/raw/4e66294a89b8bb3459acabe9b2d6a271ab18900c/api.py -O /opt/nova/nova/db/sqlalchemy/api.py
+# RUN rm /opt/nova/nova/virt/libvirt/driver.py && wget https://gist.githubusercontent.com/memogarcia/46b9a2466c9d85a213dc739389e384f9/raw/c1ddd14ede8e4413d839f212e86496b084e3186c/driver.py -O /opt/nova/nova/virt/libvirt/driver.py
 
-RUN pip2 install libvirt-python
-RUN mkdir /opt/nova/instances
-
-VOLUME ["/var/lib/libvirt"]
+# VOLUME ["/var/lib/libvirt"]
 
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

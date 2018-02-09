@@ -5,7 +5,7 @@ services:
 
   glance:
     build: .
-    container_name: openstack_glance
+    container_name: openstack_glance:master
     networks:
       - openstack-management-net
     ports:

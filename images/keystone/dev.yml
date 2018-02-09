@@ -5,7 +5,7 @@ services:
 
   keystone:
     build: .
-    container_name: openstack_keystone
+    container_name: openstack_keystone:master
     ports:
       - "0.0.0.0:35357:35357"
       - "0.0.0.0:5000:5000"

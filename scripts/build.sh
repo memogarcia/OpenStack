@@ -4,7 +4,7 @@ set -u -x
 
 SERVICES=$(cat scripts/services.txt)
 
-docker build -t openstack/seed images/seed
+docker build -t openstack/seed:master images/seed
 
 for service in $SERVICES
 do

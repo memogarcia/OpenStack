@@ -4,7 +4,7 @@ LABEL maintainer=root@memogarcia.mx
 
 RUN mkdir /etc/keystone
 
-RUN git clone --depth=1 -b stable/pike https://github.com/openstack/keystone.git /opt/keystone
+RUN git clone --depth=1 https://github.com/openstack/keystone.git /opt/keystone
 
 WORKDIR /opt/keystone
 

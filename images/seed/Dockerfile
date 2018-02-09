@@ -27,3 +27,7 @@ COPY configparse.py configparse.py
 COPY osrc-v3 /opt/osrc-v3
 
 RUN python2 -m pip install python-openstackclient
+
+RUN wget https://raw.githubusercontent.com/openstack/requirements/master/upper-constraints.txt
+
+RUN pip2 install -r upper-constraints.txt

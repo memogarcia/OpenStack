@@ -5,7 +5,7 @@ services:
 
   postgresql:
     image: postgres:10.1-alpine
-    container_name: openstack_postgresql
+    container_name: openstack_postgresql:master
     restart: always
     environment:
       POSTGRES_PASSWORD: secret
