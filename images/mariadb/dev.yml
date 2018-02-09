@@ -4,15 +4,15 @@
   services:
 
     mariadb:
-      build: .
+      image: mariadb:10.3.4
       container_name: openstack_mariadb
       restart: always
       environment:
         MYSQL_ROOT_PASSWORD: secret
         MYSQL_USER: mysql
         MYSQL_PASS: secret
-      # ports:
-      #   - "3306:3306"
+      ports:
+        - "0.0.0.0:3306:3306"
       volumes:
         - mysql_volume:/var/lib/mysql/
       networks:

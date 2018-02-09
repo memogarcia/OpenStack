@@ -4,14 +4,14 @@ set -u
 export PGPASSWORD=secret
 
 echo "DB configuration"
-mysql  -h openstack_mariadb -u mysql -p secret \
+mysql  -hopenstack_mariadb -umysql -psecret \
       -e "CREATE DATABASE keystone;"
 
-mysql  -h openstack_mariadb P -u mysql -p secret \
+mysql  -hopenstack_mariadb P -umysql -psecret \
        -e "GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' \
           IDENTIFIED BY 'secret';"
 
-mysql  -h openstack_mariadb -u mysql -p secret \
+mysql  -hopenstack_mariadb -umysql -psecret \
        -e "GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' \
           IDENTIFIED BY 'secret'"
 

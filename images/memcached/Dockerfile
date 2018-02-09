@@ -2,9 +2,7 @@ FROM openstack/seed:latest
 
 LABEL maintainer=root@memogarcia.mx
 
-RUN pacman -Sy --noconfirm python2-memcached memcached
-
-RUN useradd daemon
+RUN pacman -Sy --noconfirm memcached
 
 EXPOSE 11211
 
