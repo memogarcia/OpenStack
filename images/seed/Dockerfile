@@ -7,7 +7,6 @@ RUN pacman -Sy --noconfirm \
         gcc \
         base-devel \
         git \
-        python-setuptools \
         python2 python2-pip python2-setuptools \
         python2-netifaces gcc-libs \
         wget \

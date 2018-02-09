@@ -4,7 +4,7 @@ version: "2"
 services:
 
   memcached:
-    image: memcached:1.5.4-alpine
+    build: .
     container_name: openstack_memcached
     ports:
       - "11211:11211"
