@@ -4,7 +4,7 @@ LABEL maintainer=root@memogarcia.mx
 
 RUN mkdir /etc/nova /etc/nova/rootwrap.d/
 
-RUN git clone --depth=1 https://github.com/openstack/nova.git /opt/nova
+RUN git clone -b stable/pike --depth=1 https://github.com/openstack/nova.git /opt/nova
 
 WORKDIR /opt/nova
 

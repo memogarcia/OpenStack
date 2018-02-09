@@ -2,19 +2,34 @@
 
 set -u
 
-export PGPASSWORD=secret
+echo "> Creating sql user and database"
+mysql -hopenstack_mariadb -umysql -psecret \
+    -e "CREATE DATABASE nova_api;"
+mysql -hopenstack_mariadb -umysql -psecret \
+    -e "CREATE DATABASE nova;"
+mysql -hopenstack_mariadb -umysql -psecret \
+    -e "CREATE DATABASE nova_cell0;"
 
-echo "DB configuration"
-psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "admin" <<-EOSQL
-    CREATE USER nova;
-    ALTER USER nova WITH PASSWORD 'secret';
-    CREATE DATABASE nova;
-    CREATE DATABASE nova_api;
-    CREATE DATABASE nova_cell0;
-    GRANT ALL PRIVILEGES ON DATABASE nova TO nova;
-    GRANT ALL PRIVILEGES ON DATABASE nova_api TO nova;
-    GRANT ALL PRIVILEGES ON DATABASE nova_cell0 TO nova;
-EOSQL
+mysql -hopenstack_mariadb -umysql -psecret \
+        -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' \
+        IDENTIFIED BY '$NOVA_DB_PASS';"
+mysql -hopenstack_mariadb -umysql -psecret \
+        -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'%' \
+        IDENTIFIED BY '$NOVA_DB_PASS';"
+
+mysql -hopenstack_mariadb -umysql -psecret \
+        -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' \
+        IDENTIFIED BY '$NOVA_DB_PASS';"
+mysql -hopenstack_mariadb -umysql -psecret \
+        -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' \
+        IDENTIFIED BY '$NOVA_DB_PASS';"
+
+mysql -hopenstack_mariadb -umysql -psecret \
+        -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'localhost' \
+        IDENTIFIED BY '$NOVA_DB_PASS';"
+mysql -hopenstack_mariadb -umysql -psecret \
+        -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'%' \
+        IDENTIFIED BY '$NOVA_DB_PASS';"
 
 echo "Syncing api database"
 nova-manage api_db sync

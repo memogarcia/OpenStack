@@ -4,7 +4,7 @@ version: "2"
 services:
 
   rabbitmq:
-    build: .
+    image: rabbitmq:3.6.9-management-alpine
     container_name: openstack_rabbitmq
     ports:
       - "5672:5672"

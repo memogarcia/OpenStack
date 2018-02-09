@@ -4,15 +4,15 @@ set -u
 
 echo "DB configuration"
 mysql  -hopenstack_mariadb -umysql -psecret \
-      -e "CREATE DATABASE glance;"
+    -e "CREATE DATABASE glance;"
 
-mysql  -hopenstack_mariadb P -umysql -psecret \
+mysql  -hopenstack_mariadb -umysql -psecret \
        -e "GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'localhost' \
-          IDENTIFIED BY 'secret';"
+        IDENTIFIED BY 'secret';"
 
 mysql  -hopenstack_mariadb -umysql -psecret \
        -e "GRANT ALL PRIVILEGES ON glance.* TO 'glance'@'%' \
-          IDENTIFIED BY 'secret'"
+        IDENTIFIED BY 'secret'"
 
 echo "Syncing db"
 glance-manage db_sync

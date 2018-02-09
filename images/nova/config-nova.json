@@ -1,11 +1,11 @@
 {
     "api_database":
     {
-        "connection": "postgresql://nova:secret@openstack_postgresql/nova_api"
+        "connection": "mysql+pymysql://nova:secret@openstack_mariadb/nova_api"
     },
     "database":
     {
-        "connection": "postgresql://nova:secret@openstack_postgresql/nova"
+        "connection": "mysql+pymysql://nova:secret@openstack_mariadb/nova"
     },
     "DEFAULT":
     {
