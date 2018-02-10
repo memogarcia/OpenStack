@@ -3,7 +3,7 @@
 
   services:
 
-    openstack_horizon:
+    horizon:
       build: .
       container_name: openstack_horizon
       networks:
