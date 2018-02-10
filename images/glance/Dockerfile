@@ -31,5 +31,7 @@ RUN ["cp", "/opt/glance/etc/policy.json", "/etc/glance/policy.json"]
 RUN python2 /configparse.py --config config-api.json --service "/etc/glance/glance-api.conf"
 RUN python2 /configparse.py --config config-registry.json --service "/etc/glance/glance-registry.conf"
 
+RUN pip2 pymysql
+
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

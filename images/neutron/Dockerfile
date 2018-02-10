@@ -16,5 +16,19 @@ VOLUME ["/var/log/neutron"]
 
 EXPOSE 9696
 
+COPY config-metadata.json config-metadata.json
+
+RUN ["cp", "/opt/glance/etc/glance-api.conf", "/etc/glance/glance-api.conf"]
+RUN ["cp", "/opt/glance/etc/glance-api-paste.ini", "/etc/glance/glance-api-paste.ini"]
+RUN ["cp", "/opt/glance/etc/glance-registry-paste.ini", "/etc/glance/glance-registry-paste.ini"]
+RUN ["cp", "/opt/glance/etc/glance-registry.conf", "/etc/glance/glance-registry.conf"]
+RUN ["cp", "/opt/glance/etc/glance-registry.conf", "/etc/glance/glance-registry.conf"]
+RUN ["cp", "/opt/glance/etc/schema-image.json", "/etc/glance/schema-image.json"]
+RUN ["cp", "/opt/glance/etc/policy.json", "/etc/glance/policy.json"]
+
+RUN python2 /configparse.py --config config-metadata.json --service "/etc/neutron/metadata_agent.ini"
+
+RUN pip2 pymysql
+
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

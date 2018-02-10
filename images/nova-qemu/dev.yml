@@ -18,12 +18,11 @@
         - openstack_keystone:openstack_keystone
         - openstack_glance:openstack_glance
         - openstack_nova:openstack_nova
+        # - openstack_neutron:openstack_neutron
       volumes:
         - nova_log:/var/log/nova
-        # - /var/run/libvirtd.pid:/var/run/libvirtd.pid
         - libvirt_volume:/var/lib/libvirt/
         - /sys/fs/cgroup:/sys/fs/cgroup:rw
-        # - glance_etc:/etc/glance
       devices:
         - "/dev/kvm:/dev/kvm"
       command: ["bash", "start.sh"]

@@ -15,7 +15,7 @@ RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/pike/up
 
 RUN pip2 install -c upper-constraints.txt -e . && tox -e genconfig
 
-RUN pip2 install -c upper-constraints.txt libvirt-python
+RUN pip2 install libvirt-python
 
 RUN mkdir /etc/nova /opt/nova/instances
 
@@ -45,6 +45,8 @@ RUN rm /opt/nova/nova/db/sqlalchemy/api.py && wget https://gist.githubuserconten
 RUN rm /opt/nova/nova/virt/libvirt/driver.py && wget https://gist.githubusercontent.com/memogarcia/46b9a2466c9d85a213dc739389e384f9/raw/c1ddd14ede8e4413d839f212e86496b084e3186c/driver.py -O /opt/nova/nova/virt/libvirt/driver.py
 
 # VOLUME ["/var/lib/libvirt"]
+
+RUN pip2 pymysql
 
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

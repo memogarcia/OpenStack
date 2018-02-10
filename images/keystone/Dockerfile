@@ -24,5 +24,8 @@ RUN ["cp", "/opt/keystone/etc/logging.conf.sample", "/etc/keystone/logging.conf"
 COPY config.json config.json
 RUN python2 /configparse.py --config config.json --service "/etc/keystone/keystone.conf"
 
+RUN pacman -Sy --noconfirm mariadb-clients mysql-python
+RUN pip2 pymysql
+
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

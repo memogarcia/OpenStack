@@ -1,0 +1,7 @@
+{
+    "DEFAULT":
+    {
+        "nova_metadata_host": "openstack_nova",
+        "metadata_proxy_shared_secret": "METADATA_SECRET"
+    }
+}

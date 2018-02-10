@@ -3,31 +3,31 @@
 set -u
 
 echo "> Creating sql user and database"
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE nova_api;"
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE nova;"
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE nova_cell0;"
 
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' \
         IDENTIFIED BY 'secret';"
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'%' \
         IDENTIFIED BY 'secret';"
 
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' \
         IDENTIFIED BY 'secret';"
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' \
         IDENTIFIED BY 'secret';"
 
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'localhost' \
         IDENTIFIED BY 'secret';"
-mysql -hopenstack_mariadb -umysql -psecret \
+mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'%' \
         IDENTIFIED BY 'secret';"
 
