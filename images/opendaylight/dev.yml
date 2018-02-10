@@ -1,0 +1,26 @@
+---
+  version: "3"
+
+  services:
+
+    opendaylight:
+      build: .
+      container_name: openstack_opendaylight
+      networks:
+        - openstack-management-net
+      ports:
+        # - "0.0.0.0:9191:9191"
+      external_links:
+        - openstack_mariadb:openstack_mariadb
+        - openstack_keystone:openstack_keystone
+      # volumes:
+        # - glance_lib:/var/lib/glance
+      command: ["bash", "start.sh"]
+
+  # volumes:
+    # glance_log:
+      # driver: local
+
+  networks:
+    openstack-management-net:
+      external: true
