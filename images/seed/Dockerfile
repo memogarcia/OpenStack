@@ -12,19 +12,19 @@ RUN pacman -Sy --noconfirm \
         wget \
         supervisor \
         mariadb-clients \
-        mysql-python
+        mysql-python \
+        nss \
+        nspr
 
 RUN wget http://ftp5.gwdg.de/pub/linux/archlinux/core/os/x86_64//mpfr-4.0.0-1-x86_64.pkg.tar.xz
 
-RUN pacman -U  --noconfirm mpfr-4.0.0-1-x86_64.pkg.tar.xz
+RUN pacman -U --noconfirm mpfr-4.0.0-1-x86_64.pkg.tar.xz
 
-RUN python2 -m pip install tox python-memcached
+RUN python2 -m pip install tox python-memcached pymysql install python-openstackclient crudini
 
 COPY configparse.py configparse.py
 
 COPY osrc-v3 /opt/osrc-v3
-
-RUN python2 -m pip install python-openstackclient crudini
 
 RUN wget https://raw.githubusercontent.com/openstack/requirements/master/upper-constraints.txt
 
