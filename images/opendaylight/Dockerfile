@@ -12,7 +12,10 @@ RUN wget https://nexus.opendaylight.org/content/repositories/public/org/opendayl
 
 RUN tar -xvf karaf-0.7.1.tar.gz
 
+WORKDIR /opt/opendaylight/karaf-0.7.1
+
 EXPOSE 8181
 
 COPY start.sh start.sh
-CMD ["bash", "start.sh"]
+RUN chmod +x start.sh
+CMD ["./start.sh"]

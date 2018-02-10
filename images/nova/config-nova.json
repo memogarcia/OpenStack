@@ -68,5 +68,9 @@
         "password": "secret",
         "service_metadata_proxy": "true",
         "metadata_proxy_shared_secret": "METADATA_SECRET"
+    },
+    "cinder":
+    {
+        "os_region_name": "RegionOne"
     }
 }

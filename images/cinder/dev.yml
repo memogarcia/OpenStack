@@ -1,0 +1,29 @@
+---
+  version: "3"
+  services:
+    cinder:
+      build: .
+      container_name: openstack_cinder
+      networks:
+        - openstack-management-net
+      ports:
+        - "0.0.0.0:8776:8776"
+      external_links:
+        - openstack_mariadb:openstack_mariadb
+        - openstack_memcached:openstack_memcached
+        - openstack_keystone:openstack_keystone
+        - openstack_glance:openstack_glance
+      volumes:
+        - cinder_log:/var/log/cinder
+        - cinder_lib:/var/lib/cinder
+      command: ["bash", "start.sh"]
+
+  volumes:
+    cinder_log:
+      driver: local
+    cinder_lib:
+      driver: local
+
+  networks:
+    openstack-management-net:
+      external: true
