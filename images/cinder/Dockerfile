@@ -8,6 +8,12 @@ RUN git clone -b stable/pike --depth=1 https://github.com/openstack/cinder.git /
 
 WORKDIR /opt/cinder
 
+RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/pike/upper-constraints.txt
+
+RUN pip2 install -c upper-constraints.txt -e . && tox -e genconfig
+
+VOLUME ["/var/log/cinder", "/var/lib/cinder"]
+
 EXPOSE 8776
 
 COPY config.json config.json

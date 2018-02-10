@@ -15,7 +15,7 @@ mysql  -hopenstack_mariadb -uroot -psecret \
         IDENTIFIED BY 'secret'"
 
 echo "Syncing db"
-cinder-manage db_sync
+cinder-manage db sync
 
 source /opt/osrc-v3
 
