@@ -10,7 +10,7 @@ WORKDIR /opt/glance
 
 RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/pike/upper-constraints.txt
 
-RUN python2 -m pip -c upper-constraints.txt install -e . && tox -e genconfig
+RUN pip2 install -c upper-constraints.txt -e . && tox -e genconfig
 
 VOLUME ["/var/log/glance", "/var/lib/glance"]
 

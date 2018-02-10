@@ -10,9 +10,7 @@ WORKDIR /opt/keystone
 
 RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/pike/upper-constraints.txt
 
-RUN python2 -m pip -c upper-constraints.txt install -e . && tox -e genconfig
-
-RUN python2 -m pip install 'pika<0.11,>=0.9' 'pymysql'
+RUN pip2 install -c upper-constraints.txt -e . && tox -e genconfig
 
 VOLUME ["/var/log/keystone"]
 

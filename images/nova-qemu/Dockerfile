@@ -2,7 +2,7 @@ FROM openstack/seed:latest
 
 LABEL maintainer=root@memogarcia.mx
 
-RUN pacman -S --noconfirm libvirt-python \
+RUN pacman -Sy --noconfirm libvirt-python \
                             sysfsutils \
                             libvirt \
                             qemu
@@ -13,9 +13,9 @@ WORKDIR /opt/nova
 
 RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/pike/upper-constraints.txt
 
-RUN python2 -m pip -c upper-constraints.txt install -e . && tox -e genconfig
+RUN pip2 install -c upper-constraints.txt -e . && tox -e genconfig
 
-RUN pip2 install libvirt-python
+RUN pip2 install -c upper-constraints.txt libvirt-python
 
 RUN mkdir /etc/nova /opt/nova/instances
 
