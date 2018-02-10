@@ -54,5 +54,19 @@
         "auth_url": "http://openstack_keystone:35357/v3",
         "username": "placement",
         "password": "secret"
+    },
+    "neutron":
+    {
+        "url": "http://openstack_neutron:9696",
+        "auth_url": "http://openstack_keystone:35357",
+        "auth_type": "password",
+        "project_domain_name": "Default",
+        "user_domain_name": "Default",
+        "region_name": "RegionOne",
+        "project_name": "service",
+        "username": "neutron",
+        "password": "secret",
+        "service_metadata_proxy": "true",
+        "metadata_proxy_shared_secret": "METADATA_SECRET"
     }
 }

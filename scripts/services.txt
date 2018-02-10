@@ -1,1 +1,1 @@
-mariadb memcached rabbitmq keystone glance nova nova-qemu
+mariadb memcached rabbitmq keystone glance neutron nova nova-qemu

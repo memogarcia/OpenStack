@@ -25,7 +25,7 @@ COPY config.json config.json
 RUN python2 /configparse.py --config config.json --service "/etc/keystone/keystone.conf"
 
 RUN pacman -Sy --noconfirm mariadb-clients mysql-python
-RUN pip2 install pymysql
+RUN pip2 install pymysql python-openstackclient
 
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

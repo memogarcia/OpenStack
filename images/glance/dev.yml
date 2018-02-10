@@ -17,7 +17,6 @@ services:
       - openstack_keystone:openstack_keystone
     volumes:
       - glance_log:/var/log/glance
-      # - glance_etc:/etc/glance
       - glance_lib:/var/lib/glance
     command: ["bash", "start.sh"]
 

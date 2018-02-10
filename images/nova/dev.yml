@@ -18,7 +18,7 @@ services:
       - openstack_memcached:openstack_memcached
       - openstack_keystone:openstack_keystone
       - openstack_glance:openstack_glance
-      # - openstack_neutron:openstack_neutron
+      - openstack_neutron:openstack_neutron
     volumes:
       - nova_log:/var/log/nova
     command: ["bash", "start.sh"]
