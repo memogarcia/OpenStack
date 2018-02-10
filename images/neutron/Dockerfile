@@ -28,7 +28,7 @@ RUN ["cp", "/opt/glance/etc/policy.json", "/etc/glance/policy.json"]
 
 RUN python2 /configparse.py --config config-metadata.json --service "/etc/neutron/metadata_agent.ini"
 
-RUN pip2 pymysql
+RUN pip2 install pymysql
 
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

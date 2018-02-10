@@ -46,7 +46,7 @@ RUN rm /opt/nova/nova/virt/libvirt/driver.py && wget https://gist.githubusercont
 
 # VOLUME ["/var/lib/libvirt"]
 
-RUN pip2 pymysql
+RUN pip2 install pymysql
 
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]
