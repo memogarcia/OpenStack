@@ -9,7 +9,7 @@
       networks:
         - openstack-management-net
       ports:
-        # - "0.0.0.0:9191:9191"
+        - "0.0.0.0:8181:8181"
       external_links:
         - openstack_mariadb:openstack_mariadb
         - openstack_keystone:openstack_keystone

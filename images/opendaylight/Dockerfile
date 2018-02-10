@@ -11,3 +11,8 @@ WORKDIR /opt/opendaylight
 RUN wget https://nexus.opendaylight.org/content/repositories/public/org/opendaylight/integration/karaf/0.7.1/karaf-0.7.1.tar.gz
 
 RUN tar -xvf karaf-0.7.1.tar.gz
+
+EXPOSE 8181
+
+COPY start.sh start.sh
+CMD ["bash", "start.sh"]
