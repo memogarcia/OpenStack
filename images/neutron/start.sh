@@ -50,6 +50,8 @@ else
     echo "Skipping"
 fi
 
+ln -s /etc/neutron/plugins/ml2/ml2_conf.ini /etc/neutron/plugin.ini
+
 echo "Create databases tables"
 neutron-db-manage --config-file /etc/neutron/neutron.conf \
                         --config-file /etc/neutron/plugins/ml2/ml2_conf.ini \

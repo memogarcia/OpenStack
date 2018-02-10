@@ -3,7 +3,7 @@
 
   services:
 
-    glance:
+    neutron:
       build: .
       container_name: openstack_neutron
       networks:

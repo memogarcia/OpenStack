@@ -1,0 +1,21 @@
+---
+  version: "3"
+
+  services:
+
+    openstack_horizon:
+      build: .
+      container_name: openstack_horizon
+      networks:
+        - openstack-management-net
+      ports:
+        - "0.0.0.0:8000:8000"
+      external_links:
+        - openstack_memcached:openstack_memcached
+        - openstack_keystone:openstack_keystone
+
+      command: ["bash", "start.sh"]
+
+  networks:
+    openstack-management-net:
+      external: true
