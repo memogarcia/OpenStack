@@ -8,7 +8,9 @@ RUN git clone -b stable/pike --depth=1 https://github.com/openstack/keystone.git
 
 WORKDIR /opt/keystone
 
-RUN python2 -m pip install -e . && tox -e genconfig
+RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/pike/upper-constraints.txt
+
+RUN python2 -m pip -c upper-constraints.txt install -e . && tox -e genconfig
 
 RUN python2 -m pip install 'pika<0.11,>=0.9' 'pymysql'
 

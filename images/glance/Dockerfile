@@ -8,7 +8,9 @@ RUN git clone -b stable/pike --depth=1 https://github.com/openstack/glance.git /
 
 WORKDIR /opt/glance
 
-RUN python2 -m pip install -e . && tox -e genconfig
+RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/pike/upper-constraints.txt
+
+RUN python2 -m pip -c upper-constraints.txt install -e . && tox -e genconfig
 
 VOLUME ["/var/log/glance", "/var/lib/glance"]
 
