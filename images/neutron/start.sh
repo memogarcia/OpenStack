@@ -3,14 +3,14 @@
 set -u
 
 echo "DB configuration"
-mysql  -hopenstack_mariadb -umysql -psecret \
+mysql  -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE neutron;"
 
-mysql  -hopenstack_mariadb -umysql -psecret \
+mysql  -hopenstack_mariadb -uroot -psecret \
        -e "GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'localhost' \
         IDENTIFIED BY 'secret';"
 
-mysql  -hopenstack_mariadb -umysql -psecret \
+mysql  -hopenstack_mariadb -uroot -psecret \
        -e "GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'%' \
         IDENTIFIED BY 'secret'"
 
@@ -39,13 +39,13 @@ endpoint=`openstack endpoint list -f csv -q |grep neutron`
 if [ -z "$endpoint" ]
 then
     echo "Creating public endpoint"
-    openstack endpoint create --region RegionOne image public http://openstack_neutron:9696
+    openstack endpoint create --region RegionOne network public http://openstack_neutron:9696
 
     echo "Creating internal endpoint"
-    openstack endpoint create --region RegionOne image internal http://openstack_neutron:9696
+    openstack endpoint create --region RegionOne network internal http://openstack_neutron:9696
 
     echo "Creating admin endpoint"
-    openstack endpoint create --region RegionOne image admin http://openstack_neutron:9696
+    openstack endpoint create --region RegionOne network admin http://openstack_neutron:9696
 else
     echo "Skipping"
 fi
@@ -57,3 +57,20 @@ echo "Create databases tables"
 neutron-db-manage --config-file /etc/neutron/neutron.conf \
                         --config-file /etc/neutron/plugins/ml2/ml2_conf.ini \
                         upgrade head
+
+echo "Starting metadata agent"
+neutron-metadata-agent &
+
+echo "Starting linux bridge agent"
+neutron-linuxbridge-agent &
+
+echo "Starting dhcp agent"
+neutron-dhcp-agent &
+
+echo "Starting neutron server"
+neutron-server &
+
+echo "Starting neutron api"
+neutron-api
+
+# neutron-l3-agent
