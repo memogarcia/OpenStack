@@ -2,9 +2,20 @@
 
 set -u -x
 
-SERVICES=$(cat scripts/services.txt)
+OPENSTACK_SERVICES=$(cat scripts/openstack_services.txt)
+THIRD_PARTY_SERVICES=$(cat scripts/third_party_services.txt)
 
-for service in $SERVICES
+echo "Starting third party services"
+for service in $THIRD_PARTY_SERVICES
 do
-    docker-compose -f images/$service/dev.yml up -d
+    docker-compose -f images/third-party/$service/dev.yml up -d
+done
+
+echo "Waiting for the third party services to start"
+sleep 10
+
+echo "Starting OpenStack services"
+for service in $OPENSTACK_SERVICES
+do
+    docker-compose -f images/openstack/$service/dev.yml up -d
 done
