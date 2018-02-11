@@ -50,6 +50,7 @@ else
     echo "Skipping"
 fi
 
+echo "Creating symbolic link"
 ln -s /etc/neutron/plugins/ml2/ml2_conf.ini /etc/neutron/plugin.ini
 
 echo "Create databases tables"
