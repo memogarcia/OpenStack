@@ -1,0 +1,49 @@
+{
+    "repo": "https://github.com",
+    "branch": "stable/pike",
+    "services":
+    {
+        "database":
+        {
+            "mariadb":{},
+            "postgresql": {}
+        },
+        "cache":
+        {
+            "memcached": {}
+        },
+        "message":
+        {
+            "rabbitmq": {}
+        },
+        "network":
+        {
+            "neutron":{},
+            "opendayligt": {},
+            "onos": {}
+        },
+        "compute":
+        {
+            "nova": {},
+            "nova-lxc": {},
+            "nova-qemu": {}
+        },
+        "image":
+        {
+            "glance": {}
+        },
+        "block_storage":
+        {
+            "cinder": {}
+        },
+        "ui":
+        {
+            "horizon": {}
+        },
+        "object_storage":
+        {
+            "swift": {},
+            "ceph": {}
+        }
+    }
+}
