@@ -123,5 +123,5 @@ nova-scheduler &
 nova-conductor &
 nova-novncproxy
 
-# how to start this service?
+# how to start this service? do I need to install neutron here? or should this be in a compute node?
 # neutron-linuxbridge-agent
