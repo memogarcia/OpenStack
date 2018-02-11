@@ -122,3 +122,6 @@ nova-consoleauth &
 nova-scheduler &
 nova-conductor &
 nova-novncproxy
+
+# how to start this service?
+# neutron-linuxbridge-agent

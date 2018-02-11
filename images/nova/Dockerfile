@@ -46,5 +46,13 @@ RUN pacman -Sy --noconfirm mariadb-clients mysql-python
 
 RUN pip2 install pymysql python-openstackclient
 
+RUN mkdir -p /etc/neutron/plugins/ml2/
+
+COPY config-neutron.json config-neutron.json
+COPY config-linuxbridge-agent.json config-linuxbridge-agent.json
+
+RUN python2 /configparse.py --config config-neutron.json --service "/etc/neutron/neutron.conf"
+RUN python2 /configparse.py --config config-linuxbridge-agent.json --service "/etc/neutron/plugins/ml2/linuxbridge_agent.ini"
+
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

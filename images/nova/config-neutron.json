@@ -1,0 +1,23 @@
+{
+    "DEFAULT":
+    {
+        "transport_url": "rabbit://guest:guest@openstack_rabbitmq",
+        "auth_strategy": "keystone"
+    },
+    "keystone_authtoken":
+    {
+        "auth_uri": "http://openstack_keystone:5000",
+        "auth_url": "http://openstack_keystone:35357",
+        "memcached_servers": "openstack_memcached:11211",
+        "auth_type": "password",
+        "project_domain_name": "Default",
+        "user_domain_name": "Default",
+        "project_name": "service",
+        "username": "neutron",
+        "password": "secret"
+    },
+    "oslo_concurrency":
+    {
+        "lock_path": "/var/lib/neutron/tmp"
+    }
+}
