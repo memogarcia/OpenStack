@@ -63,3 +63,6 @@ then
 else
     echo "Skipping"
 fi
+
+echo "Starting supervisord"
+supervisord

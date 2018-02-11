@@ -58,19 +58,22 @@ neutron-db-manage --config-file /etc/neutron/neutron.conf \
                         --config-file /etc/neutron/plugins/ml2/ml2_conf.ini \
                         upgrade head
 
-echo "Starting metadata agent"
-neutron-metadata-agent &
+# echo "Starting metadata agent"
+# neutron-metadata-agent &
 
-echo "Starting linux bridge agent"
-neutron-linuxbridge-agent &
+# echo "Starting linux bridge agent"
+# neutron-linuxbridge-agent &
 
-echo "Starting dhcp agent"
-neutron-dhcp-agent &
+# echo "Starting dhcp agent"
+# neutron-dhcp-agent &
 
-echo "Starting neutron server"
-neutron-server &
+# echo "Starting neutron server"
+# neutron-server &
 
-echo "Starting neutron api"
-neutron-api
+# echo "Starting neutron api"
+# neutron-api
+
+echo "Starting supervisord"
+supervisord
 
 # neutron-l3-agent

@@ -10,16 +10,13 @@
         - openstack-management-net
       ports:
         - "0.0.0.0:8181:8181"
+        - "0.0.0.0:8101:8101"
+        - "0.0.0.0:6633:6633"
+        - "0.0.0.0:6653:6653"
+        - "0.0.0.0:2400:2400"
       external_links:
-        - openstack_mariadb:openstack_mariadb
-        - openstack_keystone:openstack_keystone
-      # volumes:
-        # - glance_lib:/var/lib/glance
+        - openstack_neutron:openstack_neutron
       command: ["bash", "start.sh"]
-
-  # volumes:
-    # glance_log:
-      # driver: local
 
   networks:
     openstack-management-net:

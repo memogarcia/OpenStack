@@ -12,5 +12,6 @@ RUN pip2 install -c http://git.openstack.org/cgit/openstack/requirements/plain/u
 
 COPY local_settings.py.sample /opt/horizon/openstack_dashboard/local/local_settings.py
 
+COPY supervisord.conf /etc/supervisord.conf
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

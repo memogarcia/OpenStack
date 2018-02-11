@@ -54,5 +54,6 @@ COPY config-linuxbridge-agent.json config-linuxbridge-agent.json
 RUN python2 /configparse.py --config config-neutron.json --service "/etc/neutron/neutron.conf"
 RUN python2 /configparse.py --config config-linuxbridge-agent.json --service "/etc/neutron/plugins/ml2/linuxbridge_agent.ini"
 
+COPY supervisord.conf /etc/supervisord.conf
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

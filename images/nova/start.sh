@@ -116,12 +116,13 @@ else
     echo "Skipping"
 fi
 
-echo "Running the api's"
-nova-api &
-nova-consoleauth &
-nova-scheduler &
-nova-conductor &
-nova-novncproxy
-
+# echo "Running the api's"
+# nova-api &
+# nova-consoleauth &
+# nova-scheduler &
+# nova-conductor &
+# nova-novncproxy
+echo "Starting supervisord"
+supervisord
 # how to start this service? do I need to install neutron here? or should this be in a compute node?
 # neutron-linuxbridge-agent

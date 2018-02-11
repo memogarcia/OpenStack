@@ -30,5 +30,6 @@ RUN python2 /configparse.py --config config.json --service "/etc/cinder/cinder.c
 RUN pacman -Sy --noconfirm mariadb-clients mysql-python
 RUN pip2 install pymysql python-openstackclient
 
+COPY supervisord.conf /etc/supervisord.conf
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

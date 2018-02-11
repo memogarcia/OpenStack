@@ -54,6 +54,5 @@ else
     echo "Skipping"
 fi
 
-echo "Starting glance api's"
-glance-api &
-glance-registry
+echo "Starting supervisord"
+supervisord
