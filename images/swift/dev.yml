@@ -1,0 +1,28 @@
+---
+  version: "3"
+  services:
+    swift:
+      build: .
+      container_name: openstack_swift
+      networks:
+        - openstack-management-net
+      ports:
+        - "0.0.0.0:8081:8081"
+      external_links:
+        - openstack_mariadb:openstack_mariadb
+        - openstack_memcached:openstack_memcached
+        - openstack_keystone:openstack_keystone
+      volumes:
+        - swift_log:/var/log/swift
+        - swift_lib:/var/lib/swift
+      command: ["bash", "start.sh"]
+
+  volumes:
+    swift_log:
+      driver: local
+    swift_lib:
+      driver: local
+
+  networks:
+    openstack-management-net:
+      external: true
