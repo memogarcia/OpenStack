@@ -7,7 +7,7 @@ RUN pacman -Sy --noconfirm libvirt-python \
                             libvirt \
                             qemu
 
-RUN git clone -b stable/pike --depth=1 https://github.com/openstack/nova.git /opt/nova
+RUN git clone -b stable/queens --depth=1 https://github.com/openstack/nova.git /opt/nova
 
 WORKDIR /opt/nova
 

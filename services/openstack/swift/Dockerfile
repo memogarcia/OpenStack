@@ -12,7 +12,7 @@ RUN ./autogen.sh &&  ./configure && make && make install
 
 RUN mkdir /etc/swift
 
-RUN git clone -b stable/pike --depth=1 https://github.com/openstack/swift.git /opt/swift
+RUN git clone -b stable/queens --depth=1 https://github.com/openstack/swift.git /opt/swift
 
 WORKDIR /opt/swift
 

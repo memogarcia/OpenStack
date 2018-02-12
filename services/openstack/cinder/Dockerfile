@@ -4,7 +4,7 @@ LABEL maintainer=root@memogarcia.mx
 
 RUN mkdir /etc/cinder /etc/cinder/rootwrap.d
 
-RUN git clone -b stable/pike --depth=1 https://github.com/openstack/cinder.git /opt/cinder
+RUN git clone -b stable/queens --depth=1 https://github.com/openstack/cinder.git /opt/cinder
 
 WORKDIR /opt/cinder
 

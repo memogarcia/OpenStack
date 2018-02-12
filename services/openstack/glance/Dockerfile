@@ -4,7 +4,7 @@ LABEL maintainer=root@memogarcia.mx
 
 RUN mkdir /etc/glance
 
-RUN git clone -b stable/pike --depth=1 https://github.com/openstack/glance.git /opt/glance
+RUN git clone -b stable/queens --depth=1 https://github.com/openstack/glance.git /opt/glance
 
 WORKDIR /opt/glance
 
