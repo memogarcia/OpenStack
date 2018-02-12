@@ -3,7 +3,7 @@ FROM shaddock/archlinux:latest
 LABEL maintainer=root@memogarcia.mx
 
 RUN pacman -Sy --noconfirm \
-        gcc base-devel git gcc-libs \
+        gcc base-devel git gcc-libs wget \
         python2 python2-pip python2-setuptools python2-netifaces \
         wget supervisor nss nspr \
         mariadb-clients mysql-python \

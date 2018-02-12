@@ -1,0 +1,23 @@
+---
+  version: "3"
+
+  services:
+
+    onos:
+      build: .
+      container_name: openstack_onos
+      networks:
+        - openstack-management-net
+      ports:
+        - "0.0.0.0:6653:6653"
+        - "0.0.0.0:6640:6640"
+        - "0.0.0.0:8181:8181"
+        - "0.0.0.0:8101:8101"
+        - "0.0.0.0:9876:9876"
+      external_links:
+        - openstack_neutron:openstack_neutron
+      command: ["bash", "start.sh"]
+
+  networks:
+    openstack-management-net:
+      external: true

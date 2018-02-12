@@ -1,6 +1,6 @@
 {
     "repo": "https://github.com",
-    "branch": "stable/pike",
+    "branch": "stable/queens",
     "services":
     {
         "database":

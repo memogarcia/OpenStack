@@ -8,7 +8,7 @@ RUN git clone -b stable/queens --depth=1 https://github.com/openstack/nova.git /
 
 WORKDIR /opt/nova
 
-RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/pike/upper-constraints.txt
+RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/queens/upper-constraints.txt
 
 RUN pip2 install -c upper-constraints.txt -e . && tox -e genconfig
 
@@ -39,12 +39,12 @@ COPY config-nova.json config-nova.json
 
 RUN python2 /configparse.py --config config-nova.json --service "/etc/nova/nova.conf"
 
-# temporary patch for sqlalchemy/api.py in stable/pike
-RUN rm /opt/nova/nova/db/sqlalchemy/api.py && wget https://gist.githubusercontent.com/memogarcia/e0c44badaf9edb4eb8335954837e1c39/raw/4e66294a89b8bb3459acabe9b2d6a271ab18900c/api.py -O /opt/nova/nova/db/sqlalchemy/api.py
+# temporary patch for sqlalchemy/api.py in stable/queens
+# RUN rm /opt/nova/nova/db/sqlalchemy/api.py && wget https://gist.githubusercontent.com/memogarcia/e0c44badaf9edb4eb8335954837e1c39/raw/4e66294a89b8bb3459acabe9b2d6a271ab18900c/api.py -O /opt/nova/nova/db/sqlalchemy/api.py
 
-RUN pacman -Sy --noconfirm mariadb-clients mysql-python
+# RUN pacman -Sy --noconfirm mariadb-clients mysql-python
 
-RUN pip2 install pymysql python-openstackclient
+# RUN pip2 install pymysql python-openstackclient
 
 RUN mkdir -p /etc/neutron/plugins/ml2/
 
