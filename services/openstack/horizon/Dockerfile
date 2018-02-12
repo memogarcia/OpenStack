@@ -8,7 +8,9 @@ RUN git clone -b stable/queens --depth=1 https://github.com/openstack/horizon.gi
 
 WORKDIR /opt/horizon
 
-RUN pip2 install -c http://git.openstack.org/cgit/openstack/requirements/plain/upper-constraints.txt?h=stable/queens .
+# RUN pip2 install -c http://git.openstack.org/cgit/openstack/requirements/plain/upper-constraints.txt?h=stable/queens .
+
+RUN pip2 install -e .
 
 COPY local_settings.py.sample /opt/horizon/openstack_dashboard/local/local_settings.py
 

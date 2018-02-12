@@ -8,9 +8,9 @@ RUN git clone -b stable/queens --depth=1 https://github.com/openstack/keystone.g
 
 WORKDIR /opt/keystone
 
-RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/queens/upper-constraints.txt
+# RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/queens/upper-constraints.txt
 
-RUN pip2 install -c upper-constraints.txt -e . && tox -e genconfig
+RUN pip2 -e . && tox -e genconfig
 
 VOLUME ["/var/log/keystone"]
 
