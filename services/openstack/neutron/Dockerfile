@@ -34,14 +34,10 @@ RUN python2 /configparse.py --config config-linuxbridge-agent.json --service "/e
 RUN python2 /configparse.py --config config-ml2.json --service "/etc/neutron/plugins/ml2/ml2_conf.ini"
 RUN python2 /configparse.py --config config.json --service "/etc/neutron/neutron.conf"
 
-RUN pacman -Sy --noconfirm mariadb-clients mysql-python
-
-RUN pip2 install pymysql python-openstackclient
-
 COPY supervisord.conf /etc/supervisord.conf
 
 # Opendaylight conf
-RUN pacman -Sy --noconfirm openvswitch
+# RUN pacman -Sy --noconfirm openvswitch
 
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]

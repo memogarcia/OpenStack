@@ -20,10 +20,6 @@ RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/queens/
 
 RUN pip2 install -c upper-constraints.txt -e . && tox -e genconfig
 
-RUN pacman -Sy --noconfirm mariadb-clients mysql-python
-
-RUN pip2 install pymysql python-openstackclient
-
 RUN pacman -Sy --noconfirm xfsprogs rsync
 
 COPY supervisord.conf /etc/supervisord.conf

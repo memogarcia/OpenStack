@@ -46,10 +46,6 @@ RUN rm /opt/nova/nova/virt/libvirt/driver.py && wget https://gist.githubusercont
 
 # VOLUME ["/var/lib/libvirt"]
 
-RUN pacman -Sy --noconfirm mariadb-clients mysql-python
-
-RUN pip2 install pymysql python-openstackclient
-
 COPY supervisord.conf /etc/supervisord.conf
 COPY start.sh start.sh
 CMD ["bash", "start.sh"]
