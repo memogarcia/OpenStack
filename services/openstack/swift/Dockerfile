@@ -29,13 +29,12 @@ RUN ["cp", "/opt/swift/etc/internal-client.conf-sample", "/etc/swift/internal-cl
 RUN ["cp", "/opt/swift/etc/keymaster.conf-sample", "/etc/swift/keymaster.conf"]
 RUN ["cp", "/opt/swift/etc/memcache.conf-sample", "/etc/swift/memcache.conf"]
 RUN ["cp", "/opt/swift/etc/mime.types-sample", "/etc/swift/mime.types"]
-RUN ["cp", "/opt/swift/etc/object-expirer.conf-sample", "/etc/swift/object-expirer.conf-sample"]
-RUN ["cp", "/opt/swift/etc/object-server.conf-sample", "/etc/swift/object-server.conf-sample"]
-RUN ["cp", "/opt/swift/etc/proxy-server.conf-sample", "/etc/swift/proxy-server.conf-sample"]
-RUN ["cp", "/opt/swift/etc/rsyncd.conf-sample", "/etc/swift/rsyncd.conf-sample"]
-RUN ["cp", "/opt/swift/etc/rsyncd.conf-sample", "/etc/swift/rsyncd.conf-sample"]
-RUN ["cp", "/opt/swift/etc/swift-rsyslog.conf-sample", "/etc/swift/swift-rsyslog.conf-sample"]
-RUN ["cp", "/opt/swift/etc/swift.conf-sample", "/etc/swift/swift.conf-sample"]
+RUN ["cp", "/opt/swift/etc/object-expirer.conf-sample", "/etc/swift/object-expirer.conf"]
+RUN ["cp", "/opt/swift/etc/object-server.conf-sample", "/etc/swift/object-server.conf"]
+RUN ["cp", "/opt/swift/etc/rsyncd.conf-sample", "/etc/swift/rsyncd.conf"]
+RUN ["cp", "/opt/swift/etc/rsyncd.conf-sample", "/etc/swift/rsyncd.conf"]
+RUN ["cp", "/opt/swift/etc/swift-rsyslog.conf-sample", "/etc/swift/swift-rsyslog.conf"]
+RUN ["cp", "/opt/swift/etc/swift.conf-sample", "/etc/swift/swift.conf"]
 
 RUN curl -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/proxy-server.conf-sample?h=stable/queens
 
@@ -48,6 +47,8 @@ RUN python2 /configparse.py --config config.json --service "/etc/swift/swift.con
 COPY templates/ld.so.conf /etc/ld.so.conf
 
 RUN ldconfig
+
+RUN pip2 install keystonemiddleware
 
 COPY supervisord.conf /etc/supervisord.conf
 COPY start.sh start.sh
