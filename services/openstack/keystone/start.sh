@@ -39,5 +39,5 @@ keystone-manage bootstrap \
   --bootstrap-password secret \
   --bootstrap-project-name service
 
-keystone-wsgi-admin --port 35357 --host 0.0.0.0 &
-keystone-wsgi-public --port 5000 --host 0.0.0.0
+echo "Starting supervisord"
+supervisord

@@ -10,7 +10,6 @@ services:
       - openstack-management-net
     ports:
       - "0.0.0.0:8774:8774"
-      - "0.0.0.0:8776:8776"
       - "0.0.0.0:8778:8778"
     external_links:
       - openstack_mariadb:openstack_mariadb
@@ -26,8 +25,6 @@ services:
 volumes:
   nova_log:
     driver: local
-  # glance_etc:
-    # driver: local
 
 networks:
   openstack-management-net:

@@ -1,0 +1,22 @@
+---
+  version: "3"
+
+  services:
+
+    cadvisor:
+      image: google/cadvisor:latest
+      container_name: openstack_infra_cadvisor
+      volumes:
+        - /:/rootfs:ro
+        - /var/run:/var/run:rw
+        - /sys:/sys:ro
+        - /var/lib/docker/:/var/lib/docker:ro
+        - /dev/disk/:/dev/disk:ro
+      ports:
+        - "0.0.0.0:8080:9600"
+      networks:
+        - openstack-management-net
+
+  networks:
+    openstack-management-net:
+      external: true

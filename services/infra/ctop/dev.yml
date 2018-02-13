@@ -1,0 +1,17 @@
+---
+  version: "3"
+
+  services:
+
+    ctop:
+      image: quay.io/vektorlab/ctop:latest
+      container_name: openstack_infra_ctop
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:rw
+        - /dev/tty:/dev/tty
+      networks:
+        - openstack-management-net
+
+  networks:
+    openstack-management-net:
+      external: true

@@ -1,0 +1,21 @@
+---
+  version: "2"
+  services:
+    portainer:
+      image: portainer/portainer
+      container_name: openstack_infra_portainer
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - portainervolume:/data
+      ports:
+        - "0.0.0.0:9500:9000"
+      networks:
+        - openstack-management-net
+
+  volumes:
+    portainervolume:
+      driver: local
+
+  networks:
+    openstack-management-net:
+      external: true
