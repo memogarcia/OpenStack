@@ -1,0 +1,26 @@
+---
+  version: '3.1'
+
+  services:
+
+    openldap:
+      build: .
+      container_name: openstack_ldap
+      restart: always
+      environment:
+        test: pass
+      ports:
+        - "0.0.0.0:389:389"
+        - "0.0.0.0:636:636"
+      volumes:
+        - ldap_volume:/var/lib/openldap/
+      networks:
+        - openstack-management-net
+
+  volumes:
+    ldap_volume:
+      driver: local
+
+  networks:
+    openstack-management-net:
+      external: true

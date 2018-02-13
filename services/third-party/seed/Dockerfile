@@ -18,3 +18,5 @@ RUN python2 -m pip install tox python-memcached pymysql python-openstackclient c
 COPY configparse.py configparse.py
 
 COPY osrc-v3 /opt/osrc-v3
+
+# onbuild copy start.sh and supervisord.conf
