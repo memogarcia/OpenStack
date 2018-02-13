@@ -1,0 +1,17 @@
+dn: dc=openstack,dc=mx
+dc: openstack
+objectClass: top
+objectClass: domain
+
+dn: cn=Manager,dc=openstack,dc=mx
+objectClass: organizationalRole
+cn: Manager
+description: LDAP Manager
+
+dn: ou=Users,dc=openstack,dc=mx
+objectClass: organizationalUnit
+ou: Users
+
+dn: ou=Users,dc=openstack,dc=mx
+objectClass: organizationalUnit
+ou: Groups
