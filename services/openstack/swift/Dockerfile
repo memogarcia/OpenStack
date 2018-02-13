@@ -20,22 +20,22 @@ RUN pip2 install -e .
 
 RUN pacman -Sy --noconfirm xfsprogs rsync
 
-RUN ["cp", "/opt/swift/etc/swift/account-server.conf-sample", "/etc/swift/account-server.conf"]
-RUN ["cp", "/opt/swift/etc/swift/container-reconciler.conf-sample	", "/etc/swift/container-reconciler.conf"]
-RUN ["cp", "/opt/swift/etc/swift/container-server.conf-sample", "/etc/swift/container-server.conf"]
-RUN ["cp", "/opt/swift/etc/swift/container-sync-realms.conf-sample", "/etc/swift/container-sync-realms.conf"]
-RUN ["cp", "/opt/swift/etc/swift/dispersion.conf-sample", "/etc/swift/dispersion.conf"]
-RUN ["cp", "/opt/swift/etc/swift/internal-client.conf-sample", "/etc/swift/internal-client.conf"]
-RUN ["cp", "/opt/swift/etc/swift/keymaster.conf-sample", "/etc/swift/keymaster.conf"]
-RUN ["cp", "/opt/swift/etc/swift/memcache.conf-sample", "/etc/swift/memcache.conf"]
-RUN ["cp", "/opt/swift/etc/swift/mime.types-sample", "/etc/swift/mime.types"]
-RUN ["cp", "/opt/swift/etc/swift/object-expirer.conf-sample", "/etc/swift/object-expirer.conf-sample"]
-RUN ["cp", "/opt/swift/etc/swift/object-server.conf-sample", "/etc/swift/object-server.conf-sample"]
-RUN ["cp", "/opt/swift/etc/swift/proxy-server.conf-sample", "/etc/swift/proxy-server.conf-sample"]
-RUN ["cp", "/opt/swift/etc/swift/rsyncd.conf-sample", "/etc/swift/rsyncd.conf-sample"]
-RUN ["cp", "/opt/swift/etc/swift/rsyncd.conf-sample", "/etc/swift/rsyncd.conf-sample"]
-RUN ["cp", "/opt/swift/etc/swift/swift-rsyslog.conf-sample", "/etc/swift/swift-rsyslog.conf-sample"]
-RUN ["cp", "/opt/swift/etc/swift/swift.conf-sample", "/etc/swift/swift.conf-sample"]
+RUN ["cp", "/opt/swift/etc/account-server.conf-sample", "/etc/swift/account-server.conf"]
+RUN ["cp", "/opt/swift/etc/container-reconciler.conf-sample	", "/etc/swift/container-reconciler.conf"]
+RUN ["cp", "/opt/swift/etc/container-server.conf-sample", "/etc/swift/container-server.conf"]
+RUN ["cp", "/opt/swift/etc/container-sync-realms.conf-sample", "/etc/swift/container-sync-realms.conf"]
+RUN ["cp", "/opt/swift/etc/dispersion.conf-sample", "/etc/swift/dispersion.conf"]
+RUN ["cp", "/opt/swift/etc/internal-client.conf-sample", "/etc/swift/internal-client.conf"]
+RUN ["cp", "/opt/swift/etc/keymaster.conf-sample", "/etc/swift/keymaster.conf"]
+RUN ["cp", "/opt/swift/etc/memcache.conf-sample", "/etc/swift/memcache.conf"]
+RUN ["cp", "/opt/swift/etc/mime.types-sample", "/etc/swift/mime.types"]
+RUN ["cp", "/opt/swift/etc/object-expirer.conf-sample", "/etc/swift/object-expirer.conf-sample"]
+RUN ["cp", "/opt/swift/etc/object-server.conf-sample", "/etc/swift/object-server.conf-sample"]
+RUN ["cp", "/opt/swift/etc/proxy-server.conf-sample", "/etc/swift/proxy-server.conf-sample"]
+RUN ["cp", "/opt/swift/etc/rsyncd.conf-sample", "/etc/swift/rsyncd.conf-sample"]
+RUN ["cp", "/opt/swift/etc/rsyncd.conf-sample", "/etc/swift/rsyncd.conf-sample"]
+RUN ["cp", "/opt/swift/etc/swift-rsyslog.conf-sample", "/etc/swift/swift-rsyslog.conf-sample"]
+RUN ["cp", "/opt/swift/etc/swift.conf-sample", "/etc/swift/swift.conf-sample"]
 
 RUN curl -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/proxy-server.conf-sample?h=stable/queens
 
