@@ -21,7 +21,7 @@ RUN pip2 install -e .
 RUN pacman -Sy --noconfirm xfsprogs rsync
 
 RUN ["cp", "/opt/swift/etc/account-server.conf-sample", "/etc/swift/account-server.conf"]
-RUN ["cp", "/opt/swift/etc/container-reconciler.conf-sample	", "/etc/swift/container-reconciler.conf"]
+RUN ["cp", "/opt/swift/etc/container-reconciler.conf-sample", "/etc/swift/container-reconciler.conf"]
 RUN ["cp", "/opt/swift/etc/container-server.conf-sample", "/etc/swift/container-server.conf"]
 RUN ["cp", "/opt/swift/etc/container-sync-realms.conf-sample", "/etc/swift/container-sync-realms.conf"]
 RUN ["cp", "/opt/swift/etc/dispersion.conf-sample", "/etc/swift/dispersion.conf"]
