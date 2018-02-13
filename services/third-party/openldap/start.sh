@@ -3,14 +3,15 @@
 # slappasswd -h {SHA} -s 901017
 export LDAP_PASSWORD={SHA}YuWSAvQE7gF6Ryl9S9PR23ExhCE=
 
+# DB_CONFIG
+cp templates/DB_CONFIG /var/lib/ldap/DB_CONFIG
+
 ## DB Configuration db.ldif and ldapmodify
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f templates/db.ldif
 
 ## monitoring configuration and ldapmodify
 ldapmodify -Y EXTERNAL  -H ldapi:/// -f templates/monitor.ldif
 
-# DB_CONFIG
-cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
 
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif -w {SHA}YuWSAvQE7gF6Ryl9S9PR23ExhCE=
 
