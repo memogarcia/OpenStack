@@ -4,14 +4,14 @@ set -u
 
 echo "DB configuration"
 mysql  -hopenstack_mariadb -uroot -psecret \
-    -e "CREATE DATABASE cinder;"
+    -e "CREATE DATABASE swift;"
 
 mysql  -hopenstack_mariadb -uroot -psecret \
-       -e "GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'localhost' \
+       -e "GRANT ALL PRIVILEGES ON swift.* TO 'swift'@'localhost' \
         IDENTIFIED BY 'secret';"
 
 mysql  -hopenstack_mariadb -uroot -psecret \
-       -e "GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%' \
+       -e "GRANT ALL PRIVILEGES ON swift.* TO 'swift'@'%' \
         IDENTIFIED BY 'secret'"
 
 echo "Syncing db"
@@ -39,7 +39,7 @@ else
     echo "Skipping"
 fi
 
-endpoint=`openstack endpoint list -f csv -q |grep cinder`
+endpoint=`openstack endpoint list -f csv -q |grep swift`
 if [ -z "$endpoint" ]
 then
     echo "Creating public endpoint"
