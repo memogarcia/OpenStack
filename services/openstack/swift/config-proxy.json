@@ -2,7 +2,7 @@
     "DEFAULT":
     {
         "bind_port": "8081",
-        "user": "swift",
+        "user": "root",
         "swift_dir": "/etc/swift"
     },
     "pipeline:main":
@@ -30,17 +30,7 @@
     },
     "filter:keystoneauth":
     {
-        "paste.filter_factory": "keystonemiddleware.auth_token:filter_factory",
-        "auth_uri": "http://openstack_keystone:5000",
-        "auth_url": "http://openstack_keystone:35357",
-        "memcached_servers": "openstack_memcached:11211",
-        "auth_type": "password",
-        "project_domain_name": "Default",
-        "user_domain_name": "Default",
-        "project_name": "service",
-        "username": "swift",
-        "password": "secret",
-        "delay_auth_decision": "True"
+        "use": "egg:swift#keystoneauth"
     },
     "filter:cache":
     {

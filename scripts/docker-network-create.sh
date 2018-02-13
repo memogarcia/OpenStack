@@ -2,7 +2,9 @@
 
 set -u -x
 
-for network in openstack-management-net openstack-public-net openstack-private-net openstack-swift-net
+NETWORKS=$(cat scripts/networks.txt)
+
+for network in $NETWORKS
 do
     docker network create "$network"
 done
