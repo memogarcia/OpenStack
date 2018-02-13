@@ -32,5 +32,15 @@
     {
         "use": "egg:swift#memcache",
         "memcache_servers": "openstack_memcached:11211"
+    },
+    "swift-hash":
+    {
+        "swift_hash_path_suffix": "123",
+        "swift_hash_path_prefix": "456"
+    },
+    "storage-policy:0":
+    {
+        "name": "Policy-0",
+        "default": "yes"
     }
 }

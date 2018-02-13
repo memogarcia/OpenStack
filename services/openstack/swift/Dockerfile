@@ -14,15 +14,19 @@ RUN git clone -b stable/queens --depth=1 https://github.com/openstack/swift.git 
 
 WORKDIR /opt/swift
 
-RUN curl -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/proxy-server.conf-sample?h=stable/pike
+RUN curl -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/proxy-server.conf-sample?h=stable/queens
 
-RUN pip2 install -e . && tox -e genconfig
+RUN pip2 install -e .
 
 COPY config.json config.json
 
 RUN python2 /configparse.py --config config.json --service "/etc/swift/proxy-server.conf"
 
 RUN pacman -Sy --noconfirm xfsprogs rsync
+
+COPY templates/ld.so.conf /etc/ld.so.conf
+
+RUN ldconfig
 
 COPY supervisord.conf /etc/supervisord.conf
 COPY start.sh start.sh
