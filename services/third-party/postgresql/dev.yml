@@ -19,8 +19,8 @@ services:
       - openstack-management-net
 
 volumes:
-  pgmaster:
-    driver: local
+  openstack_volume_postgres:
+    external: true
 
 networks:
   openstack-management-net:

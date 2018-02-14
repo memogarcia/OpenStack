@@ -16,9 +16,12 @@
       volumes:
         - cinder_log:/var/log/cinder
         - cinder_lib:/var/lib/cinder
+        - openstack_volume_cinder:/etc/cinder
       command: ["bash", "start.sh"]
 
   volumes:
+    openstack_volume_cinder:
+      external: true
     cinder_log:
       driver: local
     cinder_lib:
