@@ -11,9 +11,6 @@ services:
       - "0.0.0.0:5000:5000"
     networks:
       - openstack-management-net
-    external_links:
-      - openstack_mariadb:openstack_mariadb
-      - openstack_memcached:openstack_memcached
     volumes:
       - keystone_log:/var/log/keystone
     command: ["bash", "/opt/start.sh"]
