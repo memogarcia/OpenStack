@@ -19,4 +19,10 @@ COPY configparse.py configparse.py
 
 COPY osrc-v3 /opt/osrc-v3
 
-# onbuild copy start.sh and supervisord.conf
+ONBUILD COPY start.sh start.sh
+
+ONBUILD COPY supervisord.conf supervisord.conf
+
+ONBUILD COPY config/ /opt/config/
+
+CMD ["bash", "start.sh"]
