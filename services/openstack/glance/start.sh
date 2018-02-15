@@ -2,6 +2,17 @@
 
 set -u
 
+echo "Applying configuration"
+cp /opt/glance/etc/glance-api.conf /etc/glance/glance-api.conf
+cp /opt/glance/etc/glance-api-paste.ini /etc/glance/glance-api-paste.ini
+cp /opt/glance/etc/glance-registry-paste.ini /etc/glance/glance-registry-paste.ini
+cp /opt/glance/etc/glance-registry.conf /etc/glance/glance-registry.conf
+cp /opt/glance/etc/schema-image.json /etc/glance/schema-image.json
+cp /opt/glance/etc/policy.json /etc/glance/policy.json
+
+python2 /opt/configparse.py --config /opt/config/config-api.json --service "/etc/glance/glance-api.conf"
+python2 /opt/configparse.py --config /opt/config/cconfig-registry.json --service "/etc/glance/glance-registry.conf"
+
 echo "DB configuration"
 mysql  -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE glance;"
