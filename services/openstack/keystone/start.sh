@@ -5,7 +5,7 @@ echo "Applying configuration"
 cp /opt/keystone/etc/keystone.conf.sample /etc/keystone/keystone.conf
 cp /opt/keystone/etc/keystone-paste.ini /etc/keystone/keystone-paste.ini
 cp /opt/keystone/etc/logging.conf.sample /etc/keystone/logging.conf
-python2 /configparse.py --config /opt/config/config.json --service "/etc/keystone/keystone.conf"
+python2 /opt/configparse.py --config /opt/config/config.json --service "/etc/keystone/keystone.conf"
 
 echo "DB configuration"
 mysql  -hopenstack_mariadb -uroot -psecret \

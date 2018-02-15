@@ -16,7 +16,7 @@ services:
       - openstack_memcached:openstack_memcached
     volumes:
       - keystone_log:/var/log/keystone
-    command: ["bash", "start.sh"]
+    command: ["bash", "/opt/start.sh"]
 
 volumes:
   keystone_log:
