@@ -2,28 +2,40 @@
 
 set -u
 
-echo "> Creating sql user and database"
+echo "Applying configuration"
+cp /opt/nova/etc/nova/api-paste.ini /etc/nova/api-paste.ini
+cp /opt/nova/etc/nova/cells.json /etc/nova/cells.json
+cp /opt/nova/etc/nova/logging_sample.conf /etc/nova/logging.conf
+cp /opt/nova/etc/nova/nova-config-generator.conf /etc/nova/nova-config-generator.conf
+cp /opt/nova/etc/nova/nova-policy-generator.conf /etc/nova/nova-policy-generator.conf
+cp /opt/nova/etc/nova/rootwrap.conf /etc/nova/rootwrap.conf
+cp /opt/nova/etc/nova/rootwrap.d/api-metadata.filters /etc/nova/rootwrap.d/api-metadata.filters
+cp /opt/nova/etc/nova/rootwrap.d/compute.filters /etc/nova/rootwrap.d/compute.filters
+cp /opt/nova/etc/nova/rootwrap.d/network.filters /etc/nova/rootwrap.d/network.filters
+
+python2 /opt/configparse.py --config /opt/config/config-nova.json --service "/etc/nova/nova.conf"
+python2 /opt/configparse.py --config /opt/config/config-neutron.json --service "/etc/neutron/neutron.conf"
+python2 /opt/configparse.py --config /opt/config/config-linuxbridge-agent.json --service "/etc/neutron/plugins/ml2/linuxbridge_agent.ini"
+
+echo "Creating sql user and database"
 mysql -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE nova_api;"
 mysql -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE nova;"
 mysql -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE nova_cell0;"
-
 mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' \
         IDENTIFIED BY 'secret';"
 mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'%' \
         IDENTIFIED BY 'secret';"
-
 mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' \
         IDENTIFIED BY 'secret';"
 mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' \
         IDENTIFIED BY 'secret';"
-
 mysql -hopenstack_mariadb -uroot -psecret \
         -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'localhost' \
         IDENTIFIED BY 'secret';"
@@ -116,13 +128,5 @@ else
     echo "Skipping"
 fi
 
-# echo "Running the api's"
-# nova-api &
-# nova-consoleauth &
-# nova-scheduler &
-# nova-conductor &
-# nova-novncproxy
 echo "Starting supervisord"
 supervisord
-# how to start this service? do I need to install neutron here? or should this be in a compute node?
-# neutron-linuxbridge-agent
