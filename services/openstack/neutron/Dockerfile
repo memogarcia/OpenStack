@@ -2,21 +2,17 @@ FROM openstack/seed:latest
 
 LABEL maintainer=root@memogarcia.mx
 
-RUN mkdir /etc/neutron
+RUN mkdir /etc/neutron && \
+    mkdir -p /etc/neutron/plugins/ml2 && \
+    wget https://raw.githubusercontent.com/openstack/requirements/stable/queens/upper-constraints.txt -O /opt/upper-constraints.txt && \
+    git clone -b stable/queens --depth=1 https://github.com/openstack/neutron.git /opt/neutron
 
-RUN git clone -b stable/queens --depth=1 https://github.com/openstack/neutron.git /opt/neutron
-
-WORKDIR /opt/neutron
-
-# RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/queens/upper-constraints.txt
-
-RUN pip2 install -e . && tox -e genconfig
+RUN pip2 install  -c /opt/upper-constraints.txt -e . && tox -e genconfig
 
 VOLUME ["/var/log/neutron"]
 
 EXPOSE 9696
 
-RUN mkdir -p /etc/neutron/plugins/ml2
 
 RUN ["cp", "/opt/neutron/etc/api-paste.ini", "/etc/neutron/api-paste.ini"]
 RUN ["cp", "/opt/neutron/etc/policy.json", "/etc/neutron/policy.json"]
@@ -33,11 +29,3 @@ RUN python2 /configparse.py --config config-dhcp-agent.json --service "/etc/neut
 RUN python2 /configparse.py --config config-linuxbridge-agent.json --service "/etc/neutron/plugins/ml2/linuxbridge_agent.ini"
 RUN python2 /configparse.py --config config-ml2.json --service "/etc/neutron/plugins/ml2/ml2_conf.ini"
 RUN python2 /configparse.py --config config.json --service "/etc/neutron/neutron.conf"
-
-COPY supervisord.conf /etc/supervisord.conf
-
-# Opendaylight conf
-# RUN pacman -Sy --noconfirm openvswitch
-
-COPY start.sh start.sh
-CMD ["bash", "start.sh"]

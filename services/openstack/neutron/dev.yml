@@ -20,7 +20,7 @@
         - neutron_log:/var/log/neutron
         - /lib/modules:/lib/modules
         - /run/openvswitch/db.sock:/run/openvswitch/db.sock
-      command: ["bash", "start.sh"]
+      command: ["bash", "/opt/start.sh"]
       cap_add:
         - NET_ADMIN
         - SYS_MODULE

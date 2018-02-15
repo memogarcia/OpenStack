@@ -2,6 +2,17 @@
 
 set -u
 
+echo "Applying configuration"
+cp /opt/neutron/etc/api-paste.ini /etc/neutron/api-paste.ini
+cp /opt/neutron/etc/policy.json /etc/neutron/policy.json
+cp /opt/neutron/etc/neutron/plugins/ml2/ml2_conf.ini.sample /etc/neutron/plugins/ml2/ml2_conf.ini
+
+python2 /opt/configparse.py --config /opt/config/config-metadata.json --service "/etc/neutron/metadata_agent.ini"
+python2 /opt/configparse.py --config /opt/config/config-dhcp-agent.json --service "/etc/neutron/dhcp_agent.ini"
+python2 /opt/configparse.py --config /opt/config/config-linuxbridge-agent.json --service "/etc/neutron/plugins/ml2/linuxbridge_agent.ini"
+python2 /opt/configparse.py --config /opt/config/config-ml2.json --service "/etc/neutron/plugins/ml2/ml2_conf.ini"
+python2 /opt/configparse.py --config /opt/config/config.json --service "/etc/neutron/neutron.conf"
+
 echo "DB configuration"
 mysql  -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE neutron;"
@@ -58,22 +69,5 @@ neutron-db-manage --config-file /etc/neutron/neutron.conf \
                         --config-file /etc/neutron/plugins/ml2/ml2_conf.ini \
                         upgrade head
 
-# echo "Starting metadata agent"
-# neutron-metadata-agent &
-
-# echo "Starting linux bridge agent"
-# neutron-linuxbridge-agent &
-
-# echo "Starting dhcp agent"
-# neutron-dhcp-agent &
-
-# echo "Starting neutron server"
-# neutron-server &
-
-# echo "Starting neutron api"
-# neutron-api
-
 echo "Starting supervisord"
 supervisord
-
-# neutron-l3-agent
