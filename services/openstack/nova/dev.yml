@@ -20,7 +20,7 @@ services:
       - openstack_neutron:openstack_neutron
     volumes:
       - nova_log:/var/log/nova
-    command: ["bash", "start.sh"]
+    command: ["bash", "/opt/start.sh"]
 
 volumes:
   nova_log:

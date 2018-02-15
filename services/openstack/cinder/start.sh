@@ -2,6 +2,16 @@
 
 set -u
 
+echo "Applying configuration"
+cp /opt/cinder/etc/cinder/api-httpd.conf /etc/cinder/api-httpd.conf
+cp /opt/cinder/etc/cinder/api-paste.ini /etc/cinder/api-paste.ini
+cp /opt/cinder/etc/cinder/logging_sample.conf /etc/cinder/logging.conf
+cp /opt/cinder/etc/cinder/resource_filters.json /etc/cinder/resource_filters.json
+cp /opt/cinder/etc/cinder/rootwrap.conf /etc/cinder/rootwrap.conf
+cp /opt/cinder/etc/cinder/rootwrap.d/volume.filters /etc/cinder/rootwrap.d/volume.filters
+
+python2 /opt/configparse.py --config /opt/config/config.json --service "/etc/cinder/cinder.conf"
+
 echo "DB configuration"
 mysql  -hopenstack_mariadb -uroot -psecret \
     -e "CREATE DATABASE cinder;"

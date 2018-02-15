@@ -17,7 +17,7 @@
         - cinder_log:/var/log/cinder
         - cinder_lib:/var/lib/cinder
         - openstack_volume_cinder:/etc/cinder
-      command: ["bash", "start.sh"]
+      command: ["bash", "/opt/start.sh"]
 
   volumes:
     openstack_volume_cinder:

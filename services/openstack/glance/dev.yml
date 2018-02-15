@@ -18,7 +18,7 @@ services:
     volumes:
       - glance_log:/var/log/glance
       - glance_lib:/var/lib/glance
-    command: ["bash", "start.sh"]
+    command: ["bash", "/opt/start.sh"]
 
 volumes:
   glance_log:
