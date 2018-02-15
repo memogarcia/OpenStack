@@ -15,7 +15,7 @@
       volumes:
         - swift_log:/var/log/swift
         - swift_lib:/var/lib/swift
-      command: ["bash", "start.sh"]
+      command: ["bash", "/opt/start.sh"]
 
   volumes:
     swift_log:
