@@ -1,0 +1,22 @@
+---
+    repo: "https://github.com/openstack/"
+    branch: "stable/queens"
+
+    infra:
+        networks:
+            - openstack-management-net
+            - openstack-public-net
+            - openstack-private-net
+            - openstack-swift-net
+
+    
+
+    clusters:
+        controllers:
+            - keystone:
+            - glance:
+
+        computes:
+            - nova-qemu:
+
+        storages:
