@@ -14,7 +14,7 @@
         - openstack_memcached:openstack_memcached
         - openstack_keystone:openstack_keystone
 
-      command: ["bash", "start.sh"]
+      command: ["bash", "/opt/start.sh"]
 
   networks:
     openstack-management-net:
