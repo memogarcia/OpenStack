@@ -19,3 +19,11 @@ RUN pacman -Sy --noconfirm iptables net-tools && \
 VOLUME ["/var/log/nova"]
 
 EXPOSE 8774 8778
+
+COPY start.sh /opt/start.sh
+
+COPY supervisord.conf /etc/supervisord.conf
+
+COPY config/ /opt/config/
+
+CMD ["bash", "/opt/start.sh"]

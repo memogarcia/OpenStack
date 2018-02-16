@@ -8,3 +8,11 @@ RUN mkdir /etc/horizon && \
 WORKDIR /opt/horizon
 
 RUN pip2 install -e .
+
+COPY start.sh /opt/start.sh
+
+COPY supervisord.conf /etc/supervisord.conf
+
+COPY config/ /opt/config/
+
+CMD ["bash", "/opt/start.sh"]

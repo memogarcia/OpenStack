@@ -18,11 +18,3 @@ RUN python2 -m pip install tox python-memcached pymysql python-openstackclient
 COPY configparse.py /opt/configparse.py
 
 COPY osrc-v3 /opt/osrc-v3
-
-ONBUILD COPY start.sh /opt/start.sh
-
-ONBUILD COPY supervisord.conf /etc/supervisord.conf
-
-ONBUILD COPY config/ /opt/config/
-
-CMD ["bash", "/opt/start.sh"]

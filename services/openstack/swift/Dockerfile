@@ -22,3 +22,11 @@ RUN pip2 install -e . && \
     pip2 install keystonemiddleware
 
 COPY templates/ld.so.conf /etc/ld.so.conf
+
+COPY start.sh /opt/start.sh
+
+COPY supervisord.conf /etc/supervisord.conf
+
+COPY config/ /opt/config/
+
+CMD ["bash", "/opt/start.sh"]

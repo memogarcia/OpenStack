@@ -17,3 +17,11 @@ RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig pip2 ins
 VOLUME  ["/var/log/nova"]
 
 EXPOSE 8775
+
+COPY start.sh /opt/start.sh
+
+COPY supervisord.conf /etc/supervisord.conf
+
+COPY config/ /opt/config/
+
+CMD ["bash", "/opt/start.sh"]

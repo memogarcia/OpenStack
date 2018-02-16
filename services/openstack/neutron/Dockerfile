@@ -14,3 +14,11 @@ RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig
 VOLUME ["/var/log/neutron"]
 
 EXPOSE 9696
+
+COPY start.sh /opt/start.sh
+
+COPY supervisord.conf /etc/supervisord.conf
+
+COPY config/ /opt/config/
+
+CMD ["bash", "/opt/start.sh"]

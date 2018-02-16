@@ -13,3 +13,11 @@ RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig
 VOLUME ["/var/log/glance", "/var/lib/glance"]
 
 EXPOSE 9292 9191
+
+COPY start.sh /opt/start.sh
+
+COPY supervisord.conf /etc/supervisord.conf
+
+COPY config/ /opt/config/
+
+CMD ["bash", "/opt/start.sh"]
