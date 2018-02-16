@@ -3,6 +3,8 @@
 Deploying OpenStack using containers allows an easy customization and flexibility on how to deploy
 the platform for development, testing and _production_ environments.
 
+Current deployment: **stable/queens**
+
 ## Infra services
 
 * [Docker](services/infra/docker/README.md)
@@ -41,3 +43,7 @@ Let's configure the third-party services need it for OpenStack to run.
     openstack image list
     openstack server list
     openstack network list
+
+## References
+
+[OpenStack installation Guide](https://docs.openstack.org/install-guide/)
