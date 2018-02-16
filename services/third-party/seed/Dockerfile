@@ -13,7 +13,7 @@ RUN wget http://ftp5.gwdg.de/pub/linux/archlinux/core/os/x86_64/mpfr-4.0.0-1-x86
 
 RUN pacman -U --noconfirm mpfr-4.0.0-1-x86_64.pkg.tar.xz
 
-RUN python2 -m pip install tox python-memcached pymysql python-openstackclient crudini
+RUN python2 -m pip install tox python-memcached pymysql python-openstackclient
 
 COPY configparse.py /opt/configparse.py
 

@@ -7,7 +7,9 @@ RUN mkdir /etc/neutron && \
     wget https://raw.githubusercontent.com/openstack/requirements/stable/queens/upper-constraints.txt -O /opt/upper-constraints.txt && \
     git clone -b stable/queens --depth=1 https://github.com/openstack/neutron.git /opt/neutron
 
-RUN pip2 install  -c /opt/upper-constraints.txt -e . && tox -e genconfig
+WORKDIR /opt/neutron
+
+RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig
 
 VOLUME ["/var/log/neutron"]
 
