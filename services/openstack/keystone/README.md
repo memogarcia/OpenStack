@@ -16,7 +16,19 @@ By using `<container_name>.<network_name>` in the configuration file, we can seg
 ```
 
 For the database configuration, modify [start.sh](start.sh) to match your database.
-In this example, MariaDB is configured. If you want to use PostgreSQL use the [PostgreSQL](config/start_with_postgresql.sh) configuration:
+In this example, MariaDB is configured. If you want to use PostgreSQL, replace the DB configuration
+with the following:
+
+```bash
+echo "DB configuration"
+export PGPASSWORD=secret
+psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "admin" <<-EOSQL
+    CREATE USER keystone;
+    ALTER USER keystone WITH PASSWORD 'secret';
+    CREATE DATABASE keystone;
+    GRANT ALL PRIVILEGES ON DATABASE keystone TO keystone;
+EOSQL
+```
 
 ## References
 
