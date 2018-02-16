@@ -30,6 +30,14 @@ psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "admin" <<-EO
 EOSQL
 ```
 
+and for `config/config.json`:
+
+```bash
+    ...
+    "connection": "postgresql://keystone:secret@openstack_postgresql.openstack-management-net/keystone"
+    ...
+```
+
 ## References
 
 [Keystone installation Guide](https://docs.openstack.org/keystone/queens/install/)

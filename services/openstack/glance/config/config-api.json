@@ -1,9 +1,9 @@
 {
     "keystone_authtoken":
     {
-        "auth_uri": "http://openstack_keystone:5000",
-        "auth_url": "http://openstack_keystone:35357",
-        "memcached_servers": "openstack_memcached:11211",
+        "auth_uri": "http://openstack_keystone.openstack-management-net:5000",
+        "auth_url": "http://openstack_keystone.openstack-management-net:35357",
+        "memcached_servers": "openstack_memcached.openstack-management-net:11211",
         "auth_type": "password",
         "project_domain_name": "Default",
         "user_domain_name": "Default",
@@ -17,7 +17,7 @@
     },
     "database":
     {
-        "connection": "mysql+pymysql://glance:secret@openstack_mariadb/glance"
+        "connection": "mysql+pymysql://glance:secret@openstack_mariadb.openstack-management-net/glance"
     },
     "glance_store":
     {
