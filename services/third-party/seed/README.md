@@ -1,6 +1,6 @@
 # OpenStack docker base image
 
-This is the Arch Linux base image for most of the docker containers.
+This is the Arch Linux base image based on [shaddock/archlinux](https://hub.docker.com/r/shaddock/archlinux/) for most of the docker containers.
 
 It contains the following tools:
 
