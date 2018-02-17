@@ -11,7 +11,7 @@ Current deployment: **stable/queens**
 
 ## Third-party services
 
-Let's configure the third-party services need it for OpenStack to run.
+Configure the third-party services need it for OpenStack to run.
 
 * [Seed](services/third-party/seed/README.md)
 * [MariaDB/MySQL](services/third-party/mariadb/README.md)
@@ -26,6 +26,7 @@ Let's configure the third-party services need it for OpenStack to run.
 * [Glance](services/openstack/glance/README.md)
 * [Neutron](services/openstack/neutron/README.md)
 * [Nova](services/openstack/nova/README.md)
+* [Nova-Qemu](services/openstack/nova-qemu/README.md)
 * [Cinder](services/openstack/cinder/README.md)
 * [Horizon](services/openstack/horizon/README.md)
 

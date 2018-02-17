@@ -10,7 +10,7 @@ Modify the following files to match your environment:
 
 ## Network configuration
 
-Chose one network configuration to deploy on your environment
+Chose one network configuration for your environment:
 
 ### Provider networks
 
@@ -20,6 +20,7 @@ Deploys the simplest configuration, in which you use [provider networks](https:/
 * No virtual routers
 * No Floating IPs
 * Only `admin` users can modify and create networks
+* An existing network is required
 
 **Note** This option works with SDN's
 
@@ -29,7 +30,7 @@ Modify:
 * [config/config-linuxbridge-agent.json](config/config-linuxbridge-agent.json) to map to `/etc/neutron/plugins/ml2/linuxbridge_agent.ini`
 * [config/config-dhcp-agent.json](config/config-dhcp-agent.json) to map to `/etc/neutron/dhcp_agent.ini`
 
-Before the service is running, create a docker network that will act as a provider for neutron:
+Before the service is running, create a docker network that will act as a provider network in OpenStack:
 
     docker network create openstack-provider-net \
         --driver=bridge \
@@ -37,7 +38,7 @@ Before the service is running, create a docker network that will act as a provid
         --ip-range=172.28.5.0/24 \
         --gateway=172.28.5.254
 
-After the service is running, create a provider network with neutron:
+After the service is running, create a provider network:
 
     openstack network create --share --external \
         --provider-physical-network provider \
@@ -75,5 +76,7 @@ Self-service configuration allows attaching instances to private networks (VxLan
 ## References
 
 [Docker networking](https://docs.docker.com/engine/reference/commandline/network_create/#specify-advanced-options)
+
 [Host networking](https://docs.openstack.org/neutron/pike/install/environment-networking-obs.html)
+
 [Provider networks](https://docs.openstack.org/neutron/pike/install/controller-install-option1-obs.html)
