@@ -1,1 +1,1 @@
-openstack-management-net openstack-public-net openstack-private-net openstack-swift-net
+openstack-management-net openstack-public-net openstack-private-net openstack-swift-net openstack-provider-net
