@@ -3,6 +3,7 @@
 set -u
 
 echo "Applying configuration"
+mkdir /var/log/nova
 cp /opt/neutron/etc/api-paste.ini /etc/neutron/api-paste.ini
 cp /opt/neutron/etc/policy.json /etc/neutron/policy.json
 cp /opt/neutron/etc/neutron/plugins/ml2/ml2_conf.ini.sample /etc/neutron/plugins/ml2/ml2_conf.ini
