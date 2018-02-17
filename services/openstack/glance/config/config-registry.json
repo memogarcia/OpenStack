@@ -3,7 +3,7 @@
     {
         "auth_uri": "http://openstack_keystone.openstack-management-net:5000",
         "auth_url": "http://openstack_keystone.openstack-management-net:35357",
-        "memcached_servers": "openstack_memcached:11211",
+        "memcached_servers": "openstack_memcached.openstack-management-net:11211",
         "auth_type": "password",
         "project_domain_name": "Default",
         "user_domain_name": "Default",

@@ -11,10 +11,6 @@ services:
     ports:
       - "0.0.0.0:9191:9191"
       - "0.0.0.0:9292:9292"
-    external_links:
-      - openstack_mariadb:openstack_mariadb
-      - openstack_memcached:openstack_memcached
-      - openstack_keystone:openstack_keystone
     volumes:
       - glance_log:/var/log/glance
       - glance_lib:/var/lib/glance

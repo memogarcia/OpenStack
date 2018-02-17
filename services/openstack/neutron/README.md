@@ -29,6 +29,35 @@ Modify:
 * [config/config-linuxbridge-agent.json](config/config-linuxbridge-agent.json) to map to `/etc/neutron/plugins/ml2/linuxbridge_agent.ini`
 * [config/config-dhcp-agent.json](config/config-dhcp-agent.json) to map to `/etc/neutron/dhcp_agent.ini`
 
+Before the service is running, create a docker network that will act as a provider for neutron:
+
+    docker network create openstack-provider-net \
+        --driver=bridge \
+        --subnet=172.28.0.0/16 \
+        --ip-range=172.28.5.0/24 \
+        --gateway=172.28.5.254
+
+After the service is running, create a provider network with neutron:
+
+    openstack network create --share --external \
+        --provider-physical-network provider \
+        --provider-network-type flat provider
+
+And its subnet:
+
+    openstack subnet create --network provider \
+        --allocation-pool start=172.28.5.1,end=172.28.5.250 \
+        --dns-nameserver 8.8.8.8 --gateway 172.28.5.254 \
+        --subnet-range 172.28.0.0/16 provider-subnet
+
+Create a port:
+
+    openstack port create \
+        --fixed-ip subnet=provider-subnet,ip-address=172.28.5.2 \
+        --enable \
+        --network provider \
+        port-provider
+
 ### Self-service networks
 
 Self-service configuration allows attaching instances to private networks (VxLans). This means:
@@ -40,8 +69,10 @@ Self-service configuration allows attaching instances to private networks (VxLan
 * Attach instances to provider networks
 
 **Note** This option works with SDN's
+**Note** Configuration steps are missing
 
 ## References
 
+[Docker networking](https://docs.docker.com/engine/reference/commandline/network_create/#specify-advanced-options)
 [Host networking](https://docs.openstack.org/neutron/pike/install/environment-networking-obs.html)
 [Provider networks](https://docs.openstack.org/neutron/pike/install/controller-install-option1-obs.html)
