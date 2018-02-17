@@ -1,0 +1,19 @@
+---
+version: "3"
+
+services:
+
+  fluentd:
+    build: .
+    container_name: openstack_infra_fluentd
+    volumes:
+      - ./conf:/fluentd/etc
+    ports:
+      - "0.0.0.0:24224:24224"
+      - "0.0.0.0:24224:24224/udp"
+    networks:
+      - openstack-management-net
+
+networks:
+  openstack-management-net:
+    external: true

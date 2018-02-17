@@ -4,6 +4,13 @@ set -u -x
 
 OPENSTACK_SERVICES=$(cat scripts/openstack_services.txt)
 THIRD_PARTY_SERVICES=$(cat scripts/third_party_services.txt)
+INFRA_SERVICES=$(cat scripts/third_party_services.txt)
+
+echo "Restarting infra services"
+for service in $INFRA_SERVICES
+do
+    docker-compose -f services/infra/$service/dev.yml restart
+done
 
 echo "Restarting third party services"
 for service in $THIRD_PARTY_SERVICES
