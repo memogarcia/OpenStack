@@ -1,15 +1,15 @@
 {
     "api_database":
     {
-        "connection": "mysql+pymysql://nova:secret@openstack_mariadb/nova_api"
+        "connection": "mysql+pymysql://nova:secret@openstack_mariadb.openstack-management-net/nova_api"
     },
     "database":
     {
-        "connection": "mysql+pymysql://nova:secret@openstack_mariadb/nova"
+        "connection": "mysql+pymysql://nova:secret@openstack_mariadb.openstack-management-net/nova"
     },
     "DEFAULT":
     {
-        "transport_url": "rabbit://guest:guest@openstack_rabbitmq",
+        "transport_url": "rabbit://guest:guest@openstack_rabbitmq.openstack-management-net",
         "my_ip": "0.0.0.0",
         "use_neutron": "True",
         "firewall_driver": "nova.virt.firewall.NoopFirewallDriver",
@@ -21,9 +21,9 @@
     },
     "keystone_authtoken":
     {
-        "auth_uri": "http://openstack_keystone:5000",
-        "auth_url": "http://openstack_keystone:35357",
-        "memcached_servers": "openstack_memcached:11211",
+        "auth_uri": "http://openstack_keystone.openstack-management-net:5000",
+        "auth_url": "http://openstack_keystone.openstack-management-net:35357",
+        "memcached_servers": "openstack_memcached.openstack-management-net:11211",
         "auth_type": "password",
         "project_domain_name": "Default",
         "user_domain_name": "Default",
@@ -49,7 +49,7 @@
         "project_name": "service",
         "auth_type": "password",
         "user_domain_name": "Default",
-        "auth_url": "http://openstack_keystone:35357/v3",
+        "auth_url": "http://openstack_keystone.openstack-management-net:35357/v3",
         "username": "placement",
         "password": "secret"
     },
@@ -59,12 +59,12 @@
     },
     "glance":
     {
-        "api_servers": "http://openstack_glance:9292"
+        "api_servers": "http://openstack_glance.openstack-management-net:9292"
     },
     "neutron":
     {
-        "url": "http://openstack_neutron:9696",
-        "auth_url": "http://openstack_keystone:35357",
+        "url": "http://openstack_neutron.openstack-management-net:9696",
+        "auth_url": "http://openstack_keystone.openstack-management-net:35357",
         "auth_type": "password",
         "project_domain_name": "Default",
         "user_domain_name": "Default",
@@ -74,5 +74,9 @@
         "password": "secret",
         "service_metadata_proxy": "true",
         "metadata_proxy_shared_secret": "METADATA_SECRET"
+    },
+    "libvirt":
+    {
+        "virt_type": "qemu"
     }
 }

@@ -11,14 +11,6 @@
         - openstack-management-net
       ports:
         - "0.0.0.0:8775:8775"
-      external_links:
-        - openstack_mariadb:openstack_mariadb
-        - openstack_rabbitmq:openstack_rabbitmq
-        - openstack_memcached:openstack_memcached
-        - openstack_keystone:openstack_keystone
-        - openstack_glance:openstack_glance
-        - openstack_nova:openstack_nova
-        # - openstack_neutron:openstack_neutron
       volumes:
         - nova_log:/var/log/nova
         - libvirt_volume:/var/lib/libvirt/

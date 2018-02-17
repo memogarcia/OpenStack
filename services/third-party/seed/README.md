@@ -24,12 +24,6 @@ It contains the following tools:
 * mpfr
 * [configparse](configparse.py)
 
-And it expects the following directories and files at build time:
-
-* start.sh (scripts that runs the runtime configuration)
-* config/ (contains all runtime configuration for the container)
-* supervisord.conf (to start the services)
-
 ## Next steps
 
 * Move the base image to alpine and make them as small as possible.

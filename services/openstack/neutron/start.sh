@@ -8,8 +8,8 @@ cp /opt/neutron/etc/policy.json /etc/neutron/policy.json
 cp /opt/neutron/etc/neutron/plugins/ml2/ml2_conf.ini.sample /etc/neutron/plugins/ml2/ml2_conf.ini
 
 python2 /opt/configparse.py --config /opt/config/config-metadata.json --service "/etc/neutron/metadata_agent.ini"
-# python2 /opt/configparse.py --config /opt/config/config-dhcp-agent.json --service "/etc/neutron/dhcp_agent.ini"
-# python2 /opt/configparse.py --config /opt/config/config-linuxbridge-agent.json --service "/etc/neutron/plugins/ml2/linuxbridge_agent.ini"
+python2 /opt/configparse.py --config /opt/config/config-dhcp-agent.json --service "/etc/neutron/dhcp_agent.ini"
+python2 /opt/configparse.py --config /opt/config/config-linuxbridge-agent.json --service "/etc/neutron/plugins/ml2/linuxbridge_agent.ini"
 python2 /opt/configparse.py --config /opt/config/config-ml2.json --service "/etc/neutron/plugins/ml2/ml2_conf.ini"
 python2 /opt/configparse.py --config /opt/config/config.json --service "/etc/neutron/neutron.conf"
 

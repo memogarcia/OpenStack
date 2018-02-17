@@ -69,6 +69,7 @@ Self-service configuration allows attaching instances to private networks (VxLan
 * Attach instances to provider networks
 
 **Note** This option works with SDN's
+
 **Note** Configuration steps are missing
 
 ## References
