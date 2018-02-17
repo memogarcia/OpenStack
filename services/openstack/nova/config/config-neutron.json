@@ -1,13 +1,13 @@
 {
     "DEFAULT":
     {
-        "transport_url": "rabbit://guest:guest@openstack_rabbitmq",
+        "transport_url": "rabbit://guest:guest@openstack_rabbitmq.openstack-management-net",
         "auth_strategy": "keystone"
     },
     "keystone_authtoken":
     {
-        "auth_uri": "http://openstack_keystone:5000",
-        "auth_url": "http://openstack_keystone:35357",
+        "auth_uri": "http://openstack_keystone.openstack-management-net:5000",
+        "auth_url": "http://openstack_keystone.openstack-management-net:35357",
         "memcached_servers": "openstack_memcached:11211",
         "auth_type": "password",
         "project_domain_name": "Default",
