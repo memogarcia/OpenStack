@@ -1,1 +1,1 @@
-keystone glance neutron cinder nova horizon swift
+keystone glance neutron cinder nova horizon

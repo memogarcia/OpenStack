@@ -8,8 +8,6 @@ WORKDIR /opt/liberasurecode
 
 RUN bash autogen.sh &&  bash configure && make && make install
 
-RUN mkdir /etc/swift
-
 RUN mkdir /etc/swift && \
     pacman -Sy --noconfirm xfsprogs rsync && \
     curl -o /etc/swift/proxy-server.conf https://git.openstack.org/cgit/openstack/swift/plain/etc/proxy-server.conf-sample?h=stable/queens && \

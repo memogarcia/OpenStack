@@ -8,6 +8,7 @@
       container_name: openstack_neutron
       networks:
         - openstack-management-net
+        - openstack-provider-net
       ports:
         - "0.0.0.0:9696:9696"
       volumes:
@@ -25,4 +26,6 @@
 
   networks:
     openstack-management-net:
+      external: true
+    openstack-provider-net:
       external: true

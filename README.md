@@ -9,6 +9,15 @@ Current deployment: **stable/queens**
 
 * [Docker](services/infra/docker/README.md)
 
+## Network topology
+
+This is the default network topology, 2 networks are used:
+
+* openstack-management-net: All openstack traffic goes through here
+* openstack-provider-net: Instances get IPs in this network
+
+![simplified_network_diagram](services/infra/docker/simplified_networks.png)
+
 ## Third-party services
 
 Configure the third-party services need it for OpenStack to run.
