@@ -19,6 +19,7 @@ Configure the third-party services need it for OpenStack to run.
 * [Memcached](services/third-party/memcached/README.md)
 * [Rabbitmq](services/third-party/rabbitmq/README.md)
 * [Onos](services/third-party/onos/README.md) **Optional SDN**
+* [Minio](services/third-party/minio/README.md) **Optional Object Storage**
 
 ## OpenStack services
 

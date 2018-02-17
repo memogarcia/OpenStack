@@ -8,6 +8,7 @@
   services:
     minio:
       image: minio/minio
+      container_name: openstack_minio
       ports:
         - "0.0.0.0:9001:9000"
       environment:
@@ -16,7 +17,7 @@
       volumes:
         - openstack_volume_minio:/data
         - openstack_volume_minio_config:/root/.minio
-      command: server /data
+      command: ["bash", "/opt/start.sh", "&&", "server", "/data"]
       networks:
         - openstack-management-net
 
