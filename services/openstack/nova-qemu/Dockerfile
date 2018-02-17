@@ -13,7 +13,7 @@ RUN pacman -Sy --noconfirm libvirt-python \
 
 WORKDIR /opt/nova
 
-RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig pip2 install libvirt-python
+RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig && pip2 install libvirt-python
 
 VOLUME  ["/var/log/nova"]
 
