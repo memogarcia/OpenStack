@@ -16,7 +16,7 @@
       volumes:
         - openstack_volume_minio:/data
         - openstack_volume_minio_config:/root/.minio
-      command: server http://minio/data
+      command: server /data
       networks:
         - openstack-management-net
 

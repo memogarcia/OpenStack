@@ -4,7 +4,7 @@ set -u -x
 
 OPENSTACK_SERVICES=$(cat scripts/openstack_services.txt)
 THIRD_PARTY_SERVICES=$(cat scripts/third_party_services.txt)
-INFRA_SERVICES=$(cat scripts/third_party_services.txt)
+INFRA_SERVICES=$(cat scripts/infra_services.txt)
 
 echo "Building the seed image"
 docker build -t openstack/seed:latest services/third-party/seed --no-cache
