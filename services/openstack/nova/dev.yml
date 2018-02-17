@@ -11,6 +11,7 @@ services:
     ports:
       - "0.0.0.0:8774:8774"
       - "0.0.0.0:8778:8778"
+      - "0.0.0.0:6080:6080"
     volumes:
       - nova_log:/var/log/nova
     command: ["bash", "/opt/start.sh"]

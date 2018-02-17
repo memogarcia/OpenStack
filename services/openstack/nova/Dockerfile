@@ -18,7 +18,7 @@ RUN pacman -Sy --noconfirm iptables net-tools && \
 
 VOLUME ["/var/log/nova"]
 
-EXPOSE 8774 8778
+EXPOSE 8774 8778 6080
 
 COPY start.sh /opt/start.sh
 
