@@ -14,22 +14,22 @@ python2 /opt/configparse.py --config /opt/config/config.json --service "/etc/cin
 
 echo "DB configuration"
 {% if database == "mariadb" %}
-mysql  -hopenstack_mariadb -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
     -e "CREATE DATABASE cinder;"
 
-mysql  -hopenstack_mariadb -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
        -e "GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'localhost' \
-        IDENTIFIED BY '{{openstack_services.cinder.cinder_database_password}}';"
+        IDENTIFIED BY '{{openstack_services.cinder.database_password}}';"
 
-mysql  -hopenstack_mariadb -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
        -e "GRANT ALL PRIVILEGES ON cinder.* TO 'cinder'@'%' \
-        IDENTIFIED BY '{{openstack_services.cinder.cinder_database_password}}'"
+        IDENTIFIED BY '{{openstack_services.cinder.database_password}}'"
 
 {% elif database == "postgresql" %}
 export PGPASSWORD={{postgresql.postgresql_password}}
-psql -h openstack_postgresql -p 5432 -v ON_ERROR_STOP=1 --username "{{postgresql.postgresql_user}}" <<-EOSQL
+psql -h {{database_ipv4}} -p 5432 -v ON_ERROR_STOP=1 --username "{{postgresql.postgresql_user}}" <<-EOSQL
     CREATE USER cinder;
-    ALTER USER cinder WITH PASSWORD '{{openstack_services.cinder.cinder_database_password}}';
+    ALTER USER cinder WITH PASSWORD '{{openstack_services.cinder.database_password}}';
     CREATE DATABASE cinder;
     GRANT ALL PRIVILEGES ON DATABASE cinder TO cinder;
 EOSQL

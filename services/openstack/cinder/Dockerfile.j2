@@ -10,7 +10,7 @@ WORKDIR /opt/cinder
 
 RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig
 
-VOLUME ["/var/log/cinder", "/var/lib/cinder"]
+VOLUME ["/var/log/cinder", "/var/lib/cinder", "/etc/cinder", "/opt"]
 
 EXPOSE 8776
 

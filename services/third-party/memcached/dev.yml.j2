@@ -9,7 +9,8 @@ services:
     ports:
       - "11211:11211"
     networks:
-      - openstack-management-net
+      openstack-management-net:
+          ipv4_address: {{memcached_ipv4}}
 
 networks:
   openstack-management-net:

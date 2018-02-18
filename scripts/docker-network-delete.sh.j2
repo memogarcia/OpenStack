@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -u -x
+
+docker network delete {{ networks.openstack_management_net.name }}
+docker network delete {{ networks.openstack_provider_net.name }}

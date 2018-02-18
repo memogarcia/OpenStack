@@ -73,11 +73,12 @@ Apply the configuration:
 
 Config processor will create a new branch `deploy` where the runtime configuration will be ready for deployment.
 
-Verify the branch is created or modified correctly:
+Verify the branch is created correctly:
 
     git branch
     # * deploy
     git log
+    # Ready for deployment
 
 Deploy OpenStack
 

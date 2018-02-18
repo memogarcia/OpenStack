@@ -10,7 +10,8 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks:
-      - openstack-management-net
+      openstack-management-net:
+          ipv4_address: {{rabbitmq_ipv4}}
 
 networks:
   openstack-management-net:

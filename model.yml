@@ -5,12 +5,46 @@
 openstack_repo: https://github.com/openstack
 openstack_branch: stable/queens
 
+# List the services to run.
+third_party_services_runtime:
+  - mariadb
+  - rabbitmq
+  - memcached
+
+openstack_services_runtime:
+  - keystone
+  - glance
+  - horizon
+  - neutron
+  - nova
+
+infra_services_runtime:
+  - portainer
+
+## network configuration
+networks:
+  openstack_management_net:
+    name: openstack-management-net
+    gateway: "172.18.0.1"
+    subnet: "172.18.0.0/16"
+  openstack_provider_net:
+    name: openstack-provider-net
+    gateway: "172.30.0.1"
+    subnet: "172.30.0.0/16"
+
 # database configuration
 database: mariadb
 database_ipv4: "172.18.1.5"
+
+# mariadb configuration
 mariadb:
   mariadb_user: root
   mariadb_password: secret
+  mariadb_root_password: secret
+  volumes:
+    - openstack_volume_mariadb:/var/lib/mysql/
+
+# postgresql configuration
 postgresql:
   postgresql_user: admin
   postgresql_password: secret
@@ -26,15 +60,30 @@ memcached_ipv4:  "172.18.1.8"
 # openstack service configuration
 openstack_services:
   keystone:
-    keystone_ipv4: "172.18.1.20"
+    ipv4: "172.18.1.10"
+    database_password: secret
+    user_password: secret
+    ports:
+      - 5000:5000
+      - 35357:35357
+    volumes:
+    - openstack_volume_keystone_log:/var/log/keystone
+    - openstack_volume_keystone_lib:/var/lib/keystone
+    - openstack_volume_keystone_etc:/etc/keystone
+    - openstack_volume_keystone_opt:/opt
 
   glance:
-    glance_ipv4: "172.18.1.40"
+    ipv4: "172.18.1.40"
 
   cinder:
-    cinder_database_password: secret
-    cinder_user_password: secret
-    cinder_ipv4: "172.18.1.100"
-    cinder_ipv6: ""
-    cinder_ports:
-      - 8776
+    database_password: secret
+    user_password: secret
+    ipv4: "172.18.1.60"
+    ipv6: ""
+    ports:
+      - 8776:8776
+    volumes:
+    - openstack_volume_cinder_log:/var/log/cinder
+    - openstack_volume_cinder_lib:/var/lib/cinder
+    - openstack_volume_cinder_etc:/etc/cinder
+    - openstack_volume_cinder_opt:/opt

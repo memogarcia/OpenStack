@@ -1,0 +1,21 @@
+---
+- name: Check if changes are commited
+  command: git status -s
+  register: git_status
+
+- fail: msg="Please commit your changes"
+  when: git_status.stdout != ''
+
+- debug: msg="Changes commited, moving forward"
+  when: git_status.stdout == ''
+
+- name: Deleting branch deploy
+  command: git branch -D deploy
+  ignore_errors: true
+
+- name: Creating branch deploy
+  command: git branch deploy
+  ignore_errors: true
+
+- name: Checking out to branch deploy
+  command: git checkout deploy

@@ -8,10 +8,10 @@
     "cache":
     {
         "enabled": "true",
-        "memcache_servers": "openstack_memcached.openstack-management-net:11211"
+        "memcache_servers": "{{memcached_ipv4}}:11211"
     },
     "database":
     {
-        "connection": "mysql+pymysql://keystone:secret@openstack_mariadb.openstack-management-net/keystone"
+        "connection": "mysql+pymysql://keystone:{{openstack_services.keystone.database_password}}@{{database_ipv4}}/keystone"
     }
 }

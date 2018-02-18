@@ -1,0 +1,32 @@
+---
+  version: '3.1'
+
+  services:
+
+    mariadb:
+      image: mariadb:10.3.4
+      container_name: openstack_mariadb
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: {{mariadb.mariadb_root_password}}
+        MYSQL_USER: {{mariadb.mariadb_user}}
+        MYSQL_PASS: {{mariadb.mariadb_password}}
+      ports:
+        - "0.0.0.0:3306:3306"
+      volumes:
+{% for volume in mariadb.volumes %}
+        - {{volume}}
+{% endfor %}
+      networks:
+        openstack-management-net:
+          ipv4_address: {{database_ipv4}}
+
+  volumes:
+{% for volume in mariadb.volumes %}
+    {{volume.split(':')[0]}}:
+      external: true
+{% endfor %}
+
+  networks:
+    openstack-management-net:
+      external: true
