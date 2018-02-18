@@ -1,0 +1,5 @@
+---
+- name: Generating dev.yml for postgresql
+  template:
+    src: services/third-party/postgresql/dev.yml.j2
+    dest: services/third-party/postgresql/dev.yml

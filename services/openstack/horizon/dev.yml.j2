@@ -4,7 +4,9 @@
   services:
 
     horizon:
-      build: .
+      image: openstack/horizon:{{environment_name}}
+      build:
+        context: .
       container_name: openstack_horizon
       networks:
         openstack-management-net:

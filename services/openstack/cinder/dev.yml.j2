@@ -2,7 +2,9 @@
   version: "3"
   services:
     cinder:
-      build: .
+      image: openstack/cinder:{{environment_name}}
+      build:
+        context: .
       container_name: openstack_cinder
       networks:
         openstack-management-net:

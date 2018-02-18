@@ -29,11 +29,11 @@ This is the default network topology, 2 networks are used:
 
 ## Infra services
 
-* fluentd: for logging
-* cadvisor: for container stats
-* elasticsearch: for log collection
-* kibana: for log visualization
-* portainer: for container management
+* Fluentd: for logging
+* Cadvisor: for container stats
+* Elasticsearch: for log collection
+* Kibana: for log visualization
+* Portainer: for container management
 
 ## Third-party services
 
@@ -62,8 +62,6 @@ Configure the third-party services needed for OpenStack to run.
 * [Custom Backend](services/custom/backend/README.md)
 
 ## Deploying OpenStack
-
-Modify [scripts/infra_services.txt](scripts/infra_services.txt), [scripts/third_party_services.txt](scripts/third_party_services.txt) and [scripts/openstack_services.txt](scripts/openstack_services.txt) to run the services you need.
 
 Configure your runtime environment by modifying [model.yml](model.yml).
 

@@ -4,7 +4,9 @@ version: "3"
 services:
 
   keystone:
-    build: .
+    image: openstack/keystone:{{environment_name}}
+    build:
+      context: .
     container_name: openstack_keystone
     ports:
 {% for port in openstack_services.keystone.ports %}

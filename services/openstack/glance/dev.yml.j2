@@ -4,7 +4,9 @@ version: "3"
 services:
 
   glance:
-    build: .
+    image: openstack/glance:{{environment_name}}
+    build:
+      context: .
     container_name: openstack_glance
     networks:
         openstack-management-net:

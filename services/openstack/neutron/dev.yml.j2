@@ -4,7 +4,9 @@ version: "3"
 services:
 
   neutron:
-    build: .
+    image: openstack/neutron:{{environment_name}}
+    build:
+      context: .
     container_name: openstack_neutron
     networks:
         openstack-management-net:

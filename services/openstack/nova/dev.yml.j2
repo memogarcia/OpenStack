@@ -4,7 +4,9 @@ version: "3"
 services:
 
   nova:
-    build: .
+    image: openstack/nova:{{environment_name}}
+    build:
+      context: .
     container_name: openstack_nova
     networks:
         openstack-management-net:

@@ -1,0 +1,32 @@
+---
+version: '3.1'
+
+services:
+
+  postgresql:
+    image: postgres:10.1-alpine
+    container_name: openstack_postgresql
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: {{postgresql.postgresql_password}}
+      POSTGRES_USER: {{postgresql.postgresql_user}}
+      POSTGRES_DB: {{postgresql.postgresql_db}}
+    ports:
+      - "0.0.0.0:5432:5432"
+    volumes:
+{% for volume in postgresql.volumes %}
+      - {{volume}}
+{% endfor %}
+    networks:
+      openstack-management-net:
+        ipv4_address: {{database_ipv4}}
+
+volumes:
+{% for volume in postgresql.volumes %}
+    {{volume.split(':')[0]}}:
+      external: true
+{% endfor %}
+
+networks:
+  openstack-management-net:
+    external: true

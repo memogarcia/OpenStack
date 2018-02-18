@@ -1,6 +1,8 @@
 # model
 ---
 
+environment_name: openstack_queens
+
 # openstack version and repo
 openstack_repo: https://github.com/openstack
 openstack_branch: stable/queens
@@ -14,9 +16,9 @@ third_party_services_runtime:
 openstack_services_runtime:
   - keystone
   - glance
-  # - horizon
+  - horizon
   - neutron
-  # - nova
+  - nova
 
 infra_services_runtime:
   - portainer
@@ -48,6 +50,9 @@ mariadb:
 postgresql:
   postgresql_user: admin
   postgresql_password: secret
+  postgresql_db: admin
+  volumes:
+    - openstack_volume_postgres:/var/lib/postgresql/data
 
 # rabbitmq configuration
 rabbitmq_ipv4: "172.18.1.6"
