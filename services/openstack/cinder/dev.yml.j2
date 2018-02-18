@@ -5,7 +5,7 @@
       build: .
       container_name: openstack_cinder
       networks:
-        - openstack-management-net:
+        openstack-management-net:
             ipv4_address: {{openstack_services.cinder.ipv4}}
       ports:
 {% for port in openstack_services.cinder.ports %}
