@@ -8,6 +8,7 @@ Current deployment: **stable/queens**
 ## Infra services
 
 * [Docker](services/infra/docker/README.md)
+* [Seed](services/third-party/seed/README.md)
 
 ## Network topology
 
@@ -20,9 +21,8 @@ This is the default network topology, 2 networks are used:
 
 ## Third-party services
 
-Configure the third-party services need it for OpenStack to run.
+Configure the third-party services needed for OpenStack to run.
 
-* [Seed](services/third-party/seed/README.md)
 * [MariaDB/MySQL](services/third-party/mariadb/README.md)
 * [PostgreSQL](services/third-party/postgresql/README.md) **Optional Database**
 * [Memcached](services/third-party/memcached/README.md)
@@ -39,6 +39,11 @@ Configure the third-party services need it for OpenStack to run.
 * [Nova-Qemu](services/openstack/nova-qemu/README.md)
 * [Cinder](services/openstack/cinder/README.md)
 * [Horizon](services/openstack/horizon/README.md)
+
+## Extending OpenStack services
+
+* [Custom API](services/custom/api/README.md)
+* [Custom Backend](services/custom/backend/README.md)
 
 ## Start OpenStack
 

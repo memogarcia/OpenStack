@@ -1,3 +1,3 @@
 # PostgreSQL
 
-Because OpenStack uses sqlalchemy to deal with the db, it's easy to swap databases.
+Because OpenStack uses sqlalchemy to deal with the DB, it's easy to swap databases.
