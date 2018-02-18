@@ -6,9 +6,11 @@
       container_name: openstack_cinder
       networks:
         - openstack-management-net:
-            ipv4_address: 172.18.1.100
+            ipv4_address: {{openstack_services.cinder.cinder_ipv4}}
       ports:
-        - "0.0.0.0:8776:8776"
+{% for port in openstack_services.cinder.cinder_ports %}
+        - "0.0.0.0:{{port}}:{{port}}"
+{% endfor %}
       volumes:
         - cinder_log:/var/log/cinder
         - cinder_lib:/var/lib/cinder

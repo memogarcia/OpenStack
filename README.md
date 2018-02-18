@@ -61,9 +61,25 @@ Configure the third-party services needed for OpenStack to run.
 * [Custom API](services/custom/api/README.md)
 * [Custom Backend](services/custom/backend/README.md)
 
-## Start OpenStack
+## Deploying OpenStack
 
 Modify [scripts/infra_services.txt](scripts/infra_services.txt), [scripts/third_party_services.txt](scripts/third_party_services.txt) and [scripts/openstack_services.txt](scripts/openstack_services.txt) to run the services you need.
+
+Configure your runtime environment by modifying [model.yml](model.yml).
+
+Apply the configuration:
+
+    ansible-playbook -i hosts/localhost config_processor.yml
+
+Config processor will create a new branch `deploy` where the runtime configuration will be ready for deployment.
+
+Verify the branch is created or modified correctly:
+
+    git branch
+    # * deploy
+    git log
+
+Deploy OpenStack
 
     ./scripts/build.sh
     ./scripts/docker-network-create.sh

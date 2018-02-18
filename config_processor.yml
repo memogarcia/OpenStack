@@ -1,0 +1,36 @@
+# Config Processor
+---
+- hosts: localhost
+  become: no
+  tasks:
+
+    - name: "Loading model"
+      include_vars: "model.yml"
+
+    # - name: Printing model for debug
+    #   debug:
+    #     msg: "{{openstack_services}}"
+
+    - name: Creating branch deploy
+      command: git branch deploy
+      ignore_errors: true
+
+    - name: Generating dev.yml for cinder
+      template:
+        src: services/openstack/cinder/dev.yml.j2
+        dest: services/openstack/cinder/dev.yml
+
+    - name: Generating Dockerfile for cinder
+      template:
+        src: services/openstack/cinder/Dockerfile.j2
+        dest: services/openstack/cinder/Dockerfile
+
+    - name: Generating start.sh for cinder
+      template:
+        src: services/openstack/cinder/start.sh.j2
+        dest: services/openstack/cinder/start.sh
+
+    - name: Generating config.json for cinder
+      template:
+        src: services/openstack/cinder/config/config.json.j2
+        dest: services/openstack/cinder/config/config.json

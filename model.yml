@@ -1,0 +1,40 @@
+# model
+---
+
+# openstack version and repo
+openstack_repo: https://github.com/openstack
+openstack_branch: stable/queens
+
+# database configuration
+database: mariadb
+database_ipv4: "172.18.1.5"
+mariadb:
+  mariadb_user: root
+  mariadb_password: secret
+postgresql:
+  postgresql_user: admin
+  postgresql_password: secret
+
+# rabbitmq configuration
+rabbitmq_ipv4: "172.18.1.6"
+rabbitmq_user: guest
+rabbitmq_password: guest
+
+# memcached configuration
+memcached_ipv4:  "172.18.1.8"
+
+# openstack service configuration
+openstack_services:
+  keystone:
+    keystone_ipv4: "172.18.1.20"
+
+  glance:
+    glance_ipv4: "172.18.1.40"
+
+  cinder:
+    cinder_database_password: secret
+    cinder_user_password: secret
+    cinder_ipv4: "172.18.1.100"
+    cinder_ipv6: ""
+    cinder_ports:
+      - 8776

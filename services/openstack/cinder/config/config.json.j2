@@ -1,26 +1,26 @@
 {
     "keystone_authtoken":
     {
-        "auth_uri": "http://172.18.1.20:5000",
-        "auth_url": "http://172.18.1.20:35357",
-        "memcached_servers": "172.18.1.8:11211",
+        "auth_uri": "http://{{openstack_services.keystone.keystone_ipv4}}:5000",
+        "auth_url": "http://{{openstack_services.keystone.keystone_ipv4}}:35357",
+        "memcached_servers": "{{memcached_ipv4}}:11211",
         "auth_type": "password",
         "project_domain_name": "Default",
         "user_domain_name": "Default",
         "project_name": "service",
         "username": "cinder",
-        "password": "secret"
+        "password": "{{openstack_services.cinder.cinder_user_password}}"
     },
     "database":
     {
-        "connection": "mysql+pymysql://cinder:secret@172.18.1.5/cinder"
+        "connection": "mysql+pymysql://cinder:{{openstack_services.cinder.cinder_database_password}}@{{database_ipv4}}/cinder"
     },
     "DEFAULT":
     {
-        "transport_url": "rabbit://guest:guest@172.18.1.6",
+        "transport_url": "rabbit://{{rabbitmq_user}}:{{rabbitmq_password}}@{{rabbitmq_ipv4}}",
         "my_ip": "0.0.0.0",
         "enabled_backends": "lvm",
-        "glance_api_servers": "http://172.18.1.40:9292"
+        "glance_api_servers": "http://{{openstack_services.glance.glance_ipv4}}:9292"
     },
     "lvm":
     {
