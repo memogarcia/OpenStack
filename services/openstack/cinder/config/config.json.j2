@@ -13,7 +13,11 @@
     },
     "database":
     {
+{% if database == "mariadb" %}
         "connection": "mysql+pymysql://cinder:{{openstack_services.cinder.database_password}}@{{database_ipv4}}/cinder"
+{% elif database == "postgresql" %}
+        "connection": "postgresql://cinder:{{openstack_services.cinder.database_password}}@{{database_ipv4}}/cinder"
+{% endif %}
     },
     "DEFAULT":
     {

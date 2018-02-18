@@ -15,16 +15,27 @@ python2 /opt/configparse.py --config /opt/config/config-ml2.json --service "/etc
 python2 /opt/configparse.py --config /opt/config/config.json --service "/etc/neutron/neutron.conf"
 
 echo "DB configuration"
-mysql  -hopenstack_mariadb -uroot -psecret \
+{% if database == "mariadb" %}
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
     -e "CREATE DATABASE neutron;"
 
-mysql  -hopenstack_mariadb -uroot -psecret \
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
        -e "GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'localhost' \
-        IDENTIFIED BY 'secret';"
+        IDENTIFIED BY '{{openstack_services.neutron.database_password}}';"
 
-mysql  -hopenstack_mariadb -uroot -psecret \
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
        -e "GRANT ALL PRIVILEGES ON neutron.* TO 'neutron'@'%' \
-        IDENTIFIED BY 'secret'"
+        IDENTIFIED BY '{{openstack_services.neutron.database_password}}'"
+
+{% elif database == "postgresql" %}
+export PGPASSWORD={{postgresql.postgresql_password}}
+psql -h {{database_ipv4}} -p 5432 -v ON_ERROR_STOP=1 --username "{{postgresql.postgresql_user}}" <<-EOSQL
+    CREATE USER neutron;
+    ALTER USER neutron WITH PASSWORD '{{openstack_services.neutron.database_password}}';
+    CREATE DATABASE neutron;
+    GRANT ALL PRIVILEGES ON DATABASE neutron TO neutron;
+EOSQL
+{% endif %}
 
 source /opt/osrc-v3
 

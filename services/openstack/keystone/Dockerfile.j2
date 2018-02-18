@@ -2,7 +2,7 @@ FROM openstack/seed:latest
 
 LABEL maintainer=root@memogarcia.mx
 
-RUN wget https://raw.githubusercontent.com/openstack/requirements/stable/queens/upper-constraints.txt -O /opt/upper-constraints.txt && \
+RUN wget https://raw.githubusercontent.com/openstack/requirements/{{openstack_branch}}/upper-constraints.txt -O /opt/upper-constraints.txt && \
     mkdir /etc/keystone && \
     git clone -b {{openstack_branch}} --depth=1 {{openstack_repo}}/keystone.git /opt/keystone
 

@@ -9,10 +9,13 @@
       networks:
         - openstack-management-net
       ports:
-        - "0.0.0.0:8000:8000"
+{% for port in openstack_services.glance.ports %}
+        - "0.0.0.0:{{port}}"
+{% endfor %}
       external_links:
         - openstack_memcached:openstack_memcached
-        - openstack_keystone:openstack_keystone
+        - openstack_keystone:openstack_keystone:
+            ipv4_address: {{openstack_services.horizon.ipv4}}
 
       command: ["bash", "/opt/start.sh"]
 

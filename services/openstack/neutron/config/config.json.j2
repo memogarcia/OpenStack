@@ -1,14 +1,18 @@
 {
     "database":
     {
-        "connection": "mysql+pymysql://neutron:secret@openstack_mariadb.openstack-management-net/neutron"
+{% if database == "mariadb" %}
+        "connection": "mysql+pymysql://neutron:{{openstack_services.neutron.database_password}}@{{database_ipv4}}/neutron"
+{% elif database == "postgresql" %}
+        "connection": "postgresql://neutron:{{openstack_services.neutron.database_password}}@{{database_ipv4}}/neutron"
+{% endif %}
     },
     "DEFAULT":
     {
         "core_plugin": "ml2",
         "service_plugins": "",
 
-        "transport_url": "rabbit://guest:guest@openstack_rabbitmq.openstack-management-net",
+        "transport_url": "rabbit://{{rabbitmq_user}}:{{rabbitmq_password}}@{{rabbitmq_ipv4}}",
 
         "auth_strategy": "keystone",
 
@@ -17,9 +21,9 @@
     },
     "keystone_authtoken":
     {
-        "auth_uri": "http://openstack_keystone.openstack-management-net:5000",
-        "auth_url": "http://openstack_keystone.openstack-management-net:35357",
-        "memcached_servers": "openstack_memcached:11211",
+        "auth_uri": "http://{{openstack_services.keystone.ipv4}}:5000",
+        "auth_url": "http://{{openstack_services.keystone.ipv4}}:35357",
+        "memcached_servers": "{{memcached_ipv4}}:11211",
         "auth_type": "password",
         "project_domain_name": "Default",
         "user_domain_name": "Default",
@@ -29,9 +33,9 @@
     },
     "nova":
     {
-        "auth_uri": "http://openstack_keystone.openstack-management-net:5000",
-        "auth_url": "http://openstack_keystone.openstack-management-net:35357",
-        "memcached_servers": "openstack_memcached.openstack-management-net:11211",
+        "auth_uri": "http://{{openstack_services.keystone.ipv4}}:5000",
+        "auth_url": "http://{{openstack_services.keystone.ipv4}}:35357",
+        "memcached_servers": "{{memcached_ipv4}}:11211",
         "auth_type": "password",
         "project_domain_name": "Default",
         "user_domain_name": "Default",

@@ -12,6 +12,10 @@
     },
     "database":
     {
+{% if database == "mariadb" %}
         "connection": "mysql+pymysql://keystone:{{openstack_services.keystone.database_password}}@{{database_ipv4}}/keystone"
+{% elif database == "postgresql" %}
+        "connection": "postgresql://keystone:{{openstack_services.keystone.database_password}}@{{database_ipv4}}/keystone"
+{% endif %}
     }
 }

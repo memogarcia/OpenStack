@@ -1,0 +1,20 @@
+---
+- name: Generating dev.yml for horizon
+  template:
+    src: services/openstack/horizon/dev.yml.j2
+    dest: services/openstack/horizon/dev.yml
+
+- name: Generating Dockerfile for horizon
+  template:
+    src: services/openstack/horizon/Dockerfile.j2
+    dest: services/openstack/horizon/Dockerfile
+
+- name: Generating start.sh for horizon
+  template:
+    src: services/openstack/horizon/start.sh.j2
+    dest: services/openstack/horizon/start.sh
+
+- name: Generating local_settings.py.sample for horizon
+  template:
+    src: services/openstack/horizon/config/local_settings.py.sample.j2
+    dest: services/openstack/horizon/config/local_settings.py.sample
