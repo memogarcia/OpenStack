@@ -7,6 +7,7 @@ From the perspective of the Compute service, the QEMU hypervisor is very similar
 Before running the service, verify your [dev.yml](dev.yml):
 
 ```yml
+    privileged: true
     volumes:
         - nova_log:/var/log/nova
         - libvirt_volume:/var/lib/libvirt/

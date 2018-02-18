@@ -10,6 +10,18 @@ Current deployment: **stable/queens**
 * [Docker](services/infra/docker/README.md)
 * [Seed](services/third-party/seed/README.md)
 
+## Host configuration
+
+The default configuration for this environment is composed by 3 main components that need to run on the host:
+
+* Libvirtd
+* OpenVSwitch
+* Docker
+
+Docker will act as the control plane for OpenStack while the host will provide the hypervisor, network and storage.
+
+![host_diagram](services/infra/docker/host.png)
+
 ## Network topology
 
 This is the default network topology, 2 networks are used:
