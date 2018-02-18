@@ -5,20 +5,16 @@ the platform for development, testing and _production_ environments.
 
 Current deployment: **stable/queens**
 
-## Infra services
-
-* [Docker](services/infra/docker/README.md)
-* [Seed](services/third-party/seed/README.md)
-
 ## Host configuration
 
 The default configuration for this environment is composed by 3 main components that need to run on the host:
 
+* [Seed](services/third-party/seed/README.md)
 * [Docker](services/infra/docker/README.md)
 * [Libvirtd](services/infra/libvirtd/README.md)
 * [OpenVSwitch](services/infra/openvswitch/README.md)
 
-Docker will act as the control plane for OpenStack while the host will provide the hypervisor, network and storage directly on the host.
+Docker will act as the control plane for OpenStack while the host will provide the hypervisor, network and storage.
 
 ![host_diagram](services/infra/docker/host.png)
 
@@ -30,6 +26,14 @@ This is the default network topology, 2 networks are used:
 * openstack-provider-net: Instances get IPs in this network
 
 ![simplified_network_diagram](services/infra/docker/simplified_networks.png)
+
+## Infra services
+
+* fluentd: for logging
+* cadvisor: for container stats
+* elasticsearch: for log collection
+* kibana: for log visualization
+* portainer: for container management
 
 ## Third-party services
 

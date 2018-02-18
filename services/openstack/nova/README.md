@@ -16,9 +16,9 @@
 
 [nova-novncproxy](https://docs.openstack.org/nova/latest/cli/nova-novncproxy.html) is a server daemon that serves the Nova noVNC Websocket Proxy service
 
-[nova-xvpvncproxy](hhttps://docs.openstack.org/nova/latest/cli/nova-xvpvncproxy.html) is a server daemon that serves the Nova XVP VNC Console Proxy service, which provides an XVP-based VNC Console Proxy for use with the Xen hypervisor.
-
 [nova-serialproxy](https://docs.openstack.org/nova/latest/cli/nova-serialproxy.html) is a server daemon that serves the Nova Serial Websocket Proxy service, which provides a websocket proxy that is compatible with OpenStack Nova serial ports.
+
+[nova-xvpvncproxy](hhttps://docs.openstack.org/nova/latest/cli/nova-xvpvncproxy.html) is a server daemon that serves the Nova XVP VNC Console Proxy service, which provides an XVP-based VNC Console Proxy for use with the Xen hypervisor.
 
 [nova-spicehtml5proxy](https://docs.openstack.org/nova/latest/cli/nova-serialproxy.html)  is a server daemon that serves the Nova SPICE HTML5 Websocket Proxy service, which provides a websocket proxy that is compatible with OpenStack Nova SPICE HTML5 consoles.
 
