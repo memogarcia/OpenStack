@@ -1,6 +1,6 @@
 # Nova-Qemu
 
-This service will deploy qemu instances.
+From the perspective of the Compute service, the QEMU hypervisor is very similar to the KVM hypervisor. Both are controlled through libvirt, both support the same feature set, and all virtual machine images that are compatible with KVM are also compatible with QEMU. The main difference is that QEMU does not support native virtualization. Consequently, QEMU has worse performance than KVM and is a poor choice for a production deployment.
 
 ## Configuration
 
@@ -20,3 +20,7 @@ After running the container, verify your virtualisation capabilities:
     egrep -c '(vmx|svm)' /proc/cpuinfo
 
 The output should be >= 1
+
+## References
+
+[QEMU](https://docs.openstack.org/juno/config-reference/content/qemu.html)

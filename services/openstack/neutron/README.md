@@ -10,7 +10,7 @@ Modify the following files to match your environment:
 
 ## Network configuration
 
-Chose one network configuration for your environment:
+Chose one network configurations for your environment:
 
 ### Provider networks
 
@@ -18,7 +18,7 @@ Deploys the simplest configuration, in which you use [provider networks](https:/
 
 * No private networks
 * No virtual routers
-* No Floating IPs
+* No floating IPs
 * Only `admin` users can modify and create networks
 * An existing network is required
 
