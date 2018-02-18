@@ -10,7 +10,8 @@ services:
       - "0.0.0.0:35357:35357"
       - "0.0.0.0:5000:5000"
     networks:
-      - openstack-management-net
+      openstack-management-net:
+        ipv4_address: {{openstack_services.keystone.ipv4}}
     volumes:
       - keystone_log:/var/log/keystone
     command: ["bash", "/opt/start.sh"]
