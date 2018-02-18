@@ -14,11 +14,11 @@ Current deployment: **stable/queens**
 
 The default configuration for this environment is composed by 3 main components that need to run on the host:
 
-* Libvirtd
-* OpenVSwitch
-* Docker
+* [Docker](services/infra/docker/README.md)
+* [Libvirtd](services/infra/libvirtd/README.md)
+* [OpenVSwitch](services/infra/openvswitch/README.md)
 
-Docker will act as the control plane for OpenStack while the host will provide the hypervisor, network and storage.
+Docker will act as the control plane for OpenStack while the host will provide the hypervisor, network and storage directly on the host.
 
 ![host_diagram](services/infra/docker/host.png)
 
@@ -59,6 +59,8 @@ Configure the third-party services needed for OpenStack to run.
 
 ## Start OpenStack
 
+Modify [scripts/infra_services.txt](scripts/infra_services.txt), [scripts/third_party_services.txt](scripts/third_party_services.txt) and [scripts/openstack_services.txt](scripts/openstack_services.txt) to run the services you need.
+
     ./scripts/build.sh
     ./scripts/docker-network-create.sh
     ./scripts/docker-volume-create.sh
@@ -69,8 +71,8 @@ Configure the third-party services needed for OpenStack to run.
     source osrc-v3
     openstack project list
     openstack image list
-    openstack server list
     openstack network list
+    openstack server list
 
 ## References
 
