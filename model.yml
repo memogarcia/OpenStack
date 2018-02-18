@@ -103,6 +103,21 @@ openstack_services:
     ports:
       - 8000:8000
 
+  nova:
+    ipv4: "172.18.1.50"
+    ipv6: ""
+    assword: secret
+    user_password: secret
+    ports:
+      - 8774:8774
+      - 8778:8778
+      - 6080:6080
+    volumes:
+      - openstack_volume_nova_log:/var/log/nova
+      - openstack_volume_nova_lib:/var/lib/nova
+      - openstack_volume_nova_etc:/etc/nova
+      - openstack_volume_nova_opt:/opt
+
   cinder:
     ipv4: "172.18.1.60"
     ipv6: ""
