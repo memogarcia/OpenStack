@@ -5,18 +5,14 @@ the platform for development, testing and _production_ environments.
 
 Current deployment: **stable/queens**
 
-## Infra services
-
-* [Docker](services/infra/docker/README.md)
-* [Seed](services/third-party/seed/README.md)
-
 ## Host configuration
 
 The default configuration for this environment is composed by 3 main components that need to run on the host:
 
-* Libvirtd
-* OpenVSwitch
-* Docker
+* [Seed](services/third-party/seed/README.md)
+* [Docker](services/infra/docker/README.md)
+* [Libvirtd](services/infra/libvirtd/README.md)
+* [OpenVSwitch](services/infra/openvswitch/README.md)
 
 Docker will act as the control plane for OpenStack while the host will provide the hypervisor, network and storage.
 
@@ -30,6 +26,14 @@ This is the default network topology, 2 networks are used:
 * openstack-provider-net: Instances get IPs in this network
 
 ![simplified_network_diagram](services/infra/docker/simplified_networks.png)
+
+## Infra services
+
+* fluentd: for logging
+* cadvisor: for container stats
+* elasticsearch: for log collection
+* kibana: for log visualization
+* portainer: for container management
 
 ## Third-party services
 
@@ -57,7 +61,26 @@ Configure the third-party services needed for OpenStack to run.
 * [Custom API](services/custom/api/README.md)
 * [Custom Backend](services/custom/backend/README.md)
 
-## Start OpenStack
+## Deploying OpenStack
+
+Modify [scripts/infra_services.txt](scripts/infra_services.txt), [scripts/third_party_services.txt](scripts/third_party_services.txt) and [scripts/openstack_services.txt](scripts/openstack_services.txt) to run the services you need.
+
+Configure your runtime environment by modifying [model.yml](model.yml).
+
+Apply the configuration:
+
+    ansible-playbook -i hosts/localhost config_processor.yml
+
+Config processor will create a new branch `deploy` where the runtime configuration will be ready for deployment.
+
+Verify the branch is created correctly:
+
+    git branch
+    # * deploy
+    git log
+    # Ready for deployment
+
+Deploy OpenStack
 
     ./scripts/build.sh
     ./scripts/docker-network-create.sh
@@ -69,8 +92,8 @@ Configure the third-party services needed for OpenStack to run.
     source osrc-v3
     openstack project list
     openstack image list
-    openstack server list
     openstack network list
+    openstack server list
 
 ## References
 

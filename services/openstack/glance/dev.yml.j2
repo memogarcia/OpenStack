@@ -1,0 +1,30 @@
+---
+version: "3"
+
+services:
+
+  glance:
+    build: .
+    container_name: openstack_glance
+    networks:
+        openstack-management-net:
+            ipv4_address: {{openstack_services.glance.ipv4}}
+{% for port in openstack_services.glance.ports %}
+        - "0.0.0.0:{{port}}"
+{% endfor %}
+    volumes:
+{% for volume in openstack_services.glance.volumes %}
+        - {{volume}}
+{% endfor %}
+    command: ["bash", "/opt/start.sh"]
+
+
+volumes:
+{% for volume in openstack_services.glance.volumes %}
+    {{volume.split(':')[0]}}:
+      external: true
+{% endfor %}
+
+networks:
+  openstack-management-net:
+    external: true

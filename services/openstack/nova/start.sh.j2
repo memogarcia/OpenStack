@@ -1,0 +1,168 @@
+#!/bin/bash
+
+set -u
+
+echo "Applying configuration"
+cp /opt/nova/etc/nova/api-paste.ini /etc/nova/api-paste.ini
+cp /opt/nova/etc/nova/cells.json /etc/nova/cells.json
+cp /opt/nova/etc/nova/logging_sample.conf /etc/nova/logging.conf
+cp /opt/nova/etc/nova/nova-config-generator.conf /etc/nova/nova-config-generator.conf
+cp /opt/nova/etc/nova/nova-policy-generator.conf /etc/nova/nova-policy-generator.conf
+cp /opt/nova/etc/nova/rootwrap.conf /etc/nova/rootwrap.conf
+cp /opt/nova/etc/nova/rootwrap.d/api-metadata.filters /etc/nova/rootwrap.d/api-metadata.filters
+cp /opt/nova/etc/nova/rootwrap.d/compute.filters /etc/nova/rootwrap.d/compute.filters
+cp /opt/nova/etc/nova/rootwrap.d/network.filters /etc/nova/rootwrap.d/network.filters
+
+python2 /opt/configparse.py --config /opt/config/config-nova.json --service "/etc/nova/nova.conf"
+python2 /opt/configparse.py --config /opt/config/config-neutron.json --service "/etc/neutron/neutron.conf"
+python2 /opt/configparse.py --config /opt/config/config-linuxbridge-agent.json --service "/etc/neutron/plugins/ml2/linuxbridge_agent.ini"
+
+echo "DB configuration"
+{% if database == "mariadb" %}
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+    -e "CREATE DATABASE nova_api;"
+
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+       -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' \
+        IDENTIFIED BY '{{openstack_services.nova.database_password}}';"
+
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+       -e "GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'%' \
+        IDENTIFIED BY '{{openstack_services.nova.database_password}}'"
+
+
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+    -e "CREATE DATABASE nova;"
+
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+       -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' \
+        IDENTIFIED BY '{{openstack_services.nova.database_password}}';"
+
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+       -e "GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' \
+        IDENTIFIED BY '{{openstack_services.nova.database_password}}'"
+
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+    -e "CREATE DATABASE nova_cell0;"
+
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+       -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'localhost' \
+        IDENTIFIED BY '{{openstack_services.nova.database_password}}';"
+
+mysql  -h{{database_ipv4}} -u{{mariadb.mariadb_user}} -p{{mariadb.mariadb_password}} \
+       -e "GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'%' \
+        IDENTIFIED BY '{{openstack_services.nova.database_password}}'"
+
+{% elif database == "postgresql" %}
+export PGPASSWORD={{postgresql.postgresql_password}}
+psql -h {{database_ipv4}} -p 5432 -v ON_ERROR_STOP=1 --username "{{postgresql.postgresql_user}}" <<-EOSQL
+    CREATE USER nova;
+    ALTER USER nova WITH PASSWORD '{{openstack_services.nova.database_password}}';
+    CREATE DATABASE nova;
+    GRANT ALL PRIVILEGES ON DATABASE nova TO nova;
+EOSQL
+
+psql -h {{database_ipv4}} -p 5432 -v ON_ERROR_STOP=1 --username "{{postgresql.postgresql_user}}" <<-EOSQL
+    ALTER USER nova WITH PASSWORD '{{openstack_services.nova.database_password}}';
+    CREATE DATABASE nova;
+    GRANT ALL PRIVILEGES ON DATABASE nova TO nova;
+EOSQL
+
+psql -h {{database_ipv4}} -p 5432 -v ON_ERROR_STOP=1 --username "{{postgresql.postgresql_user}}" <<-EOSQL
+    CREATE DATABASE nova_api;
+    GRANT ALL PRIVILEGES ON DATABASE nova_api TO nova;
+EOSQL
+
+psql -h {{database_ipv4}} -p 5432 -v ON_ERROR_STOP=1 --username "{{postgresql.postgresql_user}}" <<-EOSQL
+    CREATE DATABASE nova_api;
+    GRANT ALL PRIVILEGES ON DATABASE nova_cell0 TO nova;
+EOSQL
+{% endif %}
+
+echo "Syncing api database"
+nova-manage api_db sync
+
+echo "Registering cell0 database"
+nova-manage cell_v2 map_cell0
+
+echo "Create cell1 cell"
+nova-manage cell_v2 create_cell --name=cell1 --verbose
+
+echo "Syncing nova database"
+nova-manage db sync
+
+echo "Verify cell0 and cell1 are registered"
+nova-manage cell_v2 list_cells
+
+source /opt/osrc-v3
+
+echo "Creating user"
+if [ -z `openstack user list -f csv -q |grep nova` ]
+then
+    openstack user create --domain Default --password secret nova
+else
+    echo "Skipping"
+fi
+
+echo "Adding to role admin"
+openstack role add --project service --user nova admin
+
+echo "Creating nova service"
+if [ -z `openstack service list -f csv -q |grep nova` ]
+then
+    openstack service create --name nova --description "OpenStack Compute" compute
+else
+    echo "Skipping"
+fi
+
+endpoint=`openstack endpoint list -f csv -q |grep nova`
+if [ -z "$endpoint" ]
+then
+    echo "Creating public endpoint"
+    openstack endpoint create --region RegionOne compute public http://openstack_nova:8774/v2.1
+
+    echo "Creating internal endpoint"
+    openstack endpoint create --region RegionOne compute internal http://openstack_nova:8774/v2.1
+
+    echo "Creating admin endpoint"
+    openstack endpoint create --region RegionOne compute admin http://openstack_nova:8774/v2.1
+else
+    echo "Skipping"
+fi
+
+echo "Creating placement service"
+if [ -z `openstack user list -f csv -q |grep placement` ]
+then
+    openstack user create --domain Default --password secret placement
+else
+    echo "Skipping"
+fi
+
+echo "Adding to role admin"
+openstack role add --project service --user placement admin
+
+echo "Creating nova placement service"
+if [ -z `openstack service list -f csv -q |grep placement` ]
+then
+    openstack service create --name placement --description "Placement API" placement
+else
+    echo "Skipping"
+fi
+
+endpoint=`openstack endpoint list -f csv -q |grep placement`
+if [ -z "$endpoint" ]
+then
+    echo "Creating public endpoint"
+    openstack endpoint create --region RegionOne placement public http://openstack_nova:8778/v2.1
+
+    echo "Creating internal endpoint"
+    openstack endpoint create --region RegionOne placement internal http://openstack_nova:8778/v2.1
+
+    echo "Creating admin endpoint"
+    openstack endpoint create --region RegionOne placement admin http://openstack_nova:8778/v2.1
+else
+    echo "Skipping"
+fi
+
+echo "Starting supervisord"
+supervisord

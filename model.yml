@@ -1,0 +1,133 @@
+# model
+---
+
+# openstack version and repo
+openstack_repo: https://github.com/openstack
+openstack_branch: stable/queens
+
+# List the services to run.
+third_party_services_runtime:
+  - mariadb
+  - rabbitmq
+  - memcached
+
+openstack_services_runtime:
+  - keystone
+  - glance
+  # - horizon
+  - neutron
+  # - nova
+
+infra_services_runtime:
+  - portainer
+
+## network configuration
+networks:
+  openstack_management_net:
+    name: openstack-management-net
+    gateway: "172.18.0.1"
+    subnet: "172.18.0.0/16"
+  openstack_provider_net:
+    name: openstack-provider-net
+    gateway: "172.30.0.1"
+    subnet: "172.30.0.0/16"
+
+# database configuration
+database: mariadb
+database_ipv4: "172.18.1.5"
+
+# mariadb configuration
+mariadb:
+  mariadb_user: root
+  mariadb_password: secret
+  mariadb_root_password: secret
+  volumes:
+    - openstack_volume_mariadb:/var/lib/mysql/
+
+# postgresql configuration
+postgresql:
+  postgresql_user: admin
+  postgresql_password: secret
+
+# rabbitmq configuration
+rabbitmq_ipv4: "172.18.1.6"
+rabbitmq_user: guest
+rabbitmq_password: guest
+
+# memcached configuration
+memcached_ipv4:  "172.18.1.8"
+
+# openstack service configuration
+openstack_services:
+  keystone:
+    ipv4: "172.18.1.10"
+    database_password: secret
+    user_password: secret
+    ports:
+      - 5000:5000
+      - 35357:35357
+    volumes:
+      - openstack_volume_keystone_log:/var/log/keystone
+      - openstack_volume_keystone_lib:/var/lib/keystone
+      - openstack_volume_keystone_etc:/etc/keystone
+      - openstack_volume_keystone_opt:/opt
+
+  glance:
+    ipv4: "172.18.1.20"
+    database_password: secret
+    user_password: secret
+    ports:
+      - 9292:9292
+      - 9191:9191
+    volumes:
+      - openstack_volume_glance_log:/var/log/glance
+      - openstack_volume_glance_lib:/var/lib/glance
+      - openstack_volume_glance_etc:/etc/glance
+      - openstack_volume_glance_opt:/opt
+
+  neutron:
+    ipv4: "172.18.1.30"
+    database_password: secret
+    user_password: secret
+    ports:
+      - 9696:9696
+    volumes:
+      - openstack_volume_glance_log:/var/log/glance
+      - openstack_volume_glance_lib:/var/lib/glance
+      - openstack_volume_glance_etc:/etc/glance
+      - openstack_volume_glance_opt:/opt
+    metadata_secret: METADATA_SECRET
+
+  horizon:
+    ipv4: "172.18.1.40"
+    ports:
+      - 8000:8000
+
+  nova:
+    ipv4: "172.18.1.50"
+    ipv6: ""
+    database_password: secret
+    user_password: secret
+    ports:
+      - 8774:8774
+      - 8778:8778
+      - 6080:6080
+    volumes:
+      - openstack_volume_nova_log:/var/log/nova
+      - openstack_volume_nova_lib:/var/lib/nova
+      - openstack_volume_nova_etc:/etc/nova
+      - openstack_volume_nova_opt:/opt
+    metadata_secret: METADATA_SECRET
+
+  cinder:
+    ipv4: "172.18.1.60"
+    ipv6: ""
+    database_password: secret
+    user_password: secret
+    ports:
+      - 8776:8776
+    volumes:
+      - openstack_volume_cinder_log:/var/log/cinder
+      - openstack_volume_cinder_lib:/var/lib/cinder
+      - openstack_volume_cinder_etc:/etc/cinder
+      - openstack_volume_cinder_opt:/opt

@@ -1,0 +1,24 @@
+FROM openstack/seed:latest
+
+LABEL maintainer=root@memogarcia.mx
+
+RUN wget https://raw.githubusercontent.com/openstack/requirements/{{openstack_branch}}/upper-constraints.txt -O /opt/upper-constraints.txt && \
+    mkdir /etc/cinder /etc/cinder/rootwrap.d && \
+    mkdir /etc/cinder && \
+    git clone -b {{openstack_branch}} --depth=1 {{openstack_repo}}/cinder.git /opt/cinder
+
+WORKDIR /opt/cinder
+
+RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig
+
+VOLUME ["/var/log/cinder", "/var/lib/cinder", "/etc/cinder", "/opt"]
+
+EXPOSE 8776
+
+COPY start.sh /opt/start.sh
+
+COPY supervisord.conf /etc/supervisord.conf
+
+COPY config/ /opt/config/
+
+CMD ["bash", "/opt/start.sh"]

@@ -1,0 +1,40 @@
+---
+- name: Generating dev.yml for neutron
+  template:
+    src: services/openstack/neutron/dev.yml.j2
+    dest: services/openstack/neutron/dev.yml
+
+- name: Generating Dockerfile for neutron
+  template:
+    src: services/openstack/neutron/Dockerfile.j2
+    dest: services/openstack/neutron/Dockerfile
+
+- name: Generating start.sh for neutron
+  template:
+    src: services/openstack/neutron/start.sh.j2
+    dest: services/openstack/neutron/start.sh
+
+- name: Generating config-dhcp-agent.json for neutron
+  template:
+    src: services/openstack/neutron/config/config-dhcp-agent.json.j2
+    dest: services/openstack/neutron/config/config-dhcp-agent.json
+
+- name: Generating config-linuxbridge-agent.json for neutron
+  template:
+    src: services/openstack/neutron/config/config-linuxbridge-agent.json.j2
+    dest: services/openstack/neutron/config/config-linuxbridge-agent.json
+
+- name: Generating config-metadata.json for neutron
+  template:
+    src: services/openstack/neutron/config/config-metadata.json.j2
+    dest: services/openstack/neutron/config/config-metadata.json
+
+- name: Generating config-ml2.json for neutron
+  template:
+    src: services/openstack/neutron/config/config-ml2.json.j2
+    dest: services/openstack/neutron/config/config-ml2.json
+
+- name: Generating config.json for neutron
+  template:
+    src: services/openstack/neutron/config/config.json.j2
+    dest: services/openstack/neutron/config/config.json

@@ -1,0 +1,30 @@
+---
+- name: Generating dev.yml for nova
+  template:
+    src: services/openstack/nova/dev.yml.j2
+    dest: services/openstack/nova/dev.yml
+
+- name: Generating Dockerfile for nova
+  template:
+    src: services/openstack/nova/Dockerfile.j2
+    dest: services/openstack/nova/Dockerfile
+
+- name: Generating start.sh for nova
+  template:
+    src: services/openstack/nova/start.sh.j2
+    dest: services/openstack/nova/start.sh
+
+- name: Generating config-linuxbridge-agent.json for nova
+  template:
+    src: services/openstack/nova/config/config-linuxbridge-agent.json.j2
+    dest: services/openstack/nova/config/config-linuxbridge-agent.json
+
+- name: Generating config-neutron.json for nova
+  template:
+    src: services/openstack/nova/config/config-neutron.json.j2
+    dest: services/openstack/nova/config/config-neutron.json
+
+- name: Generating config-nova.json for nova
+  template:
+    src: services/openstack/nova/config/config-nova.json.j2
+    dest: services/openstack/nova/config/config-nova.json

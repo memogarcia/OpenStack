@@ -1,0 +1,17 @@
+---
+
+- name: Loading model
+  include_vars: ../../../model.yml
+
+- import_tasks: 01-git-checks.yml
+- import_tasks: 02-scripts.yml
+- import_tasks: 03-mariadb.yml
+- import_tasks: 04-memcached.yml
+- import_tasks: 05-rabitmq.yml
+- import_tasks: 10-keystone.yml
+- import_tasks: 20-glance.yml
+- import_tasks: 30-neutron.yml
+- import_tasks: 40-horizon.yml
+- import_tasks: 50-nova.yml
+- import_tasks: 60-cinder.yml
+- import_tasks: 99-git-commit.yml

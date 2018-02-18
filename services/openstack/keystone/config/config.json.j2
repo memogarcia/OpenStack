@@ -1,0 +1,21 @@
+{
+    "DEFAULT":
+    {
+        "admin_token": "<none>",
+        "public_endpoint": "http://0.0.0.0:5000",
+        "admin_endpoint": "http://0.0.0.0:35357"
+    },
+    "cache":
+    {
+        "enabled": "true",
+        "memcache_servers": "{{memcached_ipv4}}:11211"
+    },
+    "database":
+    {
+{% if database == "mariadb" %}
+        "connection": "mysql+pymysql://keystone:{{openstack_services.keystone.database_password}}@{{database_ipv4}}/keystone"
+{% elif database == "postgresql" %}
+        "connection": "postgresql://keystone:{{openstack_services.keystone.database_password}}@{{database_ipv4}}/keystone"
+{% endif %}
+    }
+}

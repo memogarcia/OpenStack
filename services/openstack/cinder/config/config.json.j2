@@ -1,0 +1,40 @@
+{
+    "keystone_authtoken":
+    {
+        "auth_uri": "http://{{openstack_services.keystone.ipv4}}:5000",
+        "auth_url": "http://{{openstack_services.keystone.ipv4}}:35357",
+        "memcached_servers": "{{memcached_ipv4}}:11211",
+        "auth_type": "password",
+        "project_domain_name": "Default",
+        "user_domain_name": "Default",
+        "project_name": "service",
+        "username": "cinder",
+        "password": "{{openstack_services.cinder.user_password}}"
+    },
+    "database":
+    {
+{% if database == "mariadb" %}
+        "connection": "mysql+pymysql://cinder:{{openstack_services.cinder.database_password}}@{{database_ipv4}}/cinder"
+{% elif database == "postgresql" %}
+        "connection": "postgresql://cinder:{{openstack_services.cinder.database_password}}@{{database_ipv4}}/cinder"
+{% endif %}
+    },
+    "DEFAULT":
+    {
+        "transport_url": "rabbit://{{rabbitmq_user}}:{{rabbitmq_password}}@{{rabbitmq_ipv4}}",
+        "my_ip": "0.0.0.0",
+        "enabled_backends": "lvm",
+        "glance_api_servers": "http://{{openstack_services.glance.ipv4}}:9292"
+    },
+    "lvm":
+    {
+        "volume_driver": "cinder.volume.drivers.lvm.LVMVolumeDriver",
+        "volume_group": "cinder-volumes",
+        "iscsi_protocol": "iscsi",
+        "iscsi_helper": "lioadm"
+    },
+    "oslo_concurrency":
+    {
+        "lock_path": "/var/lib/cinder/tmp"
+    }
+}

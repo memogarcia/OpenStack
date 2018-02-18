@@ -1,0 +1,6 @@
+---
+- name: Adding the changes
+  command: git add .
+
+- name: Commiting the changes
+  command: git commit -m "Ready for deployment"

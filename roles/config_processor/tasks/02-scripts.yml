@@ -1,0 +1,30 @@
+---
+- name: Building infra services file
+  template:
+    src: scripts/infra_services.txt.j2
+    dest: scripts/infra_services.txt
+
+- name: Building third party services file
+  template:
+    src: scripts/third_party_services.txt.j2
+    dest: scripts/third_party_services.txt
+
+- name: Building openstack services file
+  template:
+    src: scripts/openstack_services.txt.j2
+    dest: scripts/openstack_services.txt
+
+- name: Building network creation script
+  template:
+    src: scripts/docker-network-create.sh.j2
+    dest: scripts/docker-network-create.sh
+
+- name: Building network deletion script
+  template:
+    src: scripts/docker-network-delete.sh.j2
+    dest: scripts/docker-network-delete.sh
+
+# - name: Build volume list
+#   template:
+#     src: scripts/volumes.txt.j2
+#     dest: scripts/volumes.txt

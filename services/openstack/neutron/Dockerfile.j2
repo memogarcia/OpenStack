@@ -1,0 +1,24 @@
+FROM openstack/seed:latest
+
+LABEL maintainer=root@memogarcia.mx
+
+RUN mkdir /etc/neutron && \
+    mkdir -p /etc/neutron/plugins/ml2 && \
+    wget https://raw.githubusercontent.com/openstack/requirements/{{openstack_branch}}/upper-constraints.txt -O /opt/upper-constraints.txt && \
+    git clone -b {{openstack_branch}} --depth=1 {{openstack_repo}}/neutron.git /opt/neutron
+
+WORKDIR /opt/neutron
+
+RUN pip2 install -c /opt/upper-constraints.txt -e . && tox -e genconfig
+
+VOLUME ["/var/log/neutron", "/var/lib/neutron", "/etc/neutron", "/opt"]
+
+EXPOSE 9696
+
+COPY start.sh /opt/start.sh
+
+COPY supervisord.conf /etc/supervisord.conf
+
+COPY config/ /opt/config/
+
+CMD ["bash", "/opt/start.sh"]

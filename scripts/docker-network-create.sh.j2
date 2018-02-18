@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -u -x
+
+docker network create --subnet {{networks.openstack_management_net.subnet}} --gateway {{networks.openstack_management_net.gateway}} {{networks.openstack_management_net.name }}
+docker network create --subnet {{networks.openstack_provider_net.subnet}} --gateway {{networks.openstack_provider_net.gateway}} {{networks.openstack_provider_net.name}}

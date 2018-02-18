@@ -1,0 +1,32 @@
+---
+version: "3"
+
+services:
+
+  keystone:
+    build: .
+    container_name: openstack_keystone
+    ports:
+{% for port in openstack_services.keystone.ports %}
+        - "0.0.0.0:{{port}}"
+{% endfor %}
+
+    networks:
+        openstack-management-net:
+            ipv4_address: {{openstack_services.keystone.ipv4}}
+
+    volumes:
+{% for volume in openstack_services.keystone.volumes %}
+        - {{volume}}
+{% endfor %}
+    command: ["bash", "/opt/start.sh"]
+
+volumes:
+{% for volume in openstack_services.keystone.volumes %}
+    {{volume.split(':')[0]}}:
+      external: true
+{% endfor %}
+
+networks:
+  openstack-management-net:
+    external: true

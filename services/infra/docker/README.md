@@ -11,3 +11,7 @@ The current builds are tested against:
 
 * Single libvirtd instance (if host is using it)
 * Single OpenVSwitch instance (if host is using it)
+
+## Configuration
+
+Just [install docker](https://wiki.archlinux.org/index.php/Docker)

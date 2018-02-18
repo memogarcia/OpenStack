@@ -1,0 +1,29 @@
+---
+  version: "3"
+  services:
+    cinder:
+      build: .
+      container_name: openstack_cinder
+      networks:
+        openstack-management-net:
+            ipv4_address: {{openstack_services.cinder.ipv4}}
+      ports:
+{% for port in openstack_services.cinder.ports %}
+        - "0.0.0.0:{{port}}"
+{% endfor %}
+
+      volumes:
+{% for volume in openstack_services.cinder.volumes %}
+        - {{volume}}
+{% endfor %}
+      command: ["bash", "/opt/start.sh"]
+
+  volumes:
+{% for volume in openstack_services.cinder.volumes %}
+    {{volume.split(':')[0]}}:
+      external: true
+{% endfor %}
+
+  networks:
+    openstack-management-net:
+      external: true

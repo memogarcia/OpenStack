@@ -1,0 +1,6 @@
+# Config Processor
+---
+- hosts: localhost
+  become: no
+  roles:
+    - config_processor

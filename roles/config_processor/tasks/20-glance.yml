@@ -1,0 +1,25 @@
+---
+- name: Generating dev.yml for glance
+  template:
+    src: services/openstack/glance/dev.yml.j2
+    dest: services/openstack/glance/dev.yml
+
+- name: Generating Dockerfile for glance
+  template:
+    src: services/openstack/glance/Dockerfile.j2
+    dest: services/openstack/glance/Dockerfile
+
+- name: Generating start.sh for glance
+  template:
+    src: services/openstack/glance/start.sh.j2
+    dest: services/openstack/glance/start.sh
+
+- name: Generating config-api.json for glance
+  template:
+    src: services/openstack/glance/config/config-api.json.j2
+    dest: services/openstack/glance/config/config-api.json
+
+- name: Generating config-registry.json for glance
+  template:
+    src: services/openstack/glance/config/config-registry.json.j2
+    dest: services/openstack/glance/config/config-registry.json

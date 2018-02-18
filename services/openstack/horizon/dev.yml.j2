@@ -1,0 +1,21 @@
+---
+  version: "3"
+
+  services:
+
+    horizon:
+      build: .
+      container_name: openstack_horizon
+      networks:
+        openstack-management-net:
+            ipv4_address: {{openstack_services.horizon.ipv4}}
+      ports:
+{% for port in openstack_services.glance.ports %}
+        - "0.0.0.0:{{port}}"
+{% endfor %}
+
+      command: ["bash", "/opt/start.sh"]
+
+  networks:
+    openstack-management-net:
+      external: true

@@ -1,0 +1,5 @@
+---
+- name: Generating dev.yml for rabbitmq
+  template:
+    src: services/third-party/rabbitmq/dev.yml.j2
+    dest: services/third-party/rabbitmq/dev.yml

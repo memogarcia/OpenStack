@@ -1,0 +1,17 @@
+---
+version: "2"
+
+services:
+
+  memcached:
+    image: memcached:1.5.4-alpine
+    container_name: openstack_memcached
+    ports:
+      - "11211:11211"
+    networks:
+      openstack-management-net:
+          ipv4_address: {{memcached_ipv4}}
+
+networks:
+  openstack-management-net:
+    external: true

@@ -1,0 +1,38 @@
+---
+version: "3"
+
+services:
+
+  neutron:
+    build: .
+    container_name: openstack_neutron
+    networks:
+        openstack-management-net:
+            ipv4_address: {{openstack_services.neutron.ipv4}}
+        openstack-provider-net:
+    ports:
+{% for port in openstack_services.neutron.ports %}
+      - "0.0.0.0:{{port}}"
+{% endfor %}
+    volumes:
+{% for volume in openstack_services.neutron.volumes %}
+      - {{volume}}
+{% endfor %}
+      - /lib/modules:/lib/modules
+      - /run/openvswitch/db.sock:/run/openvswitch/db.sock
+    command: ["bash", "/opt/start.sh"]
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+
+volumes:
+{% for volume in openstack_services.neutron.volumes %}
+    {{volume.split(':')[0]}}:
+      external: true
+{% endfor %}
+
+networks:
+  openstack-management-net:
+    external: true
+  openstack-provider-net:
+    external: true

@@ -1,0 +1,30 @@
+---
+version: "3"
+
+services:
+
+  nova:
+    build: .
+    container_name: openstack_nova
+    networks:
+        openstack-management-net:
+            ipv4_address: {{openstack_services.nova.ipv4}}
+    ports:
+{% for port in openstack_services.nova.ports %}
+        - "0.0.0.0:{{port}}"
+{% endfor %}
+    volumes:
+{% for volume in openstack_services.nova.volumes %}
+        - {{volume}}
+{% endfor %}
+    command: ["bash", "/opt/start.sh"]
+
+volumes:
+{% for volume in openstack_services.nova.volumes %}
+    {{volume.split(':')[0]}}:
+      external: true
+{% endfor %}
+
+networks:
+  openstack-management-net:
+    external: true
