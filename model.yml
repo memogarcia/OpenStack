@@ -7,6 +7,32 @@ environment_name: openstack_queens
 openstack_repo: https://github.com/openstack
 openstack_branch: stable/queens
 
+# base operating system configuration
+seed_base_image: shaddock/archlinux:latest
+seed_base_python_version: 2
+seed_base_dependencies:
+  - gcc
+  - base-devel
+  - git
+  - gcc-libs
+  - wget
+  - python2
+  - python2-pip
+  - python2-setuptools
+  - python2-netifaces
+  - wget
+  - supervisor
+  - nss
+  - nspr
+
+seed_base_mariadb_dependencies:
+  - mariadb-clients
+  - mysql-python
+
+seed_base_postgresql_dependencies:
+  - postgresql
+  - python-psycopg2
+
 # List the services to run.
 third_party_services_runtime:
   - mariadb
@@ -15,13 +41,13 @@ third_party_services_runtime:
 
 openstack_services_runtime:
   - keystone
-  - glance
-  - horizon
-  - neutron
-  - nova
+  # - glance
+  # - horizon
+  # - neutron
+  # - nova
 
 infra_services_runtime:
-  - portainer
+  # - portainer
 
 ## network configuration
 networks:
@@ -35,7 +61,7 @@ networks:
     subnet: "172.30.0.0/16"
 
 # database configuration
-database: mariadb
+database: postgresql
 database_ipv4: "172.18.1.5"
 
 # mariadb configuration

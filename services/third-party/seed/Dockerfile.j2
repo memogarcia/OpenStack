@@ -1,0 +1,24 @@
+FROM {{ seed_base_image }}
+
+LABEL maintainer=root@memogarcia.mx
+LABEL environment={{ environment_name }}
+LABEL database_used={{ database }}
+
+RUN pacman -Sy --noconfirm {% for dependency in seed_base_dependencies%}{{dependency}} {% endfor %}
+
+
+RUN python{{seed_base_python_version}} -m pip install tox python-memcached python-openstackclient
+
+{% if database == "mariadb" %}
+RUN pacman -Sy --noconfirm {% for dependency in seed_base_mariadb_dependencies%}{{dependency}} {% endfor %}
+
+
+RUN python{{seed_base_python_version}} -m pip install pymysql
+
+{% elif database == "postgresql" %}
+RUN pacman -Sy --noconfirm {% for dependency in seed_base_postgresql_dependencies%}{{dependency}} {% endfor %}
+{% endif %}
+
+COPY configparse.py /opt/configparse.py
+
+COPY osrc-v3 /opt/osrc-v3

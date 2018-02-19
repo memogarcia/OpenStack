@@ -9,7 +9,6 @@ Current deployment: **stable/queens**
 
 The default configuration for this environment is composed by 3 main components that need to run on the host:
 
-* [Seed](services/third-party/seed/README.md)
 * [Docker](services/infra/docker/README.md)
 * [Libvirtd](services/infra/libvirtd/README.md)
 * [OpenVSwitch](services/infra/openvswitch/README.md)
@@ -39,6 +38,7 @@ This is the default network topology, 2 networks are used:
 
 Configure the third-party services needed for OpenStack to run.
 
+* [Seed](services/third-party/seed/README.md)
 * [MariaDB/MySQL](services/third-party/mariadb/README.md)
 * [PostgreSQL](services/third-party/postgresql/README.md) **Optional Database**
 * [Memcached](services/third-party/memcached/README.md)

@@ -23,8 +23,3 @@
   template:
     src: scripts/docker-network-delete.sh.j2
     dest: scripts/docker-network-delete.sh
-
-# - name: Build volume list
-#   template:
-#     src: scripts/volumes.txt.j2
-#     dest: scripts/volumes.txt
