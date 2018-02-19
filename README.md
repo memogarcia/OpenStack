@@ -80,9 +80,8 @@ Verify the branch is created correctly:
 
 Deploy OpenStack
 
-    ./scripts/build.sh
     ./scripts/docker-network-create.sh
-    ./scripts/docker-volume-create.sh
+    ./scripts/build.sh
     ./scripts/start.sh
 
 ## Verify installation
