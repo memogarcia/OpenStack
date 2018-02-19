@@ -63,9 +63,11 @@ Configure the third-party services needed for OpenStack to run.
 
 ## Deploying OpenStack
 
+The model is a yml file describing how your environment should look like. It defines the services to run, networks, ips, volumes, dependencies, etc.
+
 Configure your runtime environment by modifying [model.yml](model.yml).
 
-Apply the configuration:
+Apply the configuration with config_processor, which will create the necessary scripts to run the environment.
 
     ansible-playbook -i hosts/localhost config_processor.yml
 
