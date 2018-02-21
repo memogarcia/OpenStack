@@ -15,7 +15,8 @@
       volumes:
         - ldap_volume:/var/lib/openldap/
       networks:
-        - openstack-management-net
+        openstack-management-net:
+          ipv4_address: {{openldap_ipv4}}
 
   volumes:
     ldap_volume:

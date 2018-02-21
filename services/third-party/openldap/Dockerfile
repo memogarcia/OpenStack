@@ -1,17 +1,9 @@
-FROM openstack/seed:latest
+FROM alpine:latest
 
 LABEL maintainer=root@memogarcia.mx
 
-RUN pacman -Sy --noconfirm openldap
+RUN apk update && apk add openldap
 
-EXPOSE 389
-EXPOSE 636
+EXPOSE 389 636
 
-VOLUME [ "/var/lib/glance" ]
-
-RUN chown -R ldap:ldap /var/lib/ldap/
-
-COPY templates/ templates/
-COPY supervisord.conf supervisord.conf
-COPY start.sh start.sh
-CMD ["bash", "start.sh"]
+CMD ["slapd"]

@@ -3,33 +3,37 @@
 - name: Loading model
   include_vars: ../../../model.yml
 
-# - import_tasks: 01-git-checks.yml
+- import_tasks: 01-git-checks.yml
 
-# - import_tasks: 02-scripts.yml
+- import_tasks: 02-scripts.yml
+
+- import_tasks: 03-ntp.yml
+
+- import_tasks: 04-openldap.yml
 
 - import_tasks: 10-seed.yml
 
-# - import_tasks: 13-mariadb.yml
-#   when: database == "mariadb"
+- import_tasks: 13-mariadb.yml
+  when: database == "mariadb"
 
-# - import_tasks: 13-postgresql.yml
-#   when: database == "postgresql"
+- import_tasks: 13-postgresql.yml
+  when: database == "postgresql"
 
-# - import_tasks: 14-memcached.yml
+- import_tasks: 14-memcached.yml
 
-# - import_tasks: 15-rabitmq.yml
+- import_tasks: 15-rabitmq.yml
 
-# - import_tasks: 20-keystone.yml
+- import_tasks: 20-keystone.yml
 
-# - import_tasks: 30-glance.yml
+- import_tasks: 30-glance.yml
 
-# - import_tasks: 40-neutron.yml
+- import_tasks: 40-neutron.yml
 
-# - import_tasks: 50-horizon.yml
+- import_tasks: 50-horizon.yml
 
-# - import_tasks: 60-nova.yml
+- import_tasks: 60-nova.yml
 
-# - import_tasks: 70-cinder.yml
+- import_tasks: 70-cinder.yml
 
-# - import_tasks: 99-git-commit.yml
+- import_tasks: 99-git-commit.yml
 

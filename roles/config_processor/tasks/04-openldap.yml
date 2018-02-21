@@ -1,0 +1,5 @@
+---
+- name: Generating dev.yml for openldap
+  template:
+    src: services/third-party/openldap/dev.yml.j2
+    dest: services/third-party/openldap/dev.yml
