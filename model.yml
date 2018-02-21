@@ -41,13 +41,13 @@ third_party_services_runtime:
 
 openstack_services_runtime:
   - keystone
-  # - glance
-  # - horizon
-  # - neutron
-  # - nova
+  - glance
+  - horizon
+  - neutron
+  - nova
 
 infra_services_runtime:
-  # - portainer
+  - portainer
 
 ## network configuration
 networks:

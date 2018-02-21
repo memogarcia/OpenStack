@@ -5,6 +5,9 @@
 
     mariadb:
       image: mariadb:10.3.4
+      # image: openstack/mariadb:{{environment_name}}
+      # build:
+      #   context: .
       container_name: openstack_mariadb
       restart: always
       environment:
