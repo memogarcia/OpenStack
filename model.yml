@@ -60,6 +60,9 @@ networks:
     gateway: "172.30.0.1"
     subnet: "172.30.0.0/16"
 
+# ntp configuration
+ntp_ipv4: "172.18.1.4"
+
 # database configuration
 ## postgresql | mariadb
 database: postgresql

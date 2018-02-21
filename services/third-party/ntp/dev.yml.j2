@@ -1,0 +1,18 @@
+---
+  version: "3"
+
+  services:
+
+    onos:
+      build: .
+      container_name: openstack_ntp
+      networks:
+        openstack-management-net:
+          ipv4_address: {{ntp_ipv4}}
+      ports:
+        - "0.0.0.0:123:123/udp"
+      command: ["ntpd", "-d"]
+
+  networks:
+    openstack-management-net:
+      external: true

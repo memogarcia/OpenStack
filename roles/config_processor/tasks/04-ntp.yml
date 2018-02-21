@@ -1,0 +1,5 @@
+---
+- name: Generating dev.yml for ntp
+  template:
+    src: services/third-party/ntp/dev.yml.j2
+    dest: services/third-party/ntp/dev.yml
