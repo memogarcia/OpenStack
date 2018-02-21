@@ -4,9 +4,9 @@
 
 Modify the following files to match your environment:
 
-* [config/config.json](config/config.json) which will map to `/etc/neutron/neutron.conf`.
-* [config/config-metadata.json](config/config-metadata.json) which will map to `/etc/neutron/metadata_agent.ini`
-* [dev.yml](dev.yml) to match your host environment.
+* [config/config.json](config/config.json.j2) which will map to `/etc/neutron/neutron.conf`.
+* [config/config-metadata.json](config/config-metadata.json.j2) which will map to `/etc/neutron/metadata_agent.ini`
+* [dev.yml](dev.yml.j2) to match your host environment.
 
 ## Network configuration
 
@@ -26,9 +26,9 @@ Deploys the simplest configuration, in which you use [provider networks](https:/
 
 Modify:
 
-* [config/config-ml2.json](config/config-ml2.json) to map to `/etc/neutron/plugins/ml2/ml2_conf.ini`
-* [config/config-linuxbridge-agent.json](config/config-linuxbridge-agent.json) to map to `/etc/neutron/plugins/ml2/linuxbridge_agent.ini`
-* [config/config-dhcp-agent.json](config/config-dhcp-agent.json) to map to `/etc/neutron/dhcp_agent.ini`
+* [config/config-ml2.json](config/config-ml2.json.j2) to map to `/etc/neutron/plugins/ml2/ml2_conf.ini`
+* [config/config-linuxbridge-agent.json](config/config-linuxbridge-agent.json.j2) to map to `/etc/neutron/plugins/ml2/linuxbridge_agent.ini`
+* [config/config-dhcp-agent.json](config/config-dhcp-agent.json.j2) to map to `/etc/neutron/dhcp_agent.ini`
 
 Before the service is running, create a docker network that will act as a provider network in OpenStack:
 

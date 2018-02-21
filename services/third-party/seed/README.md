@@ -29,4 +29,3 @@ It contains the following tools:
 * Move the base image to alpine and make them as small as possible.
 * Pulling openstack services from Arch repos (self-builded) instead from git should reduce dependencies and space
 * Moving to python3.6
-* Get rid of the 2 database tooling on the seed.

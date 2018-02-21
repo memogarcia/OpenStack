@@ -4,9 +4,9 @@
 
 Modify the following files to match your environment:
 
-* [config/config-api.json](config/config-api.json) which will map to `/etc/glance/glance-api.conf`.
-* [config/config-registry.json](config/config-registry.json) which will map to `/etc/glance/glance-registry.conf`
-* [dev.yml](dev.yml) to match your host environment.
+* [config/config-api.json](config/config-api.json.j2) which will map to `/etc/glance/glance-api.conf`.
+* [config/config-registry.json](config/config-registry.json.j2) which will map to `/etc/glance/glance-registry.conf`
+* [dev.yml](dev.yml.j2) to match your host environment.
 
 After the service is running, create an image:
 

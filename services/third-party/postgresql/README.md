@@ -4,9 +4,9 @@ Because OpenStack uses sqlalchemy to deal with the DB, it's easy to swap databas
 
 ## Configuration
 
-For the database configuration, modify [start.sh](start.sh) file on each repo to match your database.
-In this environment, MariaDB is configured. If you want to use PostgreSQL, replace the DB configuration
-with the following:
+For the database configuration, modify [model.yml](../../../model.yml) to match your database.
+
+The `start.sh` script for each service will have a configuration like this:
 
 ```bash
 echo "DB configuration"

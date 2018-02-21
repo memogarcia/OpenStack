@@ -4,7 +4,7 @@ From the perspective of the Compute service, the QEMU hypervisor is very similar
 
 ## Configuration
 
-Before running the service, verify your [dev.yml](dev.yml):
+Before running the service, verify your [dev.yml](dev.yml.j2):
 
 ```yml
     privileged: true

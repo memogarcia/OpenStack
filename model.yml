@@ -61,6 +61,7 @@ networks:
     subnet: "172.30.0.0/16"
 
 # database configuration
+## postgresql | mariadb
 database: postgresql
 database_ipv4: "172.18.1.5"
 
