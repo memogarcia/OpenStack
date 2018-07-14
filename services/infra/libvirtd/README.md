@@ -6,5 +6,5 @@
 
 ## References
 
-[arch linux libvirt](https://wiki.archlinux.org/index.php/Libvirt)
-[libvirtd networking](https://jamielinux.com/docs/libvirt-networking-handbook/)
+* [arch linux libvirt](https://wiki.archlinux.org/index.php/Libvirt)
+* [libvirtd networking](https://jamielinux.com/docs/libvirt-networking-handbook/)
